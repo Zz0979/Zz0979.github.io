@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="外围信息搜集又称为公开渠道信息搜集，以前在qlcoder里见过几道题是与之相关的，那么今天正好学习一下。 英文 OSINT(Open Source INTelligence)https://en.wikipedia.org/wiki/Open-source_intelligence 以书中的testfire.net网站为例。 通过DNS和IP地址挖掘目标网络信息1.whois域名注册信息查询 这个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="外围信息搜集">
+<meta property="og:url" content="http://yoursite.com/2018/01/27/外围信息搜集/index.html">
+<meta property="og:site_name" content="Chace Blog">
+<meta property="og:description" content="外围信息搜集又称为公开渠道信息搜集，以前在qlcoder里见过几道题是与之相关的，那么今天正好学习一下。 英文 OSINT(Open Source INTelligence)https://en.wikipedia.org/wiki/Open-source_intelligence 以书中的testfire.net网站为例。 通过DNS和IP地址挖掘目标网络信息1.whois域名注册信息查询 这个">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-01-27T14:13:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="外围信息搜集">
+<meta name="twitter:description" content="外围信息搜集又称为公开渠道信息搜集，以前在qlcoder里见过几道题是与之相关的，那么今天正好学习一下。 英文 OSINT(Open Source INTelligence)https://en.wikipedia.org/wiki/Open-source_intelligence 以书中的testfire.net网站为例。 通过DNS和IP地址挖掘目标网络信息1.whois域名注册信息查询 这个">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>外围信息搜集</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/01/27/Metasploit-入门/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/01/25/Kali-Linux-基本配置/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/01/27/外围信息搜集/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/01/27/外围信息搜集/&text=外围信息搜集"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/01/27/外围信息搜集/&title=外围信息搜集"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/01/27/外围信息搜集/&is_video=false&description=外围信息搜集"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=外围信息搜集&body=Check out this article: http://yoursite.com/2018/01/27/外围信息搜集/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/01/27/外围信息搜集/&title=外围信息搜集"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/01/27/外围信息搜集/&title=外围信息搜集"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/01/27/外围信息搜集/&title=外围信息搜集"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/01/27/外围信息搜集/&title=外围信息搜集"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/01/27/外围信息搜集/&name=外围信息搜集&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#通过DNS和IP地址挖掘目标网络信息"><span class="toc-number">1.</span> <span class="toc-text">通过DNS和IP地址挖掘目标网络信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#通过搜索引擎进行信息收集"><span class="toc-number">2.</span> <span class="toc-text">通过搜索引擎进行信息收集</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        外围信息搜集
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Chace Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-01-27T04:23:31.000Z" itemprop="datePublished">2018-01-27</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>外围信息搜集又称为公开渠道信息搜集，以前在qlcoder里见过几道题是与之相关的，那么今天正好学习一下。</p>
+<p>英文 OSINT(Open Source INTelligence)<code>https://en.wikipedia.org/wiki/Open-source_intelligence</code></p>
+<p>以书中的testfire.net网站为例。</p>
+<h3 id="通过DNS和IP地址挖掘目标网络信息"><a href="#通过DNS和IP地址挖掘目标网络信息" class="headerlink" title="通过DNS和IP地址挖掘目标网络信息"></a>通过DNS和IP地址挖掘目标网络信息</h3><p>1.whois域名注册信息查询</p>
+<p>这个可以通过msf命令<code>whois testfire.net</code> 来查询。</p>
+<p>查询域名注册信息，包括域名所有者，服务商，管理员邮件地址，域名注册日期和过期日期。</p>
+<p>进行查询应该去掉www、ftp前缀，机构在注册域名时通常会注册一个上层域名，其子域名由自身的域名服务器管理。</p>
+<p>2.nslookup与dig域名查询</p>
+<p>两个工具都用来查询指定域名所对应的IP地址，dig工具从该域名的官方DNS服务器上查询到精确的权威解答，uslookup得到DNS解析服务器保存在Cache中的非权威解答。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nslookup</span><br><span class="line">set type=A</span><br><span class="line">testfire.net</span><br></pre></td></tr></table></figure>
+<p>还可以使用set type=MX 来查找其邮件转发。</p>
+<p>dig</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dig @ns.watson.ibm.com testfire.net</span><br></pre></td></tr></table></figure>
+<p>可以指定DNS服务器进行查询。</p>
+<p>可以在待查询域名后面加上A NS MX等选项以查找特定类型的DNS记录（默认为A)</p>
+<p>3.IP2Location地理位置查询</p>
+<p>这个就是通过IP地址寻找其地理位置。</p>
+<p>4.netcraft网站提供的信息查询服务</p>
+<p><code>https://searchdns.netcraft.com/</code></p>
+<p>查询子站点。</p>
+<p>5.IP2Domain 反查域名</p>
+<p>这个可以通过一些网站来通过IP反查域名。</p>
+<h3 id="通过搜索引擎进行信息收集"><a href="#通过搜索引擎进行信息收集" class="headerlink" title="通过搜索引擎进行信息收集"></a>通过搜索引擎进行信息收集</h3><p>1.Google Hacking</p>
+<ul>
+<li>SiteDigger</li>
+<li>Search Diggity</li>
+</ul>
+<p>这两个工具还没有使用过。</p>
+<p>2.探索网站的目录结构</p>
+<p>google <code>parent directory site:testfire.net</code></p>
+<ul>
+<li>扩展名为inc的文件：可能会包含网站的配置信息，如数据库用户名、口令等。</li>
+<li>扩展名为bak的文件，通常是一些文本编辑器在编辑源代码后留下的备份文件，可以让你知道与其对应的程序脚本文件中的大致内容。</li>
+<li>扩展名为txt或sql的文件：一般包含网站运行的SQL脚本，可能会透露类似数据库结构等信息。</li>
+</ul>
+<p>3.检索特定类型的文件</p>
+<p>Google<code>site:testfire.net filetype:xls</code></p>
+<p>4.搜索网站中的E-mail地址</p>
+<p>5.搜索易存在SQL注入点的页面</p>
+<p><code>site:testfire.net inurl:login</code></p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#通过DNS和IP地址挖掘目标网络信息"><span class="toc-number">1.</span> <span class="toc-text">通过DNS和IP地址挖掘目标网络信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#通过搜索引擎进行信息收集"><span class="toc-number">2.</span> <span class="toc-text">通过搜索引擎进行信息收集</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/01/27/外围信息搜集/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/01/27/外围信息搜集/&text=外围信息搜集"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/01/27/外围信息搜集/&title=外围信息搜集"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/01/27/外围信息搜集/&is_video=false&description=外围信息搜集"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=外围信息搜集&body=Check out this article: http://yoursite.com/2018/01/27/外围信息搜集/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/01/27/外围信息搜集/&title=外围信息搜集"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/01/27/外围信息搜集/&title=外围信息搜集"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/01/27/外围信息搜集/&title=外围信息搜集"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/01/27/外围信息搜集/&title=外围信息搜集"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/01/27/外围信息搜集/&name=外围信息搜集&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 jsmhny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

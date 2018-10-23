@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="主动信息收集主动信息收集 直接与目标系统交互通信 无法避免留下访问的痕迹 使用受控的第三方电脑进行探测 使用代理或已被控制的主机 做好被封杀的准备 使用噪音迷惑目标，淹没真实的探测流量   扫描 发送不同的探测，根据返回结果判断目标状态    发现 识别活着的主机 潜在的被攻击目标   输出一个IP地址列表 2、3、4层发现  二层发现 优点：扫描速度快、可靠  缺点：不可路由  Arp协议  抓">
+<meta property="og:type" content="article">
+<meta property="og:title" content="主动信息收集">
+<meta property="og:url" content="http://yoursite.com/2018/03/04/主动信息收集/index.html">
+<meta property="og:site_name" content="Chace Blog">
+<meta property="og:description" content="主动信息收集主动信息收集 直接与目标系统交互通信 无法避免留下访问的痕迹 使用受控的第三方电脑进行探测 使用代理或已被控制的主机 做好被封杀的准备 使用噪音迷惑目标，淹没真实的探测流量   扫描 发送不同的探测，根据返回结果判断目标状态    发现 识别活着的主机 潜在的被攻击目标   输出一个IP地址列表 2、3、4层发现  二层发现 优点：扫描速度快、可靠  缺点：不可路由  Arp协议  抓">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-03-04T08:55:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="主动信息收集">
+<meta name="twitter:description" content="主动信息收集主动信息收集 直接与目标系统交互通信 无法避免留下访问的痕迹 使用受控的第三方电脑进行探测 使用代理或已被控制的主机 做好被封杀的准备 使用噪音迷惑目标，淹没真实的探测流量   扫描 发送不同的探测，根据返回结果判断目标状态    发现 识别活着的主机 潜在的被攻击目标   输出一个IP地址列表 2、3、4层发现  二层发现 优点：扫描速度快、可靠  缺点：不可路由  Arp协议  抓">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>主动信息收集</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/03/17/Win缓冲区溢出/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/02/05/被动信息收集/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/03/04/主动信息收集/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/03/04/主动信息收集/&text=主动信息收集"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/03/04/主动信息收集/&title=主动信息收集"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/03/04/主动信息收集/&is_video=false&description=主动信息收集"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=主动信息收集&body=Check out this article: http://yoursite.com/2018/03/04/主动信息收集/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/03/04/主动信息收集/&title=主动信息收集"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/03/04/主动信息收集/&title=主动信息收集"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/03/04/主动信息收集/&title=主动信息收集"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/03/04/主动信息收集/&title=主动信息收集"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/03/04/主动信息收集/&name=主动信息收集&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#主动信息收集"><span class="toc-number">1.</span> <span class="toc-text">主动信息收集</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#主动信息收集-1"><span class="toc-number">1.0.1.</span> <span class="toc-text">主动信息收集</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#发现"><span class="toc-number">1.0.2.</span> <span class="toc-text">发现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二层发现"><span class="toc-number">1.0.3.</span> <span class="toc-text">二层发现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三层发现"><span class="toc-number">1.0.4.</span> <span class="toc-text">三层发现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#四层发现"><span class="toc-number">1.0.5.</span> <span class="toc-text">四层发现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#端口扫描"><span class="toc-number">1.0.6.</span> <span class="toc-text">端口扫描</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#UDP-端口扫描"><span class="toc-number">1.0.6.1.</span> <span class="toc-text">UDP 端口扫描</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#TCP端口扫描"><span class="toc-number">1.0.6.2.</span> <span class="toc-text">TCP端口扫描</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#隐蔽端口扫描"><span class="toc-number">1.0.6.2.1.</span> <span class="toc-text">隐蔽端口扫描</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#全连接端口扫描"><span class="toc-number">1.0.6.2.2.</span> <span class="toc-text">全连接端口扫描</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#僵尸扫描"><span class="toc-number">1.0.6.2.3.</span> <span class="toc-text">僵尸扫描</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#服务扫描"><span class="toc-number">1.0.6.2.4.</span> <span class="toc-text">服务扫描</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Banner"><span class="toc-number">1.0.6.2.5.</span> <span class="toc-text">Banner</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#服务扫描——服务识别"><span class="toc-number">1.0.6.2.6.</span> <span class="toc-text">服务扫描——服务识别</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#操作系统识别"><span class="toc-number">1.0.6.2.7.</span> <span class="toc-text">操作系统识别</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#SNMP扫描"><span class="toc-number">1.0.6.2.8.</span> <span class="toc-text">SNMP扫描</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#SMB扫描"><span class="toc-number">1.0.6.2.9.</span> <span class="toc-text">SMB扫描</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#SMTP扫描"><span class="toc-number">1.0.6.2.10.</span> <span class="toc-text">SMTP扫描</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#防火墙识别"><span class="toc-number">1.0.6.2.11.</span> <span class="toc-text">防火墙识别</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        主动信息收集
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Chace Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-03-04T08:53:29.000Z" itemprop="datePublished">2018-03-04</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="主动信息收集"><a href="#主动信息收集" class="headerlink" title="主动信息收集"></a>主动信息收集</h2><h4 id="主动信息收集-1"><a href="#主动信息收集-1" class="headerlink" title="主动信息收集"></a>主动信息收集</h4><ul>
+<li>直接与目标系统交互通信</li>
+<li>无法避免留下访问的痕迹</li>
+<li>使用受控的第三方电脑进行探测<ul>
+<li>使用代理或已被控制的主机</li>
+<li>做好被封杀的准备</li>
+<li>使用噪音迷惑目标，淹没真实的探测流量</li>
+</ul>
+</li>
+<li>扫描<ul>
+<li>发送不同的探测，根据返回结果判断目标状态</li>
+</ul>
+</li>
+</ul>
+<h4 id="发现"><a href="#发现" class="headerlink" title="发现"></a>发现</h4><ul>
+<li>识别活着的主机<ul>
+<li>潜在的被攻击目标</li>
+</ul>
+</li>
+<li>输出一个IP地址列表</li>
+<li>2、3、4层发现</li>
+</ul>
+<h4 id="二层发现"><a href="#二层发现" class="headerlink" title="二层发现"></a>二层发现</h4><ul>
+<li><p>优点：扫描速度快、可靠</p>
+</li>
+<li><p>缺点：不可路由</p>
+</li>
+<li><p>Arp协议</p>
+<ul>
+<li>抓包</li>
+</ul>
+</li>
+<li><p>arping</p>
+</li>
+<li><p><code>arping 1.1.1.1 -c 1</code> -c 包数量</p>
+</li>
+<li><p><code>arping -c 1 1.1.1.1 | grep &quot;bytes from&quot; | cut -d &quot; &quot; -f 5 | cut -d &quot;(&quot; -f 2 | cut -d &quot;)&quot; -f 1</code></p>
+</li>
+<li><p>脚本</p>
+</li>
+<li><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>! /bin/bash</span><br><span class="line">if ["$#" -ne 1]; then</span><br><span class="line">	echo "usage - ./arping.sh [interface]"</span><br><span class="line">	echo "Example - ./arping.sh eth0"</span><br><span class="line">	echo "Example will perform an ARP scan of the local subnet to which eth0 is assigned"</span><br><span class="line">	exit</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">interface=$1</span><br><span class="line">prefix=$(ifconfig $interface | grep 'inet addr' | cut -d ':' -f 2| cut -d ' ' -f 1 | cut -d '.' -f 1-3)</span><br><span class="line">for addr in $(seq 1 254);do</span><br><span class="line">	arping -c 1 $prefix.$addr |grep "bytes from"| cut -d "" -f 5 | cut -d "(" -f 2 | cut -d ")" -f 1</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line">if [ "$#" -ne 1]; then</span><br><span class="line">	echo "Usage - ./arping.sh [interface]"</span><br><span class="line">	echo "Example - ./arping.sh eth0"</span><br><span class="line">	echo "Example will perform an ARP scan of the local subnet to which eth0 is assigned"</span><br><span class="line">	exit</span><br><span class="line">fi</span><br><span class="line">file = $1</span><br><span class="line">for addr in $(cat $file); do</span><br><span class="line">	arping -c 1 $addr | grep "bytes from" | cut -d " " -f 5 | cut -d "(" -f 2| cut -d ")" -f 1</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>nmap 1.1.1.1-254 -sn</code></p>
+</li>
+<li><p><code>nmap -iL iplist.txt -sn</code></p>
+</li>
+<li><p>不是单纯ARP 还有DNS 可以抓包分析</p>
+</li>
+<li><p>Netdiscover</p>
+<ul>
+<li>专用于二层发现</li>
+<li>可用于无线和交换网络环境</li>
+<li>主动和被动探测</li>
+</ul>
+</li>
+<li><p>主动</p>
+<ul>
+<li><code>netdiscover -i eth0 -r 1.1.1.0/24</code></li>
+<li><code>netdiscover -i iplist.txt</code></li>
+</ul>
+</li>
+<li><p>被动</p>
+<ul>
+<li><code>netdiscover -p</code></li>
+<li>主动arp容易触发报警</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>Scapy</p>
+<ul>
+<li>可以作为Python库进行调用</li>
+<li>也可以作为单独的工具使用</li>
+<li>抓包、分析、创建、修改、注入网络流量</li>
+</ul>
+</li>
+<li><p>apt-get install python-gunplot</p>
+</li>
+<li><p>Scapy</p>
+<ul>
+<li><p><code>ARP().display()</code></p>
+</li>
+<li><p><code>Src1()</code></p>
+</li>
+<li><p>py扫描脚本</p>
+</li>
+<li><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! /usr/bin/python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line">logging.getLogger(<span class="string">"scapy.runtime"</span>).setLevel(logging.ERROR)</span><br><span class="line"><span class="keyword">from</span> scapy.all <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> len(sys.argv)!=<span class="number">2</span>:</span><br><span class="line">    print(<span class="string">"Usage - ./arp_disc.py [interface]"</span>)</span><br><span class="line">    print(<span class="string">"Example - ./arp_disc.py eth0"</span>)</span><br><span class="line">    print(<span class="string">"Example will perform an ARP scan of the local subnet to which eth0 is assigned"</span>)</span><br><span class="line">    sys.exit()</span><br><span class="line">    </span><br><span class="line">interface = str(sys.argv[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">ip = subprocess.check_output(<span class="string">"ifconfig"</span> + interface + <span class="string">"| grep 'inet addr' | cut -d ':' -f 2 | cut -d ' ' -f 1"</span>,shell=<span class="keyword">True</span> ).strip()</span><br><span class="line">prefix = ip.split(<span class="string">'.'</span>)[<span class="number">0</span>]+<span class="string">'.'</span>+ip.split(<span class="string">'.'</span>)[<span class="number">1</span>]+<span class="string">'.'</span>+ip.split(<span class="string">'.'</span>)[<span class="number">2</span>]+<span class="string">'.'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> addr <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">254</span>):</span><br><span class="line">    answer = sr1(ARP(pdst=prefix+str(addr)),timeout=<span class="number">0.1</span>,verbose=<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">if</span> answer == <span class="keyword">None</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(prefix+str(addr))</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! /usr/bin/python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line">logging.getLogger(<span class="string">"scapy.runtime"</span>).setLevel(logging.ERROR)</span><br><span class="line"><span class="keyword">from</span> scapy.all <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> len(sys.argv)!=<span class="number">2</span>:</span><br><span class="line">    print(<span class="string">"Usage - ./arp_disc.py [interface]"</span>)</span><br><span class="line">    print(<span class="string">"Example - ./arp_disc.py eth0"</span>)</span><br><span class="line">    print(<span class="string">"Example will perform an ARP scan of the local subnet to which eth0 is assigned"</span>)</span><br><span class="line">    sys.exit()</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">filename = str(sys.argv[<span class="number">1</span>])</span><br><span class="line">file = open(filename,<span class="string">'r'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> addr <span class="keyword">in</span> file:</span><br><span class="line">    answer = srl(ARP(pdst=addr.strip()), timeout=<span class="number">0.1</span>,verbose=<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">if</span> answer == <span class="keyword">None</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">print</span> addr.strip()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>​</p>
+</li>
+</ul>
+<h4 id="三层发现"><a href="#三层发现" class="headerlink" title="三层发现"></a>三层发现</h4><ul>
+<li><p>优点</p>
+<ul>
+<li>可路由</li>
+<li>速度比较快</li>
+</ul>
+</li>
+<li><p>缺点</p>
+<ul>
+<li>速度比二层慢</li>
+<li>经常被边界防火墙过滤</li>
+</ul>
+</li>
+<li><p>IP、ICMP协议</p>
+</li>
+<li><p><code>ping 1.1.1.1 -c 2</code></p>
+</li>
+<li><p><code>ping -R 1.1.1.1   / traceroute 1.1.1.1</code></p>
+</li>
+<li><p>`ping 1.1.1.1 -c 1 | grep “bytes from” | cut -d “ “ -f 4 | cut -d “:” -f 1</p>
+</li>
+<li><p>脚本</p>
+</li>
+<li><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line">if["$#" -ne 1];then</span><br><span class="line">	echo "Usage - ./pinger.sh [/24 network address]"</span><br><span class="line">	echo "Example - ./ping.sh 172.16.26.0"</span><br><span class="line">	echo "Example will perform an ICMP ping sweep of the 172.16.26.0/24 work"</span><br><span class="line">	exit</span><br><span class="line">fi</span><br><span class="line">prefix=$(echo $1 | cut -d '.' -f 1-3)</span><br><span class="line">for addr in $(seq 1 254);do</span><br><span class="line">	ping -c|1 $prefix.$addr|grep "bytes from"| cut -d ""-f 4|cut -d "." -f 1 &amp;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>​</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="四层发现"><a href="#四层发现" class="headerlink" title="四层发现"></a>四层发现</h4><ul>
+<li><p>优点</p>
+<ul>
+<li>可路由且结果可靠</li>
+<li>不太可能被防火墙过滤</li>
+<li>甚至可以发现所有端口都被过滤的主机</li>
+</ul>
+</li>
+<li><p>缺点</p>
+<ul>
+<li>基于状态过滤的防火墙可能过滤扫描</li>
+<li>全端口扫描速度慢</li>
+</ul>
+</li>
+<li><p>TCP</p>
+<ul>
+<li>未经请求的ACK——RST</li>
+<li>SYN——SYN/ACK、RST</li>
+</ul>
+</li>
+<li><p>UDP</p>
+<ul>
+<li>ICMP端口不可达、一去不复返</li>
+</ul>
+</li>
+<li><p>ACK——TCP Port——RST</p>
+</li>
+<li><p>Scapy</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">i = IP()</span><br><span class="line">t = TCP()</span><br><span class="line">r = (i/t)</span><br><span class="line">r.display()</span><br><span class="line">r[IP].dst=<span class="string">"192.168.1.1"</span></span><br><span class="line">r[TCP].flags=<span class="string">"A"</span></span><br><span class="line">a=sr1(r)</span><br><span class="line">a.display()</span><br><span class="line"></span><br><span class="line">a = sr1(IP(dst=<span class="string">"1.1.1.1"</span>)/TCP(dport=<span class="number">80</span>,flags=<span class="string">'A'</span>), timeout=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>ACK_Ping.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line">logging.getLogger(<span class="string">"scapy.runtime"</span>).setLevel(logging.ERROR)</span><br><span class="line"><span class="keyword">from</span> scapy.all <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> len(sys.argv)!=<span class="number">2</span>:</span><br><span class="line">    print(<span class="string">"Usage - ./ACK_Ping.py [/24 network address]"</span>)</span><br><span class="line">    print(<span class="string">"Example - ./ACK_Ping.py 1.1.1.0"</span>)</span><br><span class="line">    print(<span class="string">"Example will perform a TCP ACK ping scan of the 1.1.1.0/24 range"</span>)</span><br><span class="line">    sys.exit()</span><br><span class="line">    </span><br><span class="line">address = srt(sys.argv[<span class="number">1</span>])</span><br><span class="line">prefix =  address.split(<span class="string">'.'</span>)[<span class="number">0</span>] + <span class="string">'.'</span>+address.split(<span class="string">'.'</span>)[<span class="number">1</span>]+<span class="string">'.'</span>+address.split(<span class="string">'.'</span>)[<span class="number">2</span>]+<span class="string">'.'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> addr <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">254</span>):</span><br><span class="line">    respone=sr1(IP(dst=prefix+str(addr))/TCP(dport=<span class="number">2222</span>,flag=<span class="string">'A'</span>),timeout=<span class="number">0.1</span>,verbose=<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">if</span> int(response[TCP].flags)==<span class="number">4</span>:</span><br><span class="line">            print(prefix+str(addr))</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+</ul>
+<p>基于UDP</p>
+<ul>
+<li><p>UDP——UDP Port——ICMP</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">u = UDP()</span><br><span class="line">u.dport=33333</span><br><span class="line">r = (i/u)</span><br><span class="line">a = sr1(r,timeout=1,verbose=1)</span><br><span class="line">a.display()</span><br></pre></td></tr></table></figure>
+<p>UDP_Ping.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line">logging.getLogger(<span class="string">"scapy.runtime"</span>).setLevel(logging.ERROR)</span><br><span class="line"><span class="keyword">from</span> scapy.all <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> len(sys.argv)!=<span class="number">2</span>:</span><br><span class="line">    print(<span class="string">"Usage - ./ACK_Ping.py [/24 network address]"</span>)</span><br><span class="line">    print(<span class="string">"Example - ./ACK_Ping.py 1.1.1.0"</span>)</span><br><span class="line">    print(<span class="string">"Example will perform a TCP ACK ping scan of the 1.1.1.0/24 range"</span>)</span><br><span class="line">    sys.exit()</span><br><span class="line">    </span><br><span class="line">address = srt(sys.argv[<span class="number">1</span>])</span><br><span class="line">prefix =  address.split(<span class="string">'.'</span>)[<span class="number">0</span>] + <span class="string">'.'</span>+address.split(<span class="string">'.'</span>)[<span class="number">1</span>]+<span class="string">'.'</span>+address.split(<span class="string">'.'</span>)[<span class="number">2</span>]+<span class="string">'.'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> addr <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">254</span>):</span><br><span class="line">    respone=sr1(IP(dst=prefix+str(addr))/UDP(dport=<span class="number">22222</span>),timeout=<span class="number">0.1</span>,verbose=<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">if</span> int(response[IP].proto)==<span class="number">1</span>:</span><br><span class="line">            print(prefix+str(addr))</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+</ul>
+<p>nmap四层发现</p>
+<ul>
+<li><code>nmap 1.1.1.1-254 -PU53 -sn</code> UDP方式</li>
+<li><code>nmap 1.1.1.1-254 -PA80 -sn</code> ACK方式</li>
+<li><code>nmap -iL iplist.txt -PA80 -sn</code></li>
+</ul>
+<p>hping3</p>
+<ul>
+<li><p><code>hping3 --udp 211.144.145.1 -c 1</code></p>
+</li>
+<li><p>udp_hping.sh</p>
+</li>
+<li><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>! /bin/bash</span><br><span class="line">if ["$#" -ne 1]; then</span><br><span class="line">	echo "Usage - ./udp_hping.sh [/24 network address]"</span><br><span class="line">	echo "Example - ./udp_hping.sh 172.16.36.0"</span><br><span class="line">	echo "Example will perform a UDP ping sweep of the 172.16.36.0/24 network and output to an output.txt file"</span><br><span class="line">	exit</span><br><span class="line">fi</span><br><span class="line">prefix=$(echo $1 | cut -d '.' -f 1-3)</span><br><span class="line">for addr in $(seq 1 254); do</span><br><span class="line">	hping3 $prefix.$addr --udp -c 1 &gt;&gt;r.txt</span><br><span class="line">done</span><br><span class="line">grep Unreachable r.txt | cut -d " " -f 5 | cut -d "=" -f 2 &gt;&gt; output.txt</span><br><span class="line">rm r.txt</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>hping3 1.1.1.1 -c 1</code> （TCP)</p>
+</li>
+<li><p>tcp_hping.sh</p>
+</li>
+<li><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>! /bin/bash</span><br><span class="line">if ["$#" -ne 1]; then</span><br><span class="line">	echo "Usage - ./tcp_hping.sh [/24 network address]"</span><br><span class="line">	echo "Example - ./tcp_hping.sh 172.16.36.0"</span><br><span class="line">	echo "Example will perform a TCP ping sweep of the 172.16.36.0/24 network and output to an output.txt file"</span><br><span class="line">	exit</span><br><span class="line">fi</span><br><span class="line">prefix=$(echo $1 | cut -d '.' -f 1-3)</span><br><span class="line">for addr in $(seq 1 254); do</span><br><span class="line">	hping3 $prefix.$addr -c 1 &gt;&gt;r.txt</span><br><span class="line">done</span><br><span class="line">grep len r.txt | cut -d " " -f 5 | cut -d "=" -f 2 &gt;&gt; output.txt</span><br><span class="line">rm r.txt</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Flag 0 —- ACK,RST</p>
+</li>
+</ul>
+<h4 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h4><ul>
+<li><p>端口对应网络服务及应用端程序</p>
+</li>
+<li><p>服务端程序的漏洞通过端口攻入</p>
+</li>
+<li><p>发现开放的端口</p>
+</li>
+<li><p>更具体的攻击面</p>
+</li>
+<li><h5 id="UDP-端口扫描"><a href="#UDP-端口扫描" class="headerlink" title="UDP 端口扫描"></a>UDP 端口扫描</h5><ul>
+<li>假设 ICMP port-unreachable 响应代表端口关闭<ul>
+<li>目标系统不响应ICMP port-unreachable时，可能产生误判</li>
+</ul>
+</li>
+<li>完整的UPD应用层请求<ul>
+<li>准确性高</li>
+<li>耗时巨大</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Scapy UDP Scan</p>
+<ul>
+<li>端口关闭：ICMP port-unreachable</li>
+<li>端口开放：没有回包</li>
+<li>了解每一种基于UDP的应用层结构很有帮助</li>
+<li>与三层相同的技术</li>
+<li>误判</li>
+</ul>
+</li>
+<li><p>Scapy</p>
+<ul>
+<li><p><code>sr1(IP(dst=&quot;1.1.1.1&quot;)/UDP(dport=53), timeout=1,verbose=1)</code></p>
+</li>
+<li><p><code>./udp_scan.py 1.1.1.1 1 100</code></p>
+</li>
+<li><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! /usr/bin/python</span></span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line">logging.getLogger(<span class="string">"scapy.runtime"</span>).setLevel(logging.ERROR)</span><br><span class="line"><span class="keyword">from</span> scapy.all <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> len(sys.argv)!=<span class="number">4</span>:</span><br><span class="line">    print(<span class="string">"Usage - ./udp_scan.py [Target-IP] [First Port] [Last Port]"</span>)</span><br><span class="line">    print(<span class="string">"Example - ./udp_scan.py 10.0.0.5 1 100"</span>)</span><br><span class="line">    print(<span class="string">"Example will UDP port scan ports 1 through 100 on 10.0.0.5"</span>)</span><br><span class="line">    sys.exit()</span><br><span class="line">    </span><br><span class="line">ip = sys.argv[<span class="number">1</span>]</span><br><span class="line">start = int(sys.argv[<span class="number">2</span>])</span><br><span class="line">end = int(sys.argv[<span class="number">3</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> port <span class="keyword">in</span> range(start,end):</span><br><span class="line">    a = sr1(IP(dst=ip)/UDP(dport=port),timeout=<span class="number">5</span>,verbose=<span class="number">0</span>)</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">if</span> a==<span class="keyword">None</span>:</span><br><span class="line">        print(port)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Nmap</p>
+<ul>
+<li>nmap -sU 1.1.1.1<ul>
+<li>默认的1000个参数</li>
+<li>ICMP host-unreachable</li>
+</ul>
+</li>
+<li>nmap 1.1.1.1 -sU -p 53</li>
+<li>nmap -iL iplist.txt -sU -p 1-200</li>
+</ul>
+</li>
+</ul>
+<h5 id="TCP端口扫描"><a href="#TCP端口扫描" class="headerlink" title="TCP端口扫描"></a>TCP端口扫描</h5></li>
+<li><p>基于连接的协议</p>
+</li>
+<li>三次握手</li>
+<li>隐蔽扫描</li>
+<li>僵尸扫描</li>
+<li>全连接扫描（完成三次握手）</li>
+<li>所有的TCP扫描方式都是基于三次握手的变化来判断目标端口状态（1-SYN 2-SYN，ACK 3-ACK）</li>
+<li>隐蔽扫描——syn<ul>
+<li>不建立完整连接</li>
+<li>应用日志不记录扫描行为——隐蔽</li>
+</ul>
+</li>
+<li>僵尸扫描<ul>
+<li>极度隐蔽</li>
+<li>实施条件苛刻 （1.发起方伪造IP地址 2.有僵尸机 3.IPID递增产生</li>
+<li>可伪造源地址</li>
+<li>选择僵尸机<ul>
+<li>闲置系统</li>
+<li>系统使用递增的IPID<ul>
+<li>0</li>
+<li>随机</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h6 id="隐蔽端口扫描"><a href="#隐蔽端口扫描" class="headerlink" title="隐蔽端口扫描"></a>隐蔽端口扫描</h6><ul>
+<li><p>Syn——syn/ack——rst</p>
+</li>
+<li><p>Scapy</p>
+<ul>
+<li><p><code>sr1(IP(dst=&quot;192.168.60.3&quot;)/TCP(dport=80),timeout=1,verbose=1)</code></p>
+</li>
+<li><p><code>a = sr1(IP(dst=&quot;192.168.1.134&quot;)/TCP(flags=&quot;S&quot;,dport=22), timeout=1, verbose=0)</code></p>
+</li>
+<li><p>./syn_scan.py</p>
+</li>
+<li><p>chmod u+x syn_scan.py</p>
+</li>
+<li><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! /usr/bin/python</span></span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line">logging.getLogger(<span class="string">"scapy.runtime"</span>).setLevel(logging.ERROR)</span><br><span class="line"><span class="keyword">from</span> scapy.all <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> len(sys.argv)!=<span class="number">4</span>:</span><br><span class="line">    print(<span class="string">"Usage - ./syn_scan.py [Target-IP] [First Port] [Last Port]"</span>)</span><br><span class="line">    print(<span class="string">"Example - ./syn_scan.py 10.0.0.5 1 100"</span>)</span><br><span class="line">    print(<span class="string">"Example will TCP SYN scan ports 1 through 100 on 10.0.0.5"</span>)</span><br><span class="line">    sys.exit()</span><br><span class="line">    </span><br><span class="line">ip = sys.argv[<span class="number">1</span>]</span><br><span class="line">start = int(sys.argv[<span class="number">2</span>])</span><br><span class="line">end = int(sys.argv[<span class="number">3</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> port <span class="keyword">in</span> range(start,end):</span><br><span class="line">    a = sr1(IP(dst=ip)/TCP(dport=port),timeout=<span class="number">1</span>,verbose=<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">if</span> a == <span class="keyword">None</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">if</span> int(a[TCP],flags) == <span class="number">18</span>:</span><br><span class="line">            print(port)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>nmap -sS 1.1.1.1 -p 80,21,25,110,43</code></p>
+</li>
+<li><p><code>nmap -sS 1.1.1.1 -p 1-65535 -open</code></p>
+</li>
+<li><p><code>nmap -sS 1.1.1.1 -p- --open</code></p>
+</li>
+<li><p><code>nmap -sS -iL iplist.txt -p 80</code></p>
+</li>
+<li><p>hping3</p>
+</li>
+<li><p><code>hping3 1.1.1.1 --scan 80 -S</code></p>
+</li>
+<li><p><code>hping3 1.1.1.1 --scan 80,21,25,443 -S</code></p>
+</li>
+<li><p><code>hping3 1.1.1.1 --scan 0-65535 -S</code></p>
+</li>
+<li><p><code>hping3 -c 10 -S --spoof 1.1.1.2 -p ++1 1.1.1.3</code> 伪造IP地址 伪造源地址去查看 或控制交换机镜像端口</p>
+</li>
+</ul>
+<h6 id="全连接端口扫描"><a href="#全连接端口扫描" class="headerlink" title="全连接端口扫描"></a>全连接端口扫描</h6><ul>
+<li><p>Scapy</p>
+<ul>
+<li>Syn扫描不需要raw packets</li>
+<li>内核认为syn/ack是非法包，直接发rst中断连接</li>
+<li>全连接扫描对scapy比较困难</li>
+</ul>
+</li>
+<li><p><code>sr1(IP(dst=&quot;192.168.20.2&quot;)/TCP(dport=22,flags=&#39;S&#39;))</code></p>
+</li>
+<li><p>./tcp_scan1.py</p>
+</li>
+<li><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! /usr/bin/python</span></span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line">logging.getLogger(<span class="string">"scapy.runtime"</span>).setLevel(logging.ERROR)</span><br><span class="line"><span class="keyword">from</span> scapy.all <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">response = sr1(IP(dst=<span class="string">"192.168.60.4"</span>)/TCP(dport=<span class="number">80</span>,flags=<span class="string">'S'</span>))</span><br><span class="line">reply = sr1(IP(dst=<span class="string">"192.168.60.4"</span>)/TCP(dport=<span class="number">80</span>,flags=<span class="string">'A'</span>,ack=(response[TCP].seq+<span class="number">1</span>)))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>./tcp_scan2.py</p>
+</li>
+<li><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line">logging.getLogger(<span class="string">"scapy.runtime"</span>).setLevel(logging.ERROR)</span><br><span class="line"><span class="keyword">from</span> scapy.all <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">syn = IP(dst=<span class="string">"192.168.20.4"</span>)/TCP(dport=<span class="number">4444</span>,flags=<span class="string">'S'</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"--SENT--"</span>)</span><br><span class="line">SYN.display()</span><br><span class="line"></span><br><span class="line">print(<span class="string">"\n\n--RECEIVED--"</span>)</span><br><span class="line">response=sr1(SYN,timeout=<span class="number">1</span>,verbose=<span class="number">0</span>)</span><br><span class="line">response.display()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> int(response[TCP].flags)==<span class="number">18</span>:</span><br><span class="line">    print(<span class="string">"\n\n--SENT--"</span>)</span><br><span class="line">    A = IP(dst=<span class="string">"192.168.20.4"</span>)/TCP(dport=<span class="number">4444</span>,flags=<span class="string">'A'</span>,ack=(response[TCP].seq+<span class="number">1</span>))</span><br><span class="line">    A.display()</span><br><span class="line">    print(<span class="string">"\n\n--RECEIVED"</span>)</span><br><span class="line">    response2=sr1(A,timeout=<span class="number">1</span>,verbose=<span class="number">0</span>)</span><br><span class="line">    response2.display()</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">"SYN-ACK not returned"</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>​</p>
+</li>
+<li><p><code>iptables -A OUTPUT -p tcp --tcp-flags RST RST -d 192.168.20.2 -j DROP</code> 禁用内核RST</p>
+</li>
+<li><p>nmap</p>
+</li>
+<li><p><code>nmap -sT 192.168.1.134 -p 1-100</code></p>
+</li>
+<li><p><code>nmap -sT 1.1.1.1 -p 80,21,25</code></p>
+</li>
+<li><p><code>nmap -sT 1.1.1.1 -p 80-2000</code></p>
+</li>
+<li><p><code>nmap -sT -iL iplist.txt -p 80</code></p>
+</li>
+<li><p>默认1000个常用端口</p>
+</li>
+<li><p>dmirty</p>
+<ul>
+<li>功能简单，但使用简便</li>
+<li>默认150个最常用的端口</li>
+</ul>
+</li>
+<li><p><code>dmitry -p 172.16.36.135</code></p>
+</li>
+<li><p><code>dmitry -p 172.16.36.135 -o output</code></p>
+</li>
+<li><p>nc</p>
+</li>
+<li><p><code>nc -nv -w 1 -z 192.168.1.134 1-100</code></p>
+</li>
+</ul>
+<h6 id="僵尸扫描"><a href="#僵尸扫描" class="headerlink" title="僵尸扫描"></a>僵尸扫描</h6><ul>
+<li><p>Scapy——zombie.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">i = IP()</span><br><span class="line">t = TCP()</span><br><span class="line">rz=(i/t)</span><br><span class="line">rt=(i/t)</span><br><span class="line">rz[IP].dst=<span class="string">"192.168.1.133"</span></span><br><span class="line">rz[TCP].dport=<span class="number">445</span></span><br><span class="line">rz[TCP].flags=<span class="string">"SA"</span></span><br><span class="line"></span><br><span class="line">rt[IP].src=<span class="string">"192.168.1.133"</span></span><br><span class="line">rt[IP].dst=<span class="string">"192.168.1.134"</span></span><br><span class="line">rt[TCP].dport=<span class="number">25</span></span><br><span class="line">rt[TCP].flags=<span class="string">"S"</span></span><br><span class="line"></span><br><span class="line">az1=sr1(rz)</span><br><span class="line">at=sr1(rt,timeout=<span class="number">1</span>)</span><br><span class="line">az2=sr1(rz)</span><br><span class="line">az1.display()</span><br><span class="line">az2.display()</span><br><span class="line">ip id+<span class="number">2</span> 目标端口开放</span><br><span class="line">ip id+<span class="number">1</span> 目标端口关闭</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line">logging.getLogger(<span class="string">"scapy.runtime"</span>).setLevel(logging.ERROR)</span><br><span class="line"><span class="keyword">from</span> scapy.all <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ipid</span><span class="params">(zombie)</span>:</span></span><br><span class="line">    reply1=sr1(IP(dst=zombie)/TCP(flags=<span class="string">"SA"</span>),timeout=<span class="number">2</span>,verbose=<span class="number">0</span>)</span><br><span class="line">    send(IP(dst=zombie)/TCP(flags=<span class="string">"SA"</span>),verbose=<span class="number">0</span>)</span><br><span class="line">    reply2=sr1(IP(dst=zombie)/TCP(flags=<span class="string">"SA"</span>),timeout=<span class="number">2</span>,verbose=<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">if</span> reply2[IP].id==(reply1[IP].id+<span class="number">2</span>):</span><br><span class="line">        print(<span class="string">"IPID sequence is incremental and target appears to be idle. ZOMBIE LOCATED"</span>)</span><br><span class="line">        resoponse=input(<span class="string">"Do you want to use this zombie to perform a scan?(Y or N)"</span>)</span><br><span class="line">        <span class="keyword">if</span> response = <span class="string">"Y"</span>:</span><br><span class="line">            target=input(<span class="string">"Enter the IP address of the target system"</span>)</span><br><span class="line">            zombiescan=(target,zombie)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">"Either the IPID sequence is not incremental or the target is not idle,NOT A GOOD ZOMBIE"</span>)</span><br><span class="line">            </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">zombiescan</span><span class="params">(target,zombie)</span>:</span></span><br><span class="line">    print(<span class="string">"\nScanning target"</span> + target + <span class="string">"with zombie"</span> + zombie)</span><br><span class="line">    print(<span class="string">"\n----------Open Ports on Target----------\n"</span>)</span><br><span class="line">    <span class="keyword">for</span> port <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">100</span>):</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            start_val=sr1(IP(dst=zombie)/TCP(flags=<span class="string">"SA"</span>,dport=port),timeout=<span class="number">2</span>,verbose=<span class="number">0</span>)</span><br><span class="line">            send(IP(src=zombie,dst=target)/TCP(flags=<span class="string">"S"</span>,dport=port),verbose=<span class="number">0</span>)</span><br><span class="line">            end_val=sr1(IP(dst=zombie)/TCP(flags=<span class="string">"SA"</span>),timeout=<span class="number">2</span>,verbose=<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">if</span> end_val[IP].id==(start_val[IP].id+<span class="number">2</span>):</span><br><span class="line">                print(port)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        </span><br><span class="line">print(<span class="string">"----------Zombie Scan Suite----------\n"</span>)</span><br><span class="line">print(<span class="string">"1 - Identify Zombie Host\n"</span>)</span><br><span class="line">print(<span class="string">"2 - Perform Zombie Scan\n"</span>)</span><br><span class="line">ans = input(<span class="string">"Select an Option (1 or 2):"</span>)</span><br><span class="line"><span class="keyword">if</span> ans==<span class="string">"1"</span>:</span><br><span class="line">    zombie=input(<span class="string">"Enter IP address to test IPID sequence:"</span>)</span><br><span class="line">    ipid(zombie)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">if</span> ans == <span class="string">"2"</span>:</span><br><span class="line">        zombie=input(<span class="string">"Enter IP address for zombie system: "</span>)</span><br><span class="line">        target=input(<span class="string">"Enter IP address for scan target: "</span>)</span><br><span class="line">        zombiescan(target,zombie)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>发现僵尸机</p>
+<ul>
+<li><code>nmap -p445 192.168.1.133 --script=ipidseq.nse</code></li>
+</ul>
+</li>
+<li><p>扫描目标</p>
+<ul>
+<li><code>nmap 172.16.36.135 -sI 172.16.136.134 -Pn -p 0-100</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h6 id="服务扫描"><a href="#服务扫描" class="headerlink" title="服务扫描"></a>服务扫描</h6><ul>
+<li><p>识别开放端口上运行的应用</p>
+</li>
+<li><p>识别目标操作系统</p>
+</li>
+<li><p>提高攻击效率</p>
+<ul>
+<li>Banner捕获</li>
+<li>服务识别</li>
+<li>操作系统识别</li>
+<li>SNMP分析</li>
+<li>防火墙识别</li>
+</ul>
+</li>
+<li><p>Banner</p>
+<ul>
+<li>软件开发商</li>
+<li>软件名称</li>
+<li>服务类型</li>
+<li>版本号<ul>
+<li>直接发现已知的漏洞和弱点</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>连接建立后直接获取banner</p>
+</li>
+<li><p>另类服务识别方法</p>
+<ul>
+<li>特征行为和响应字段</li>
+<li>不同的响应可用于识别底层操作系统</li>
+</ul>
+</li>
+<li><p>SNMP</p>
+<ul>
+<li>简单网络管理协议</li>
+<li>Community strings</li>
+<li>信息查询或重新配置</li>
+</ul>
+</li>
+<li><p>识别和绕过防火墙筛选</p>
+</li>
+<li><h6 id="Banner"><a href="#Banner" class="headerlink" title="Banner"></a>Banner</h6><ul>
+<li><code>nc -nv 192.168.1.134 22</code></li>
+</ul>
+</li>
+<li><p>Python socket</p>
+<ul>
+<li><p>Socket模块用于连接网络服务</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> socket</span><br><span class="line">banner=socket.socket(socket.AF_INET,socket.SOCK_STREAM)</span><br><span class="line">banner.connect((<span class="string">"192.168.1.134"</span>,<span class="number">21</span>))</span><br><span class="line">banner.recv(<span class="number">4096</span>)</span><br><span class="line"><span class="comment"># `220(vsFTPD 2.3.4)\r\n`</span></span><br><span class="line">banner.close()</span><br><span class="line">exit()</span><br></pre></td></tr></table></figure>
+<p>Banner不允许抓取，recv函数无返回将挂起</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> select</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> len(sys.argv)!=<span class="number">4</span>:</span><br><span class="line">    print(<span class="string">"Usage - ./banner_grab.py [Target-IP] [First Port] [Last Port]"</span>)</span><br><span class="line">    print(<span class="string">"Example - ./banner_grab.py 10.0.0.5 1 100"</span>)</span><br><span class="line">    print(<span class="string">"Example will grab banners for TCP ports 1 through 100 on 10.0.0.5"</span>)</span><br><span class="line">    </span><br><span class="line">ip = sys.argv[<span class="number">1</span>]</span><br><span class="line">start = int(sys.argv[<span class="number">2</span>])</span><br><span class="line">end = int(sys.argv[<span class="number">3</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> port <span class="keyword">in</span> range(start, end):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        bangrab=socket.socket(socket.AF_INET,socket.SOCK_STREAM)</span><br><span class="line">        bangrab.connect((ip,port))</span><br><span class="line">        ready=select.select([bangrab],[],[],<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">if</span> ready[<span class="number">0</span>]:</span><br><span class="line">            print(<span class="string">"TCP Port"</span> + str(port) + <span class="string">"-"</span> + bangrab.recv(<span class="number">4096</span>))</span><br><span class="line">            bangrab.close()</span><br><span class="line">     <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<p><code>dmitry -p 172.16.36.135</code></p>
+<p><code>dmitry -pb 172.16.36.135</code></p>
+<p><code>nmap -sT 1.1.1.1 -p 1-100 --script=banner.nse</code></p>
+<p><code>amap -B 172.16.36.35 21</code></p>
+<p><code>amap -B 172.16.36.135 1-65535</code></p>
+<p><code>amap -B 172.16.36.135 1-65535 | grep on</code></p>
+<h6 id="服务扫描——服务识别"><a href="#服务扫描——服务识别" class="headerlink" title="服务扫描——服务识别"></a>服务扫描——服务识别</h6><ul>
+<li>Banner信息抓取能力有限</li>
+<li>nmap响应特征分析识别服务<ul>
+<li>发送系列复杂的探测</li>
+<li>依据响应特征signature</li>
+</ul>
+</li>
+<li><code>nc -nv 1.1.1.1 80</code></li>
+<li><code>nmap 1.1.1.1 -p 80 -sV</code></li>
+<li>Amap</li>
+<li><code>amap 192.168.1.134 80</code></li>
+<li><code>amap 172.16.36.135 20-30</code></li>
+<li><code>amap 172.16.36.135 20-30 -q</code></li>
+<li><code>amap 172.16.36.135 20-30 -qb</code></li>
+</ul>
+<h6 id="操作系统识别"><a href="#操作系统识别" class="headerlink" title="操作系统识别"></a>操作系统识别</h6><ul>
+<li><p>操作系统识别技术</p>
+<ul>
+<li>种类繁多</li>
+<li>好产品采用多种技术组合</li>
+</ul>
+</li>
+<li><p>TTL起始值</p>
+<ul>
+<li>Windows:128(65-128)</li>
+<li>Linux/Unix:64(1-64)</li>
+<li>某些Unix:255 </li>
+</ul>
+</li>
+<li><p>Python</p>
+</li>
+<li><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> scapy.all <span class="keyword">import</span>*</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line">logging.getLogger(<span class="string">"scapy.runtime"</span>).setLevel(logging.ERROR)</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> len(sys.argv)!=<span class="number">2</span>:</span><br><span class="line">    print(<span class="string">"Usage - ./ttl_os.py [IP Address]"</span>)</span><br><span class="line">    print(<span class="string">"Example - ./ttl_os.py 10.0.0.5"</span>)</span><br><span class="line">    print(<span class="string">"Example will perform ttl analysis to attempt to determine whether the system is Windows or Linux/Unix"</span>)</span><br><span class="line">    sys.exit()</span><br><span class="line">    </span><br><span class="line">ip = sys.argv[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">ans=sr1(IP(dst=str(ip))/ICMP(),timeout=<span class="number">1</span>,verbose=<span class="number">0</span>)</span><br><span class="line"><span class="keyword">if</span> ans==<span class="keyword">None</span>:</span><br><span class="line">    print(<span class="string">"No response was returned"</span>)</span><br><span class="line"><span class="keyword">elif</span> int(ans[IP].ttl)&lt;=<span class="number">64</span>:</span><br><span class="line">    print(<span class="string">"Host is Linux/Unix"</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">"Host is Windows"</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>nmap</p>
+</li>
+<li><p><code>nmap -O 192.168.1.133</code></p>
+</li>
+<li><p><code>xprobe2 192.168.1.134</code></p>
+</li>
+<li><p>被动操作系统识别</p>
+<ul>
+<li>IDS</li>
+<li>抓包分析</li>
+</ul>
+</li>
+<li><p>被动扫描</p>
+</li>
+<li><p>P0f</p>
+<ul>
+<li>结合ARP地址欺骗识别全网OS</li>
+</ul>
+</li>
+</ul>
+<h6 id="SNMP扫描"><a href="#SNMP扫描" class="headerlink" title="SNMP扫描"></a>SNMP扫描</h6></li>
+<li><p>snmp</p>
+<ul>
+<li>信息的金矿</li>
+<li>经常被错误配置</li>
+<li>public/private/manager</li>
+</ul>
+</li>
+<li><p>MIB Tree</p>
+<ul>
+<li>SNMP Management Information Base （MIB）</li>
+<li>树形的网络设备管理功能数据库</li>
+<li><code>1.3.6.1.4.1.77.1.2.25</code></li>
+</ul>
+</li>
+<li><p><code>onesixtyone 1.1.1.1 public</code></p>
+</li>
+<li><p><code>onesixtyone -c dict.txt -i hosts -o my.log -w 100</code></p>
+</li>
+<li><p><code>snmapwalk 192.168.1.133 -c public -v 2c</code></p>
+</li>
+<li><p><code>snmapwalk -c public -v 2c 192.168.1.133 1.3.6.1.4.1.77.1.2.25</code></p>
+</li>
+<li><p><code>snmpcheck -t 192.168.1.153</code></p>
+</li>
+<li><p><code>snmpcheck -t 192.168.1.153 -c private -v 2</code></p>
+</li>
+<li><p><code>snmpcheck -t 192.168.20.199 -w</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<h6 id="SMB扫描"><a href="#SMB扫描" class="headerlink" title="SMB扫描"></a>SMB扫描</h6><p><code>nmap -v -p139,445 192.168.60.1-20</code></p>
+<p><code>nmap 192.168.60.4 -p139,445 --script=smb-os-discovery.nse</code></p>
+<p><code>nmap -v -p139,445 --script=smb-check-vulns --script-args=unsafe=1 1.1.1.1</code></p>
+<p><code>nbtscan -r 192.168.60.0/24</code></p>
+<p><code>enum4linux -a 192.168.60.10</code></p>
+<ul>
+<li>Server Message Block 协议<ul>
+<li>微软历史上出现安全问题最多的协议</li>
+<li>实现复杂</li>
+<li>默认开放</li>
+<li>文件共享</li>
+<li>空会话未身份认证访问（SMB1）<ul>
+<li>密码策略</li>
+<li>用户名</li>
+<li>组名</li>
+<li>机器名</li>
+<li>用户名</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h6 id="SMTP扫描"><a href="#SMTP扫描" class="headerlink" title="SMTP扫描"></a>SMTP扫描</h6><p><code>nc -nc 1.1.1.1 25</code></p>
+<p><code>nmap smtp.163.com -p25 --script=smtp-enum-users.nse --script-args=smtp-enum=users.methods={VRFY}</code></p>
+<p><code>nmap smtp.163.com -p25 --script=smtp-open-relay.nse</code></p>
+<p><code>smtp-user-enum -M VRFY -U users.txt -t 10.0.0.1</code></p>
+<p><code>./smtp.py</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> len(sys.argv)!=<span class="number">2</span>:</span><br><span class="line">    print(<span class="string">"Usage:smtp.py &lt;username&gt;"</span>)</span><br><span class="line">    sys.exit(<span class="number">0</span>)</span><br><span class="line">    </span><br><span class="line">s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line">connect=s.connect((<span class="string">'192.168.20.5'</span>，<span class="number">25</span>))</span><br><span class="line">banner=s.recv(<span class="number">1024</span>)</span><br><span class="line">print(banner+<span class="string">'aaaaaaaaaa'</span>)</span><br><span class="line">s.send(<span class="string">'VRFY'</span> + sys.argv[<span class="number">1</span>]+ <span class="string">'\r\n'</span>)</span><br><span class="line">result=s.recv(<span class="number">1024</span>)</span><br><span class="line">print(result)</span><br><span class="line">s.close</span><br></pre></td></tr></table></figure>
+<h6 id="防火墙识别"><a href="#防火墙识别" class="headerlink" title="防火墙识别"></a>防火墙识别</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line">logging.getLogger(<span class="string">"scapy.runtime"</span>).setLevel(logging.ERROR)</span><br><span class="line"><span class="keyword">from</span> scapy.all <span class="keyword">import</span>*</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> len(sys.argv)!=<span class="number">3</span>:</span><br><span class="line">    print(<span class="string">"Usage - ./FW_detect.py [Target-IP] [Target Port]"</span>)</span><br><span class="line">    print(<span class="string">"Example - /FW_detect.py 10.0.0.5 443"</span>)</span><br><span class="line">    print(<span class="string">"Example will determine if filtering exists on port 443 of host 10.0.0.5"</span>)</span><br><span class="line">    sys.exit()</span><br><span class="line">    </span><br><span class="line">ip = sys.argv[<span class="number">1</span>]</span><br><span class="line">port = int(sys.argv[<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">ACK_response = sr1(IP(dst=ip)/TCP(dport=port,flags=<span class="string">'A'</span>),timeout=<span class="number">1</span>,verbose=<span class="number">0</span>)</span><br><span class="line">SYN_response = sr1(IP(dst=ip)/TCP(dport=port,flags=<span class="string">'S'</span>),timeout=<span class="number">1</span>,verbose=<span class="number">0</span>)</span><br><span class="line"><span class="keyword">if</span> (ACK_response = <span class="keyword">None</span> ) <span class="keyword">and</span> (SYN_response == <span class="keyword">None</span>):</span><br><span class="line">    print(<span class="string">"Port is either unstatefully filtered or host is down"</span>)</span><br><span class="line"><span class="keyword">elif</span>((ACK_response == <span class="keyword">None</span>) <span class="keyword">or</span> (SYN_response == <span class="keyword">None</span>)) <span class="keyword">and</span> <span class="keyword">not</span> ((ACK_response==<span class="keyword">None</span>) <span class="keyword">and</span> (SYN_response == <span class="keyword">None</span>)):</span><br><span class="line">    print(<span class="string">"Stateful filtering in place"</span>)</span><br><span class="line"><span class="keyword">elif</span> int(SYN_response[TCP].flags) == <span class="number">18</span>:</span><br><span class="line">    print(<span class="string">"Port is unfiltered and open"</span>)</span><br><span class="line"><span class="keyword">elif</span> int(SYN_response[TCP].flags) == <span class="number">20</span>:</span><br><span class="line">    print(<span class="string">"Port is unfiltered and closed"</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">"Unable to determine if the port is filtered"</span>)</span><br></pre></td></tr></table></figure>
+<p> Nmap有系列防火墙过滤检测功能</p>
+<p><code>nmap -sA 172.16.36.135 -p 22</code></p>
+<p>负载均衡识别</p>
+<ul>
+<li>广域网负载均衡<ul>
+<li>DNS</li>
+</ul>
+</li>
+<li>HTTP-Loadbalancing<ul>
+<li>Nginx</li>
+<li>Apache</li>
+</ul>
+</li>
+<li>lbd <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a></li>
+<li>lbd mail.163.com</li>
+</ul>
+<p>WAF识别</p>
+<ul>
+<li>web应用防火墙</li>
+<li><code>wafw00f -l</code></li>
+<li><code>wafw00f http://www.microsoft.com</code></li>
+<li><code>nmap www.microsoft.com --script=http-waf-detect.nse</code></li>
+</ul>
+<p>NMAP</p>
+<ul>
+<li>所有参数</li>
+<li>zenmap</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#主动信息收集"><span class="toc-number">1.</span> <span class="toc-text">主动信息收集</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#主动信息收集-1"><span class="toc-number">1.0.1.</span> <span class="toc-text">主动信息收集</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#发现"><span class="toc-number">1.0.2.</span> <span class="toc-text">发现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二层发现"><span class="toc-number">1.0.3.</span> <span class="toc-text">二层发现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三层发现"><span class="toc-number">1.0.4.</span> <span class="toc-text">三层发现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#四层发现"><span class="toc-number">1.0.5.</span> <span class="toc-text">四层发现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#端口扫描"><span class="toc-number">1.0.6.</span> <span class="toc-text">端口扫描</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#UDP-端口扫描"><span class="toc-number">1.0.6.1.</span> <span class="toc-text">UDP 端口扫描</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#TCP端口扫描"><span class="toc-number">1.0.6.2.</span> <span class="toc-text">TCP端口扫描</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#隐蔽端口扫描"><span class="toc-number">1.0.6.2.1.</span> <span class="toc-text">隐蔽端口扫描</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#全连接端口扫描"><span class="toc-number">1.0.6.2.2.</span> <span class="toc-text">全连接端口扫描</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#僵尸扫描"><span class="toc-number">1.0.6.2.3.</span> <span class="toc-text">僵尸扫描</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#服务扫描"><span class="toc-number">1.0.6.2.4.</span> <span class="toc-text">服务扫描</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Banner"><span class="toc-number">1.0.6.2.5.</span> <span class="toc-text">Banner</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#服务扫描——服务识别"><span class="toc-number">1.0.6.2.6.</span> <span class="toc-text">服务扫描——服务识别</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#操作系统识别"><span class="toc-number">1.0.6.2.7.</span> <span class="toc-text">操作系统识别</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#SNMP扫描"><span class="toc-number">1.0.6.2.8.</span> <span class="toc-text">SNMP扫描</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#SMB扫描"><span class="toc-number">1.0.6.2.9.</span> <span class="toc-text">SMB扫描</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#SMTP扫描"><span class="toc-number">1.0.6.2.10.</span> <span class="toc-text">SMTP扫描</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#防火墙识别"><span class="toc-number">1.0.6.2.11.</span> <span class="toc-text">防火墙识别</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/03/04/主动信息收集/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/03/04/主动信息收集/&text=主动信息收集"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/03/04/主动信息收集/&title=主动信息收集"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/03/04/主动信息收集/&is_video=false&description=主动信息收集"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=主动信息收集&body=Check out this article: http://yoursite.com/2018/03/04/主动信息收集/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/03/04/主动信息收集/&title=主动信息收集"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/03/04/主动信息收集/&title=主动信息收集"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/03/04/主动信息收集/&title=主动信息收集"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/03/04/主动信息收集/&title=主动信息收集"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/03/04/主动信息收集/&name=主动信息收集&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 jsmhny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

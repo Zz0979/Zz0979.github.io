@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="WEB渗透Web技术发展 静态Web 动态Web 应用程序 数据库 每人看到的内容不同 根据用户输入返回不同结果   Web攻击类型有数百种  Web攻击面 Network OS Web Server App Server Web Application Database Browser  HTTP协议基础 明文 无内建的机密性安全机制 嗅探或代理截断可查看全部明文信息 https只能提高传输层安">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web扫描工具">
+<meta property="og:url" content="http://yoursite.com/2018/04/07/Web扫描工具/index.html">
+<meta property="og:site_name" content="Chace Blog">
+<meta property="og:description" content="WEB渗透Web技术发展 静态Web 动态Web 应用程序 数据库 每人看到的内容不同 根据用户输入返回不同结果   Web攻击类型有数百种  Web攻击面 Network OS Web Server App Server Web Application Database Browser  HTTP协议基础 明文 无内建的机密性安全机制 嗅探或代理截断可查看全部明文信息 https只能提高传输层安">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-04-07T03:38:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web扫描工具">
+<meta name="twitter:description" content="WEB渗透Web技术发展 静态Web 动态Web 应用程序 数据库 每人看到的内容不同 根据用户输入返回不同结果   Web攻击类型有数百种  Web攻击面 Network OS Web Server App Server Web Application Database Browser  HTTP协议基础 明文 无内建的机密性安全机制 嗅探或代理截断可查看全部明文信息 https只能提高传输层安">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Web扫描工具</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/04/21/SQL注入笔记/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/04/01/无线渗透/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/04/07/Web扫描工具/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/04/07/Web扫描工具/&text=Web扫描工具"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/04/07/Web扫描工具/&title=Web扫描工具"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/04/07/Web扫描工具/&is_video=false&description=Web扫描工具"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Web扫描工具&body=Check out this article: http://yoursite.com/2018/04/07/Web扫描工具/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/04/07/Web扫描工具/&title=Web扫描工具"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/04/07/Web扫描工具/&title=Web扫描工具"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/04/07/Web扫描工具/&title=Web扫描工具"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/04/07/Web扫描工具/&title=Web扫描工具"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/04/07/Web扫描工具/&name=Web扫描工具&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#WEB渗透"><span class="toc-number">1.</span> <span class="toc-text">WEB渗透</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Web技术发展"><span class="toc-number">1.0.0.0.1.</span> <span class="toc-text">Web技术发展</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Web攻击面"><span class="toc-number">1.0.0.0.2.</span> <span class="toc-text">Web攻击面</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#HTTP协议基础"><span class="toc-number">1.0.0.0.3.</span> <span class="toc-text">HTTP协议基础</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Nikto"><span class="toc-number">1.0.0.0.4.</span> <span class="toc-text">Nikto</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Vega"><span class="toc-number">1.0.0.0.5.</span> <span class="toc-text">Vega</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#skipfish"><span class="toc-number">1.0.0.0.6.</span> <span class="toc-text">skipfish</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#w3af"><span class="toc-number">1.0.0.0.7.</span> <span class="toc-text">w3af</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Arachni"><span class="toc-number">1.0.0.0.8.</span> <span class="toc-text">Arachni</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OWASP-ZAP"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">OWASP_ZAP</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Burpsuite"><span class="toc-number">1.0.0.1.1.</span> <span class="toc-text">Burpsuite</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#代理截断工具"><span class="toc-number">1.0.0.1.2.</span> <span class="toc-text">代理截断工具</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ACUNETIX-WEB-VULNERABILITY-SCANNER"><span class="toc-number">1.0.0.1.3.</span> <span class="toc-text">ACUNETIX WEB VULNERABILITY SCANNER</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#APPSCAN"><span class="toc-number">1.0.0.1.4.</span> <span class="toc-text">APPSCAN</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Web扫描工具
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Chace Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-04-07T03:38:06.000Z" itemprop="datePublished">2018-04-07</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="WEB渗透"><a href="#WEB渗透" class="headerlink" title="WEB渗透"></a>WEB渗透</h1><h5 id="Web技术发展"><a href="#Web技术发展" class="headerlink" title="Web技术发展"></a>Web技术发展</h5><ul>
+<li>静态Web</li>
+<li>动态Web<ul>
+<li>应用程序</li>
+<li>数据库</li>
+<li>每人看到的内容不同</li>
+<li>根据用户输入返回不同结果</li>
+</ul>
+</li>
+<li>Web攻击类型有数百种</li>
+</ul>
+<h5 id="Web攻击面"><a href="#Web攻击面" class="headerlink" title="Web攻击面"></a>Web攻击面</h5><ul>
+<li>Network</li>
+<li>OS</li>
+<li>Web Server</li>
+<li>App Server</li>
+<li>Web Application</li>
+<li>Database</li>
+<li>Browser</li>
+</ul>
+<h5 id="HTTP协议基础"><a href="#HTTP协议基础" class="headerlink" title="HTTP协议基础"></a>HTTP协议基础</h5><ul>
+<li>明文<ul>
+<li>无内建的机密性安全机制</li>
+<li>嗅探或代理截断可查看全部明文信息</li>
+<li>https只能提高传输层安全</li>
+</ul>
+</li>
+<li>无状态<ul>
+<li>每一次客户端和服务器端的通信都是独立的过程</li>
+<li>Web应用需要跟踪客户端会话（多步通信）</li>
+<li>不使用cookie的应用，客户端每次请求都要重新身份验证</li>
+<li>Session用于在用户身份验证后跟踪用户行为轨迹</li>
+<li><ul>
+<li>提高用户体验，但增加了攻击向量</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Cycle<ul>
+<li>请求/响应</li>
+</ul>
+</li>
+<li>重要的Header</li>
+<li><ul>
+<li>Set-Cookie: 服务器发给客户端的SessionID（被窃取的风险）</li>
+<li>Content-Length: 响应body部分的字节长度</li>
+<li>Location：重定向用户到另一个页面，可识别身份认证后允许访问的页面</li>
+<li>Cookie：客户端发回给服务器证明用户状态的信息（头：值成对出现）</li>
+<li>Referrer: 发起新请求之前用户位于哪个页面，服务器基于此头的安全限制很容易被修改绕过</li>
+</ul>
+</li>
+<li>状态码</li>
+<li><ul>
+<li>服务端响应的状态码表示响应的结果类型（5大类50多个具体响应码）</li>
+<li>100s:服务器响应的信息，通常表示服务器还有后续处理，很少出现</li>
+<li>200s:请求被服务器成功接受并处理后返回的响应结果</li>
+<li>300s: 重定向，通常在身份认证成功后重定向到一个安全页面（301/302）</li>
+<li>400s: 表示客户端请求错误</li>
+<li><ul>
+<li>401：需要身份验证</li>
+<li>403：拒绝访问</li>
+<li>404：目标未发现</li>
+</ul>
+</li>
+<li>500s: 服务器内部错误（503：服务不可用）</li>
+<li><a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html" target="_blank" rel="noopener">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html</a></li>
+</ul>
+</li>
+<li>实验环境</li>
+<li><ul>
+<li>Metasploitable<ul>
+<li>DVWA</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>侦察</li>
+<li><ul>
+<li>Httrack</li>
+<li><ul>
+<li>减少与目标系统交互</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>扫描工具<h5 id="Nikto"><a href="#Nikto" class="headerlink" title="Nikto"></a>Nikto</h5><ul>
+<li>Vega</li>
+<li>Skipfish</li>
+<li>W3af</li>
+<li>Arachni</li>
+<li>Owasp-zap</li>
+<li>nikto</li>
+</ul>
+</li>
+<li><ul>
+<li>Perl语言开发的开源web安全扫描器</li>
+<li>软件版本</li>
+<li>搜索存在安全隐患的文件</li>
+<li>服务器配置漏洞</li>
+<li>web Application 层面的安全隐患</li>
+<li>避免404误判</li>
+<li><ul>
+<li>很多服务器不遵守RFC标准，对于不存在的对象返回200响应码</li>
+<li>依据响应文件内容判断，不同扩展名的文件404响应内容不同</li>
+<li>去除时间信息后的内容取MD5值</li>
+<li>-no404(参数)</li>
+</ul>
+</li>
+<li><code>nikto -list-plugins</code></li>
+<li><code>nikto -update</code>升级插件</li>
+<li><code>nikto -host http://1.1.1.1</code></li>
+<li><code>nikto -host 192.168.1.1 -ssl -port 443,8443,995</code></li>
+<li><code>nikto -host host.txt</code></li>
+<li><code>nmap -p80 192.168.1.0/24 -oG - | nikto -host -</code></li>
+<li><code>nikto -host 192.168.1.1 -useproxy http://localhost:8087</code></li>
+<li><code>-vhost</code></li>
+</ul>
+</li>
+<li>Nikto-interactive</li>
+<li><ul>
+<li>Space - report current scan status</li>
+<li>v - verbose mode on/off</li>
+<li>d - debug mode on/off</li>
+<li>e - error reporting on/off</li>
+<li>p - progress reporting on/off</li>
+<li>r - redirect display on/off</li>
+<li>c - cookie display on/off</li>
+<li>a - auth display on/off</li>
+<li>q -quit </li>
+<li>N - next host</li>
+<li>P - Pause</li>
+</ul>
+</li>
+<li>配置文件</li>
+<li><ul>
+<li><code>/etc/nikto.conf</code></li>
+<li><code>STATIC-COOKIE=&quot;cookie1&quot;=&quot;cookie value&quot;;&quot;cookie2&quot;=&quot;cookie valu”</code></li>
+</ul>
+</li>
+<li><code>evasion</code>: 使用LibWhisker中对IDS的躲避技术，可使用以下几种类型</li>
+<li><ul>
+<li>1 随机URL编码（非UTF-8方式）</li>
+<li>2 自选择路径</li>
+<li>3 过早结束的URL</li>
+<li>4 优先考虑长随机字符串</li>
+<li>5 参数欺骗</li>
+<li>6 使用TAB作为命令的分隔符</li>
+<li>7 使用变化的URL</li>
+<li>8 使用Windows路径分隔符“\“</li>
+</ul>
+</li>
+</ul>
+<h5 id="Vega"><a href="#Vega" class="headerlink" title="Vega"></a>Vega</h5><ul>
+<li>JAVA编写的开源Web扫描器</li>
+<li>扫描模式</li>
+<li>代理模式</li>
+<li>爬站、处理表单、注入测试</li>
+<li>支持SSL：<a href="http://vega/ca.crt" target="_blank" rel="noopener">http://vega/ca.crt</a></li>
+</ul>
+<h5 id="skipfish"><a href="#skipfish" class="headerlink" title="skipfish"></a>skipfish</h5><ul>
+<li>C语言编写</li>
+<li>实验性的主动web安全评估工具</li>
+<li>递归爬网</li>
+<li>基于字典的探测</li>
+<li>速度较快</li>
+<li><ul>
+<li>多路单线程，全异步网络I/O，消除内存管理和调度开销</li>
+<li>启发式自动内容识别</li>
+</ul>
+</li>
+<li>误报较低</li>
+<li><code>skipfish -o test http://1.1.1.1</code></li>
+<li><code>skipfish -o test @url.txt</code></li>
+<li><code>skipfish -o test -S complet.wl -W a.wl http://1.1.1.1</code>  #字典</li>
+<li><code>-I</code> : 只检查包含string的URL</li>
+<li><code>-X</code>: 不检查包含string 的URL</li>
+<li><code>-K</code>: 不对指定参数进行Fuzz测试</li>
+<li><code>-D</code>: 跨站点爬另外一个域</li>
+<li><code>-l</code>: 每秒最大请求数</li>
+<li><code>-m</code>: 每IP最大并发连接数</li>
+<li><code>--config</code>: 指定配置文件</li>
+<li>身份认证</li>
+<li><code>skipfish -A user:pass -o test http://1.1.1.1</code></li>
+<li><code>skipfish -C &quot;name=val&quot; -o test http://1.1.1.1</code></li>
+<li><code>Username / Password</code></li>
+<li><code>skipfish -o b --auth-form http://10.10.10.134/dvwa/login.php --auth-form-target http://10.10.10.134/dvwa/login.php --auth-user-field username  --auth-user admin --auth-pass-field password --auth-pass password --auth-verify-url http://10.10.10.134/dvwa/index.php -I dvwa -X logout http://10.10.10.134/dvwa</code></li>
+<li>扫描结束太快</li>
+<li><ul>
+<li>触发了目标站点的连接数限制，降低 -m -l 数值</li>
+</ul>
+</li>
+</ul>
+<h5 id="w3af"><a href="#w3af" class="headerlink" title="w3af"></a>w3af</h5><ul>
+<li><p>Web Application Attack and Audit Framework ,基于python 语言开发</p>
+</li>
+<li><p>此框架的目标是帮助你发现和利用所有Web应用程序漏洞</p>
+</li>
+<li><p>9大类近150个plugin</p>
+</li>
+<li><ul>
+<li>audit</li>
+<li>infrastructure</li>
+<li>grep</li>
+<li>evasion</li>
+<li>mangle</li>
+<li>auth</li>
+<li>bruteforce</li>
+<li>output</li>
+<li>crawl</li>
+</ul>
+</li>
+<li><p>安装</p>
+</li>
+<li><p>W3af_console</p>
+</li>
+<li><ul>
+<li>help #显示可用指令</li>
+<li>plugin    #进入plugin子命令</li>
+<li><ul>
+<li>help    显示可用指令</li>
+<li>list audit    列出audit类所有差劲啊</li>
+<li>audit sqli xss    选择使用的audit插件</li>
+</ul>
+</li>
+<li>http-settings / misc-settings    全局配置</li>
+<li><ul>
+<li>help</li>
+<li>view    查看可配置的参数</li>
+<li>set       设置参数</li>
+<li>back    回到上一级命令</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>profiles</p>
+</li>
+<li><ul>
+<li>save_as self-contained</li>
+<li>save_as test self-contained</li>
+</ul>
+</li>
+<li><p>target</p>
+</li>
+<li><ul>
+<li>set target <a href="http://1.1.1.1/" target="_blank" rel="noopener">http://1.1.1.1/</a></li>
+</ul>
+</li>
+<li><p>start</p>
+</li>
+<li><p>script</p>
+</li>
+<li><ul>
+<li>script/* .w3af</li>
+</ul>
+</li>
+<li><p>w3af 身份认证</p>
+</li>
+<li><p>HTTP Basic</p>
+</li>
+<li><p>NTLM</p>
+</li>
+<li><p>Form</p>
+</li>
+<li><p>Cookie</p>
+</li>
+<li><p>截断代理</p>
+</li>
+<li><p>HTTP header file</p>
+</li>
+<li><p>W3af不支持客户端技术（Javascript, flash, java applet)</p>
+</li>
+<li><p>截断代理手动爬网</p>
+</li>
+<li><ul>
+<li>spider_man</li>
+<li>output.export_requests</li>
+<li><a href="http://127.1.1.1/spider_man?terminate" target="_blank" rel="noopener">http://127.1.1.1/spider_man?terminate</a></li>
+</ul>
+</li>
+<li><p>crawl.import_results</p>
+</li>
+<li><ul>
+<li>base64</li>
+</ul>
+</li>
+<li><p>exploit</p>
+</li>
+<li><p>Fuzzy requests</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Numbers from 0 to 4: $range(5)$</span><br><span class="line">First ten letters: $string.lowercase[:10]$</span><br><span class="line">The words spam and eggs: $[’spam’, ’eggs’]$</span><br><span class="line">The content of a file: $[l.strip() for l in file(’input.txt’)]$</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Cluster responses</p>
+</li>
+</ul>
+<h5 id="Arachni"><a href="#Arachni" class="headerlink" title="Arachni"></a>Arachni</h5><ul>
+<li>安装</li>
+<li><code>http://www.arachni-scanner.com/download/#Linux</code></li>
+<li><code>tar xvf arachni.tar.gz</code></li>
+<li>Profile</li>
+<li><ul>
+<li>Import</li>
+<li>Export</li>
+<li>New</li>
+</ul>
+</li>
+<li>Dispatcher</li>
+<li><ul>
+<li><code>./arachni_rpcd --address=127.0.0.1 --port=1111 --nickname=test1</code></li>
+</ul>
+</li>
+<li>Grid</li>
+<li><ul>
+<li><code>./arachni_rpcd --nickname=test2 --address=127.0.0.1 --neighbour=127.0.0.1:1111</code></li>
+</ul>
+</li>
+<li>Scan</li>
+<li>?-s</li>
+</ul>
+<h4 id="OWASP-ZAP"><a href="#OWASP-ZAP" class="headerlink" title="OWASP_ZAP"></a>OWASP_ZAP</h4><ul>
+<li>Zed attack proxy</li>
+<li>Web application集成渗透测试和漏洞挖掘工具</li>
+<li>开源免费跨平台简单易用</li>
+<li>截断代理</li>
+<li>主动、被动扫描</li>
+<li>Fuzzy,暴力破解</li>
+<li>API</li>
+<li>• Persist Session<br>• Mode——Safe  Protected  Standard  ATTACK<br>• add-ons<br>• Scan policy<br>• Anti CSRF Tokens<br>• https——CA<br>• Scope / Contexts / filter<br>• Http Sessions——default session tokens &amp; site session tokens<br>• Note / tag<br>• Passive scan</li>
+<li>标准扫描工作流程</li>
+<li><ul>
+<li>设置代理</li>
+<li>手动爬网</li>
+<li>自动爬网</li>
+<li>主动扫描</li>
+</ul>
+</li>
+</ul>
+<h5 id="Burpsuite"><a href="#Burpsuite" class="headerlink" title="Burpsuite"></a>Burpsuite</h5><ul>
+<li><p>Web安全工具中的瑞士军刀</p>
+</li>
+<li><p>统一的集成工具发现全部现代Web安全漏洞</p>
+</li>
+<li><p>PortSwigger公司开发</p>
+</li>
+<li><p>所有的工具共享一个能处理并显示HTTP消息的可扩展框架，模块之间无缝交换信息</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">• Proxy</span><br><span class="line">• Options</span><br><span class="line">• Invisible</span><br><span class="line">• CA</span><br><span class="line">• Intercept </span><br><span class="line">• Response modify</span><br><span class="line">• Target</span><br><span class="line">• Scope logout</span><br><span class="line">• Filter</span><br><span class="line">• Comparing site map</span><br><span class="line">• Active / Passive Scan</span><br><span class="line">• Extender</span><br><span class="line">• BApp Store</span><br><span class="line">• Jython</span><br><span class="line">• http://www.jython.org/downloads.html</span><br><span class="line">• Option</span><br><span class="line">• Scan queue</span><br><span class="line">• Result</span><br><span class="line">• POSITION</span><br><span class="line">• PAYLOAD</span><br><span class="line">• Simple list</span><br><span class="line">• Runtime file</span><br><span class="line">• Character substitution</span><br><span class="line">• Case modification</span><br><span class="line">• Character blocks</span><br><span class="line">• Numbers?Copy other payload</span><br><span class="line">• Dates?Brute forcer?Character frobber?Username generator</span><br><span class="line">• OPTIONS</span><br><span class="line">• Grep match</span><br><span class="line">• Repeater</span><br><span class="line">• Request History</span><br><span class="line">• Change request method</span><br><span class="line">• Change body encoding</span><br><span class="line">• Copy as curl command</span><br><span class="line">• Convert selection</span><br><span class="line">• Repeater </span><br><span class="line">• Engagement tools——generate csrf PoC</span><br><span class="line">• Follow redirections</span><br><span class="line">• Process cookies in redirections</span><br><span class="line">Sequencer</span><br><span class="line">分析程序中可预测的数据</span><br><span class="line">• Session cookies</span><br><span class="line">• anti-CSRF tokens</span><br><span class="line">• Start live capture</span><br><span class="line">• Analyze</span><br><span class="line">• Character-level</span><br><span class="line">• Bit-level</span><br><span class="line">• FIPS(Federal Information Processing Standard)</span><br><span class="line">Decoder</span><br><span class="line">smart decode</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="代理截断工具"><a href="#代理截断工具" class="headerlink" title="代理截断工具"></a>代理截断工具</h5><ul>
+<li>Paros</li>
+<li>Webscrab</li>
+<li>Burpsuite</li>
+</ul>
+<h5 id="ACUNETIX-WEB-VULNERABILITY-SCANNER"><a href="#ACUNETIX-WEB-VULNERABILITY-SCANNER" class="headerlink" title="ACUNETIX WEB VULNERABILITY SCANNER"></a>ACUNETIX WEB VULNERABILITY SCANNER</h5><ul>
+<li>自动手动爬网，支持AJAX，JAVASCRIPT</li>
+<li>AcuSencsor 灰盒测试</li>
+<li><ul>
+<li>发现爬网无法发现文件</li>
+<li>额外的漏洞扫描</li>
+<li>可发现存在漏洞的源码行号</li>
+<li>支持PHP，.NET</li>
+</ul>
+</li>
+<li>生成PCI、27001标准合规报告</li>
+<li>网络扫描</li>
+<li><ul>
+<li>FTP， DNS，SMTP，IMAP，POP3， SSH，SNMP，Telnet</li>
+<li>集成openvas扫描漏洞</li>
+</ul>
+</li>
+<li>爬站</li>
+<li>子域扫描器</li>
+<li>发现扫描器</li>
+<li>SQL注入验证</li>
+<li>Http editor </li>
+<li>http sniffer</li>
+<li>http fuzzer</li>
+<li>身份认证测试</li>
+<li>结果比较</li>
+</ul>
+<h5 id="APPSCAN"><a href="#APPSCAN" class="headerlink" title="APPSCAN"></a>APPSCAN</h5><ul>
+<li>Watchfire APPScan , 2007年被IBM收购，称为IBMAPPSCAN</li>
+<li>扫描过程</li>
+<li><ul>
+<li>探索阶段 </li>
+<li>测试阶段</li>
+</ul>
+</li>
+<li>第一个过程发现新的URL地址，下一个扫描过程自动开始</li>
+<li>Glass box </li>
+<li><ul>
+<li>相当于Acusensor</li>
+<li>Agent收集服务器端源代码信息和其他数据</li>
+<li>支持Java，.NET两种平台</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#WEB渗透"><span class="toc-number">1.</span> <span class="toc-text">WEB渗透</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Web技术发展"><span class="toc-number">1.0.0.0.1.</span> <span class="toc-text">Web技术发展</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Web攻击面"><span class="toc-number">1.0.0.0.2.</span> <span class="toc-text">Web攻击面</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#HTTP协议基础"><span class="toc-number">1.0.0.0.3.</span> <span class="toc-text">HTTP协议基础</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Nikto"><span class="toc-number">1.0.0.0.4.</span> <span class="toc-text">Nikto</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Vega"><span class="toc-number">1.0.0.0.5.</span> <span class="toc-text">Vega</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#skipfish"><span class="toc-number">1.0.0.0.6.</span> <span class="toc-text">skipfish</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#w3af"><span class="toc-number">1.0.0.0.7.</span> <span class="toc-text">w3af</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Arachni"><span class="toc-number">1.0.0.0.8.</span> <span class="toc-text">Arachni</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OWASP-ZAP"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">OWASP_ZAP</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Burpsuite"><span class="toc-number">1.0.0.1.1.</span> <span class="toc-text">Burpsuite</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#代理截断工具"><span class="toc-number">1.0.0.1.2.</span> <span class="toc-text">代理截断工具</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ACUNETIX-WEB-VULNERABILITY-SCANNER"><span class="toc-number">1.0.0.1.3.</span> <span class="toc-text">ACUNETIX WEB VULNERABILITY SCANNER</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#APPSCAN"><span class="toc-number">1.0.0.1.4.</span> <span class="toc-text">APPSCAN</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/04/07/Web扫描工具/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/04/07/Web扫描工具/&text=Web扫描工具"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/04/07/Web扫描工具/&title=Web扫描工具"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/04/07/Web扫描工具/&is_video=false&description=Web扫描工具"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Web扫描工具&body=Check out this article: http://yoursite.com/2018/04/07/Web扫描工具/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/04/07/Web扫描工具/&title=Web扫描工具"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/04/07/Web扫描工具/&title=Web扫描工具"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/04/07/Web扫描工具/&title=Web扫描工具"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/04/07/Web扫描工具/&title=Web扫描工具"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/04/07/Web扫描工具/&name=Web扫描工具&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 jsmhny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

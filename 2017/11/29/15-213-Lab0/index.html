@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="15-213 Lab0这个实验是C语言编写链表，很久没用用过C语言，还是用了很长时间做完这个实验，期间还碰到了喜闻乐见segmentation fault，好像是因为打错某些东西发生的。最后一个问题链表反转是通过查资料搞定的，以前没见过，发现还是经典面试题之一。 放代码 queue.c 12345678910111213141516171819202122232425262728293031323">
+<meta property="og:type" content="article">
+<meta property="og:title" content="15-213-Lab0">
+<meta property="og:url" content="http://yoursite.com/2017/11/29/15-213-Lab0/index.html">
+<meta property="og:site_name" content="Chace Blog">
+<meta property="og:description" content="15-213 Lab0这个实验是C语言编写链表，很久没用用过C语言，还是用了很长时间做完这个实验，期间还碰到了喜闻乐见segmentation fault，好像是因为打错某些东西发生的。最后一个问题链表反转是通过查资料搞定的，以前没见过，发现还是经典面试题之一。 放代码 queue.c 12345678910111213141516171819202122232425262728293031323">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2017-11-29T02:19:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="15-213-Lab0">
+<meta name="twitter:description" content="15-213 Lab0这个实验是C语言编写链表，很久没用用过C语言，还是用了很长时间做完这个实验，期间还碰到了喜闻乐见segmentation fault，好像是因为打错某些东西发生的。最后一个问题链表反转是通过查资料搞定的，以前没见过，发现还是经典面试题之一。 放代码 queue.c 12345678910111213141516171819202122232425262728293031323">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>15-213-Lab0</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/11/29/15-213-Linux-Git-Bootcamp/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/11/27/vim的插件折腾/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/11/29/15-213-Lab0/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/11/29/15-213-Lab0/&text=15-213-Lab0"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/11/29/15-213-Lab0/&title=15-213-Lab0"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/11/29/15-213-Lab0/&is_video=false&description=15-213-Lab0"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=15-213-Lab0&body=Check out this article: http://yoursite.com/2017/11/29/15-213-Lab0/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/11/29/15-213-Lab0/&title=15-213-Lab0"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/11/29/15-213-Lab0/&title=15-213-Lab0"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/11/29/15-213-Lab0/&title=15-213-Lab0"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/11/29/15-213-Lab0/&title=15-213-Lab0"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/11/29/15-213-Lab0/&name=15-213-Lab0&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#15-213-Lab0"><span class="toc-number">1.</span> <span class="toc-text">15-213 Lab0</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        15-213-Lab0
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Chace Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-11-29T02:18:47.000Z" itemprop="datePublished">2017-11-29</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="15-213-Lab0"><a href="#15-213-Lab0" class="headerlink" title="15-213 Lab0"></a>15-213 Lab0</h1><p>这个实验是C语言编写链表，很久没用用过C语言，还是用了很长时间做完这个实验，期间还碰到了喜闻乐见segmentation fault，好像是因为打错某些东西发生的。最后一个问题链表反转是通过查资料搞定的，以前没见过，发现还是经典面试题之一。</p>
+<p>放代码</p>
+<p>queue.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * Code for basic C skills diagnostic.</span></span><br><span class="line"><span class="comment"> * Developed for courses 15-213/18-213/15-513 by R. E. Bryant, 2017</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * This program implements a queue supporting both FIFO and LIFO</span></span><br><span class="line"><span class="comment"> * operations.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * It uses a singly-linked list to represent the set of queue elements</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"harness.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"queue.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  Create empty queue.</span></span><br><span class="line"><span class="comment">  Return NULL if could not allocate space.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">queue_t</span> *q_new()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">queue_t</span> *q =  <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">queue_t</span>));</span><br><span class="line">	<span class="keyword">if</span>(q == <span class="literal">NULL</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">	q-&gt;tail = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="comment">/* What if malloc returned NULL? */</span></span><br><span class="line">    q-&gt;head = <span class="literal">NULL</span>;</span><br><span class="line">	q-&gt;size=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> q;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Free all storage used by queue */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">q_free</span><span class="params">(<span class="keyword">queue_t</span> *q)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(q == <span class="literal">NULL</span>)</span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">    <span class="comment">/* How about freeing the list elements? */</span></span><br><span class="line">    <span class="comment">/* Free queue structure */</span></span><br><span class="line">	<span class="keyword">list_ele_t</span> *P;</span><br><span class="line">	<span class="keyword">list_ele_t</span> *Tmp;</span><br><span class="line">	</span><br><span class="line">	P = q-&gt;head;</span><br><span class="line">	q-&gt;head = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">while</span>(P != <span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		Tmp = P-&gt;next;</span><br><span class="line">		<span class="built_in">free</span>(P);</span><br><span class="line">		P = Tmp;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="built_in">free</span>(q);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  Attempt to insert element at head of queue.</span></span><br><span class="line"><span class="comment">  Return true if successful.</span></span><br><span class="line"><span class="comment">  Return false if q is NULL or could not allocate space.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">q_insert_head</span><span class="params">(<span class="keyword">queue_t</span> *q, <span class="keyword">int</span> v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">list_ele_t</span> *newh;</span><br><span class="line">	<span class="keyword">if</span>(q == <span class="literal">NULL</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="comment">/* What should you do if the q is NULL? */</span></span><br><span class="line">    newh = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">list_ele_t</span>));</span><br><span class="line">    <span class="comment">/* What if malloc returned NULL? */</span></span><br><span class="line">	<span class="keyword">if</span>((newh == <span class="literal">NULL</span>))</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    newh-&gt;value = v;</span><br><span class="line">	newh-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    newh-&gt;next = q-&gt;head;</span><br><span class="line">	<span class="keyword">if</span>(q-&gt;size == <span class="number">0</span>)</span><br><span class="line">		q-&gt;tail = newh;</span><br><span class="line">    q-&gt;head = newh;</span><br><span class="line">	q-&gt;size += <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  Attempt to insert element at tail of queue.</span></span><br><span class="line"><span class="comment">  Return true if successful.</span></span><br><span class="line"><span class="comment">  Return false if q is NULL or could not allocate space.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">q_insert_tail</span><span class="params">(<span class="keyword">queue_t</span> *q, <span class="keyword">int</span> v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/* You need to write the complete code for this function */</span></span><br><span class="line">    <span class="comment">/* Remember: It should operate in O(1) time */</span></span><br><span class="line">	<span class="keyword">list_ele_t</span> *newh;</span><br><span class="line">	newh = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">list_ele_t</span>));</span><br><span class="line">	<span class="keyword">if</span>(q == <span class="literal">NULL</span> || newh == <span class="literal">NULL</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	newh-&gt;value = v;</span><br><span class="line">	newh-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">	q-&gt;tail-&gt;next = newh;</span><br><span class="line">	q-&gt;tail = newh;</span><br><span class="line">	q-&gt;size += <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  Attempt to remove element from head of queue.</span></span><br><span class="line"><span class="comment">  Return true if successful.</span></span><br><span class="line"><span class="comment">  Return false if queue is NULL or empty.</span></span><br><span class="line"><span class="comment">  If vp non-NULL and element removed, store removed value at *vp.</span></span><br><span class="line"><span class="comment">  Any unused storage should be freed</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">q_remove_head</span><span class="params">(<span class="keyword">queue_t</span> *q, <span class="keyword">int</span> *vp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/* You need to fix up this code. */</span></span><br><span class="line">	<span class="keyword">if</span>(q == <span class="literal">NULL</span> || q-&gt;head == <span class="literal">NULL</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">list_ele_t</span> *tmp;</span><br><span class="line">	tmp = q-&gt;head;</span><br><span class="line">	<span class="keyword">if</span>(vp != <span class="literal">NULL</span>)</span><br><span class="line">		*vp = tmp-&gt;value;</span><br><span class="line">	q-&gt;head = tmp-&gt;next;</span><br><span class="line">	<span class="built_in">free</span>(tmp);</span><br><span class="line">	q-&gt;size -= <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  Return number of elements in queue.</span></span><br><span class="line"><span class="comment">  Return 0 if q is NULL or empty</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">q_size</span><span class="params">(<span class="keyword">queue_t</span> *q)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/* You need to write the code for this function */</span></span><br><span class="line">    <span class="comment">/* Remember: It should operate in O(1) time */</span></span><br><span class="line">	<span class="keyword">if</span>(q == <span class="literal">NULL</span> || q-&gt;head == <span class="literal">NULL</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">return</span> q-&gt;size;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  Reverse elements in queue.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">  Your implementation must not allocate or free any elements (e.g., by</span></span><br><span class="line"><span class="comment">  calling q_insert_head or q_remove_head).  Instead, it should modify</span></span><br><span class="line"><span class="comment">  the pointers in the existing data structure.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">q_reverse</span><span class="params">(<span class="keyword">queue_t</span> *q)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (q == <span class="literal">NULL</span> || q-&gt;size ==<span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">	<span class="keyword">list_ele_t</span> *end = q-&gt;tail;</span><br><span class="line">	<span class="keyword">list_ele_t</span> *p = q-&gt;head;</span><br><span class="line">	<span class="keyword">bool</span> tag = <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">while</span>(q-&gt;head != end)&#123;</span><br><span class="line">		q-&gt;head = q-&gt;head-&gt;next;</span><br><span class="line">		p-&gt;next = end-&gt;next;</span><br><span class="line">		end-&gt;next = p;</span><br><span class="line">		<span class="keyword">if</span>(!tag)&#123;</span><br><span class="line">			q-&gt;tail = p;</span><br><span class="line">			tag = <span class="literal">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		p = q-&gt;head;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="comment">/* You need to write the code for this function */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>queue.h</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * Code for basic C skills diagnostic.</span></span><br><span class="line"><span class="comment"> * Developed for courses 15-213/18-213/15-513 by R. E. Bryant, 2017</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * This program implements a queue supporting both FIFO and LIFO</span></span><br><span class="line"><span class="comment"> * operations.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * It uses a singly-linked list to represent the set of queue elements</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdbool.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/************** Data structure declarations ****************/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Linked list element (You shouldn't need to change this) */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">ELE</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> value;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ELE</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125; <span class="keyword">list_ele_t</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Queue structure */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">list_ele_t</span> *head;  <span class="comment">/* Linked list of elements */</span></span><br><span class="line">	<span class="keyword">int</span> size = <span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">      You will need to add more fields to this structure</span></span><br><span class="line"><span class="comment">      to efficiently implement q_size and q_insert_tail</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">&#125; <span class="keyword">queue_t</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/************** Operations on queue ************************/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  Create empty queue.</span></span><br><span class="line"><span class="comment">  Return NULL if could not allocate space.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">queue_t</span> *q_new();</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  Free all storage used by queue.</span></span><br><span class="line"><span class="comment">  No effect if q is NULL</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">q_free</span><span class="params">(<span class="keyword">queue_t</span> *q)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  Attempt to insert element at head of queue.</span></span><br><span class="line"><span class="comment">  Return true if successful.</span></span><br><span class="line"><span class="comment">  Return false if q is NULL or could not allocate space.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">q_insert_head</span><span class="params">(<span class="keyword">queue_t</span> *q, <span class="keyword">int</span> v)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  Attempt to insert element at tail of queue.</span></span><br><span class="line"><span class="comment">  Return true if successful.</span></span><br><span class="line"><span class="comment">  Return false if q is NULL or could not allocate space.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">q_insert_tail</span><span class="params">(<span class="keyword">queue_t</span> *q, <span class="keyword">int</span> v)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  Attempt to remove element from head of queue.</span></span><br><span class="line"><span class="comment">  Return true if successful.</span></span><br><span class="line"><span class="comment">  Return false if queue is NULL or empty.</span></span><br><span class="line"><span class="comment">  If vp non-NULL and element removed, store removed value at *vp.</span></span><br><span class="line"><span class="comment">  Any unused storage should be freed</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">q_remove_head</span><span class="params">(<span class="keyword">queue_t</span> *q, <span class="keyword">int</span> *vp)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  Return number of elements in queue.</span></span><br><span class="line"><span class="comment">  Return 0 if q is NULL or empty</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">q_size</span><span class="params">(<span class="keyword">queue_t</span> *q)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  Reverse elements in queue</span></span><br><span class="line"><span class="comment">  No effect if q is NULL or empty</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<p><code>http://blog.csdn.net/feliciafay/article/details/6841115</code>单链表的反转</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#15-213-Lab0"><span class="toc-number">1.</span> <span class="toc-text">15-213 Lab0</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/11/29/15-213-Lab0/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/11/29/15-213-Lab0/&text=15-213-Lab0"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/11/29/15-213-Lab0/&title=15-213-Lab0"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/11/29/15-213-Lab0/&is_video=false&description=15-213-Lab0"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=15-213-Lab0&body=Check out this article: http://yoursite.com/2017/11/29/15-213-Lab0/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/11/29/15-213-Lab0/&title=15-213-Lab0"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/11/29/15-213-Lab0/&title=15-213-Lab0"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/11/29/15-213-Lab0/&title=15-213-Lab0"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/11/29/15-213-Lab0/&title=15-213-Lab0"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/11/29/15-213-Lab0/&name=15-213-Lab0&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 jsmhny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

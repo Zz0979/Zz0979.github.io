@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="网络配置 临时IP地址  ifconfig eth0 192.168.1.10/24 修改IP地址/掩码  route add default gw 192.168.1.1 指定网关  netstat -nr 查看网关情况  route add -net 172.16.0.0/24 gw 192.168.1.100 eth0 添加静态路由  vi /etc/resolv.conf 直接修改DNS服">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kali-Linux-基本配置">
+<meta property="og:url" content="http://yoursite.com/2018/01/25/Kali-Linux-基本配置/index.html">
+<meta property="og:site_name" content="Chace Blog">
+<meta property="og:description" content="网络配置 临时IP地址  ifconfig eth0 192.168.1.10/24 修改IP地址/掩码  route add default gw 192.168.1.1 指定网关  netstat -nr 查看网关情况  route add -net 172.16.0.0/24 gw 192.168.1.100 eth0 添加静态路由  vi /etc/resolv.conf 直接修改DNS服">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-01-25T08:30:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kali-Linux-基本配置">
+<meta name="twitter:description" content="网络配置 临时IP地址  ifconfig eth0 192.168.1.10/24 修改IP地址/掩码  route add default gw 192.168.1.1 指定网关  netstat -nr 查看网关情况  route add -net 172.16.0.0/24 gw 192.168.1.100 eth0 添加静态路由  vi /etc/resolv.conf 直接修改DNS服">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Kali-Linux-基本配置</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/01/27/外围信息搜集/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/01/24/kali-linux-虚拟机安装/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/01/25/Kali-Linux-基本配置/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/01/25/Kali-Linux-基本配置/&text=Kali-Linux-基本配置"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/01/25/Kali-Linux-基本配置/&title=Kali-Linux-基本配置"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/01/25/Kali-Linux-基本配置/&is_video=false&description=Kali-Linux-基本配置"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Kali-Linux-基本配置&body=Check out this article: http://yoursite.com/2018/01/25/Kali-Linux-基本配置/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/01/25/Kali-Linux-基本配置/&title=Kali-Linux-基本配置"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/01/25/Kali-Linux-基本配置/&title=Kali-Linux-基本配置"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/01/25/Kali-Linux-基本配置/&title=Kali-Linux-基本配置"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/01/25/Kali-Linux-基本配置/&title=Kali-Linux-基本配置"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/01/25/Kali-Linux-基本配置/&name=Kali-Linux-基本配置&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#网络配置"><span class="toc-number">1.</span> <span class="toc-text">网络配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#更新升级"><span class="toc-number">2.</span> <span class="toc-text">更新升级</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安装软件包"><span class="toc-number">3.</span> <span class="toc-text">安装软件包</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Kali-Linux-基本配置
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Chace Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-01-25T02:56:12.000Z" itemprop="datePublished">2018-01-25</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h4 id="网络配置"><a href="#网络配置" class="headerlink" title="网络配置"></a>网络配置</h4><ul>
+<li><p>临时IP地址</p>
+<ul>
+<li><p><code>ifconfig eth0 192.168.1.10/24</code> 修改IP地址/掩码</p>
+</li>
+<li><p><code>route add default gw 192.168.1.1</code> 指定网关</p>
+</li>
+<li><p><code>netstat -nr</code> 查看网关情况</p>
+</li>
+<li><p><code>route add -net 172.16.0.0/24 gw 192.168.1.100 eth0</code> 添加静态路由</p>
+</li>
+<li><p><code>vi /etc/resolv.conf</code> 直接修改DNS服务器</p>
+</li>
+<li><p><code>nameserver 8.8.8.8</code></p>
+</li>
+<li><p><code>vi /etc/network/interfaces</code> 网卡配置文件</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">iface eth0 inet static</span><br><span class="line">address 192.168.0.1</span><br><span class="line">netmask 255.255.255.0</span><br><span class="line">gateway 192.168.0.254</span><br><span class="line">dns-nameservers 192.168.1.1</span><br><span class="line">配置静态地址</span><br></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="更新升级"><a href="#更新升级" class="headerlink" title="更新升级"></a>更新升级</h4><ul>
+<li><p><code>apt-get update</code></p>
+</li>
+<li><p><code>apt-get upgrade</code></p>
+</li>
+<li><p><code>vi /etc/apt/sources.list</code> 换源</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#deb http://mirrors.ustc.edu.cn/kali kali main non-free contrib</span><br><span class="line">#deb-src http://mirrors.ustc.edu.cn/kali kali main non-free contrib</span><br><span class="line">#deb http://mirrors.ustc.edu.cn/kali-security kali/updates main contrib non-free</span><br><span class="line">deb https://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib</span><br><span class="line">deb-src https://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>apt-get dis-upgrade</code> 大版本更新</p>
+</li>
+</ul>
+<h4 id="安装软件包"><a href="#安装软件包" class="headerlink" title="安装软件包"></a>安装软件包</h4><p><code>apt-get install smplayer ibus ibus-pinyin flashplugin-nonfree gdebi amule qbittorrent geany stardict meld ttf-wqy-microhei kchmviewer freemind netspeed mtr filezilla filezilla-common chromium monodevelop mono-gmcs -y</code></p>
+<p>firefox浏览器插件</p>
+<p>flashgot 、autoproxy 、Tamper Data 、cookie importer、Cookies Manager、User Agent<br>Switcher、HackBar、Live http header、Firebug、Download YouTube Videos as MP4、<br>Flagfox、hashr<br><a href="https://addons.mozilla.org/en-US/firefox/addon/xss-me/" target="_blank" rel="noopener">https://addons.mozilla.org/en-US/firefox/addon/xss-me/</a><br><a href="https://addons.mozilla.org/en-US/firefox/addon/sql-inject-me/?src=ss" target="_blank" rel="noopener">https://addons.mozilla.org/en-US/firefox/addon/sql-inject-me/?src=ss</a></p>
+<p>安装JAVA</p>
+<p>下载<br><code>http://java.sun.com/javase/downloads/index.jsp</code><br>解包拷⻉<br><code>tar -xzvf /root/jdk-7u45-linux-x64.tar.gz</code><br><code>mv jdk1.7.0_45 /opt</code><br><code>cd /opt/jdk1.7.0_45</code><br>安装注册<br><code>update-alternatives --install /usr/bin/java java /opt/jdk1.7.0_45/bin/java 1</code><br><code>update-alternatives --install /usr/bin/javac javac /opt/jdk1.7.0_45/bin/javac 1</code></p>
+<p><code>update-alternatives --install /usr/lib/mozilla/plugins/libjavaplugin.so mozilla-javaplugin.so /opt/jdk1.7.0_45/jre/lib/amd64/libnpjp2.so 1</code><br>默认设置<br><code>update-alternatives --set java /opt/jdk1.7.0_45/bin/java</code><br><code>update-alternatives --set javac /opt/jdk1.7.0_45/bin/javac</code><br><code>update-alternatives --set mozilla-javaplugin.so /opt/jdk1.7.0_45/jre/lib/amd64/libnpjp2.so</code><br>验证<br><code>java –version</code><br><code>http://www.java.com/en/download/installed.jsp</code></p>
+<p>安装显卡驱动<br>•<br>GPU的⽤用途<br>•<br>Nvidia<br>•<br>Ati<br>•<br>Nvidia显卡驱动安装<br>•<br>apt-get update<br>apt-get dist-upgrade<br>apt-get install -y linux-headers-$(uname -r)<br>apt-get install nvidia-kernel-dkms<br>•<br>sed ‘s/quiet/quiet nouveau.modeset=0/g’ -i /etc/default/grub<br>update-grub<br>reboot<br>•<br>验证：<br>•<br>glxinfo | grep -i “direct rendering“<br>•<br>direct rendering: Yes</p>
+<p>并发线程限制<br>•<br>Ulimite⽤用于限制当前 shell 内进程的资源使⽤用<br>•<br>查看默认值<br>•<br>Ulimite –a<br>•<br>全局配置⽂文件 ：/etc/security/limits<br>•</p>
+<p><domain> <type> <item> <value><br>•<br>⽤用途距离<br>•<br>限制⽂文件块⼤大⼩小：ulimit – s 100<br>•<br>限制shell内存使⽤用：ulimit -m 5000 -v 5000<br>•<br>没有直接对socket数量的限制参数<br>•<br>Linux系统中⼀一切都是⽂文件，运⾏行中的⽂文件叫做进程<br>•<br>ulimite –n 800000</value></item></type></domain></p>
+<p>服务开关<br>•<br>Kali Linux默认未启动所有⺴⽹网络服务<br>•<br>update-rc.d ssh default<br>•<br>/etc/init.d/ssh start</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#网络配置"><span class="toc-number">1.</span> <span class="toc-text">网络配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#更新升级"><span class="toc-number">2.</span> <span class="toc-text">更新升级</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安装软件包"><span class="toc-number">3.</span> <span class="toc-text">安装软件包</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/01/25/Kali-Linux-基本配置/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/01/25/Kali-Linux-基本配置/&text=Kali-Linux-基本配置"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/01/25/Kali-Linux-基本配置/&title=Kali-Linux-基本配置"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/01/25/Kali-Linux-基本配置/&is_video=false&description=Kali-Linux-基本配置"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Kali-Linux-基本配置&body=Check out this article: http://yoursite.com/2018/01/25/Kali-Linux-基本配置/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/01/25/Kali-Linux-基本配置/&title=Kali-Linux-基本配置"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/01/25/Kali-Linux-基本配置/&title=Kali-Linux-基本配置"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/01/25/Kali-Linux-基本配置/&title=Kali-Linux-基本配置"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/01/25/Kali-Linux-基本配置/&title=Kali-Linux-基本配置"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/01/25/Kali-Linux-基本配置/&name=Kali-Linux-基本配置&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 jsmhny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

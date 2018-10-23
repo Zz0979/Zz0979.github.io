@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="第六章 被动信息收集被动信息收集 公开渠道可获得的信息  与目标系统不产生直接交互  尽量避免留下一切痕迹  OSINT：  美国军方：http://www.fas.org/irp/doddir/army/atp2-22-9.pdf 北大西洋公约组织：http://information-retrieval.info/docs/NATO-OSINT.html    信息收集内容 IP地址段 域名信">
+<meta property="og:type" content="article">
+<meta property="og:title" content="被动信息收集">
+<meta property="og:url" content="http://yoursite.com/2018/02/05/被动信息收集/index.html">
+<meta property="og:site_name" content="Chace Blog">
+<meta property="og:description" content="第六章 被动信息收集被动信息收集 公开渠道可获得的信息  与目标系统不产生直接交互  尽量避免留下一切痕迹  OSINT：  美国军方：http://www.fas.org/irp/doddir/army/atp2-22-9.pdf 北大西洋公约组织：http://information-retrieval.info/docs/NATO-OSINT.html    信息收集内容 IP地址段 域名信">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-02-07T02:56:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="被动信息收集">
+<meta name="twitter:description" content="第六章 被动信息收集被动信息收集 公开渠道可获得的信息  与目标系统不产生直接交互  尽量避免留下一切痕迹  OSINT：  美国军方：http://www.fas.org/irp/doddir/army/atp2-22-9.pdf 北大西洋公约组织：http://information-retrieval.info/docs/NATO-OSINT.html    信息收集内容 IP地址段 域名信">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>被动信息收集</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/03/04/主动信息收集/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/01/29/网络数据包分析工具/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/02/05/被动信息收集/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/02/05/被动信息收集/&text=被动信息收集"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/02/05/被动信息收集/&title=被动信息收集"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/02/05/被动信息收集/&is_video=false&description=被动信息收集"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=被动信息收集&body=Check out this article: http://yoursite.com/2018/02/05/被动信息收集/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/02/05/被动信息收集/&title=被动信息收集"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/02/05/被动信息收集/&title=被动信息收集"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/02/05/被动信息收集/&title=被动信息收集"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/02/05/被动信息收集/&title=被动信息收集"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/02/05/被动信息收集/&name=被动信息收集&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#第六章-被动信息收集"><span class="toc-number">1.</span> <span class="toc-text">第六章 被动信息收集</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#被动信息收集"><span class="toc-number">1.1.</span> <span class="toc-text">被动信息收集</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#信息收集内容"><span class="toc-number">1.2.</span> <span class="toc-text">信息收集内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#信息用途"><span class="toc-number">1.3.</span> <span class="toc-text">信息用途</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#信息收集——DNS"><span class="toc-number">1.4.</span> <span class="toc-text">信息收集——DNS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DNS——nslookup"><span class="toc-number">1.5.</span> <span class="toc-text">DNS——nslookup</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DNS——DIG"><span class="toc-number">1.6.</span> <span class="toc-text">DNS——DIG</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DNS区域传输"><span class="toc-number">1.7.</span> <span class="toc-text">DNS区域传输</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DNS字典爆破"><span class="toc-number">1.8.</span> <span class="toc-text">DNS字典爆破</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DNS注册信息"><span class="toc-number">1.9.</span> <span class="toc-text">DNS注册信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#搜索引擎"><span class="toc-number">1.10.</span> <span class="toc-text">搜索引擎</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SHODAN"><span class="toc-number">1.11.</span> <span class="toc-text">SHODAN</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GOOGLE搜索"><span class="toc-number">1.12.</span> <span class="toc-text">GOOGLE搜索</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GOOGLE搜索——实例"><span class="toc-number">1.13.</span> <span class="toc-text">GOOGLE搜索——实例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#YANDEX"><span class="toc-number">1.14.</span> <span class="toc-text">YANDEX</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#用户信息"><span class="toc-number">1.15.</span> <span class="toc-text">用户信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MELTAGO"><span class="toc-number">1.16.</span> <span class="toc-text">MELTAGO</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#其他途径"><span class="toc-number">1.17.</span> <span class="toc-text">其他途径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#生成密码字典"><span class="toc-number">1.18.</span> <span class="toc-text">生成密码字典</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#METADATA"><span class="toc-number">1.19.</span> <span class="toc-text">METADATA</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RECON-NG"><span class="toc-number">1.20.</span> <span class="toc-text">RECON-NG</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        被动信息收集
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Chace Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-02-05T13:46:13.000Z" itemprop="datePublished">2018-02-05</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="第六章-被动信息收集"><a href="#第六章-被动信息收集" class="headerlink" title="第六章 被动信息收集"></a>第六章 被动信息收集</h3><h4 id="被动信息收集"><a href="#被动信息收集" class="headerlink" title="被动信息收集"></a>被动信息收集</h4><ul>
+<li><p>公开渠道可获得的信息</p>
+</li>
+<li><p>与目标系统不产生直接交互</p>
+</li>
+<li><p>尽量避免留下一切痕迹</p>
+</li>
+<li><p>OSINT：</p>
+<ul>
+<li>美国军方：<code>http://www.fas.org/irp/doddir/army/atp2-22-9.pdf</code></li>
+<li>北大西洋公约组织：<code>http://information-retrieval.info/docs/NATO-OSINT.html</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="信息收集内容"><a href="#信息收集内容" class="headerlink" title="信息收集内容"></a>信息收集内容</h4><ul>
+<li>IP地址段</li>
+<li>域名信息</li>
+<li>邮件地址</li>
+<li>文档图片数据</li>
+<li>公司地址</li>
+<li>公司组织架构</li>
+<li>联系电话/传真号码</li>
+<li>人员姓名/职务</li>
+<li>目标系统使用的技术架构</li>
+<li>公开的商业信息</li>
+</ul>
+<h4 id="信息用途"><a href="#信息用途" class="headerlink" title="信息用途"></a>信息用途</h4><ul>
+<li>用信息描述目标</li>
+<li>发现</li>
+<li>社会工程学攻击</li>
+<li>物理缺口</li>
+</ul>
+<h4 id="信息收集——DNS"><a href="#信息收集——DNS" class="headerlink" title="信息收集——DNS"></a>信息收集——DNS</h4><ul>
+<li><p>域名解析成IP地址</p>
+<ul>
+<li>域名与FQDN的区别</li>
+<li>域名记录：A(主机记录)、C name（别名记录）、NS（域名服务器记录）、MX（邮件服务器记录）、PTR（反向记录）</li>
+<li>递归查询与迭代查询</li>
+</ul>
+<p>​</p>
+</li>
+</ul>
+<h4 id="DNS——nslookup"><a href="#DNS——nslookup" class="headerlink" title="DNS——nslookup"></a>DNS——nslookup</h4><p>域名服务器地址</p>
+<p>本地缓存服务器</p>
+<p>逐级将CNAME解析为A记录主机再解析为IP地址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">nslookup</span><br><span class="line">www.sina.com</span><br><span class="line"></span><br><span class="line">nslookup</span><br><span class="line">set type=mx</span><br><span class="line">sina.com</span><br><span class="line">server 8.8.8.8  换DNS</span><br><span class="line">set type=any 查询任何记录</span><br><span class="line">nslookup -type=ns example.com 156.154.70.22</span><br></pre></td></tr></table></figure>
+<p>SPF记录</p>
+<h4 id="DNS——DIG"><a href="#DNS——DIG" class="headerlink" title="DNS——DIG"></a>DNS——DIG</h4><ul>
+<li><code>dig @8.8.8.8 www.sina.com mx</code></li>
+<li><code>dig ww.sina.com any</code></li>
+<li><code>dig +noall +answer mail.163.com any</code></li>
+<li>反向查询：<code>dig +noall +answer -x 8.8.8.8</code>   -x </li>
+<li>bind版本信息：<code>dig +noall +answer txt chaos VERSION.BIND @ns3.dnsv4.com</code></li>
+<li>DNS追踪：<code>dig +trace example.com</code></li>
+</ul>
+<h4 id="DNS区域传输"><a href="#DNS区域传输" class="headerlink" title="DNS区域传输"></a>DNS区域传输</h4><ul>
+<li>dig @ns1.example.com example.com axfr</li>
+<li>host -T -l sina.com 8.8.8.8</li>
+</ul>
+<h4 id="DNS字典爆破"><a href="#DNS字典爆破" class="headerlink" title="DNS字典爆破"></a>DNS字典爆破</h4><ul>
+<li><code>fierce -dnsserver 8.8.8.8 -dns sina.com.cn -wordlist a.txt</code></li>
+<li>usr/share/fierce/hosts.txt</li>
+<li><code>dnsdict6 -d4 -t 16 -x sina.com</code></li>
+<li><code>dnsenum -f dnsbig.txt -dnsserver 8.8.8.8 sina.com -o sina.xml</code></li>
+<li>dpkg -L dnseum</li>
+<li>find / -name dnseum</li>
+<li><code>dnsmap sina.com -w dns.txt</code></li>
+<li><code>dnsrecon -d sina.com --lifetime 10 -t brt -D dnsbig.txt</code></li>
+<li><code>dnsrecon -t std -d sina.com</code></li>
+</ul>
+<h4 id="DNS注册信息"><a href="#DNS注册信息" class="headerlink" title="DNS注册信息"></a>DNS注册信息</h4><ul>
+<li><p>Whois</p>
+</li>
+<li><p><code>whois -h whois.apnic.net 192.0.43.1</code></p>
+</li>
+</ul>
+<h4 id="搜索引擎"><a href="#搜索引擎" class="headerlink" title="搜索引擎"></a>搜索引擎</h4><p><em>　公司新闻动态
+</em>　重要雇员信息<br><em>　机密文档、网络拓扑
+</em>　用户名密码<br>*　目标系统软硬件技术架构</p>
+<h4 id="SHODAN"><a href="#SHODAN" class="headerlink" title="SHODAN"></a>SHODAN</h4><ul>
+<li>搜索联网的设备</li>
+<li>Banner: http、ftp、ssh、telnet</li>
+<li><a href="https://www.shodan.io/" target="_blank" rel="noopener">https://www.shodan.io/</a></li>
+<li>常见:filter:<ul>
+<li>net(192.168.20.1)</li>
+<li>city</li>
+<li>country</li>
+<li>port(80\21\22\23)</li>
+<li>os</li>
+<li>Hostname(主机或域名)</li>
+<li>server</li>
+<li><code>country:CN city:beijing port:22</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="GOOGLE搜索"><a href="#GOOGLE搜索" class="headerlink" title="GOOGLE搜索"></a>GOOGLE搜索</h4><ul>
+<li><p>+充值 -支付</p>
+</li>
+<li><p>北京的电⼦子商务公司——北京 intitle:电⼦子商务 intext:法⼈人 intext:电话</p>
+</li>
+<li><p>阿里网站上的北京公司联系⼈人——北京 site:alibaba.com inurl:contact</p>
+</li>
+<li><p>塞班司法案的PDF⽂文档——SOX filetype:pdf</p>
+</li>
+<li><p>法国的⽀支付相关⻚页⾯面——payment site:fr</p>
+</li>
+</ul>
+<h4 id="GOOGLE搜索——实例"><a href="#GOOGLE搜索——实例" class="headerlink" title="GOOGLE搜索——实例"></a>GOOGLE搜索——实例</h4><ul>
+<li><p>inurl:”level/15/exec/-/show”</p>
+</li>
+<li><p>intitle:”netbotz appliance” “ok”</p>
+</li>
+<li><p>inurl /admin/login.php</p>
+</li>
+<li><p>inurl:qq.txt</p>
+</li>
+<li><p>filetype:xls “username | password“</p>
+</li>
+<li><p>inurl:ftp “password” filetype:xls site:baidu.com</p>
+</li>
+<li><p>Service.pwd</p>
+</li>
+<li><p><a href="http://exploit-db.com/google-dorks" target="_blank" rel="noopener">http://exploit-db.com/google-dorks</a></p>
+</li>
+</ul>
+<h4 id="YANDEX"><a href="#YANDEX" class="headerlink" title="YANDEX"></a>YANDEX</h4><p>世界第四⼤大搜索引擎——俄罗斯<br><a href="https://www.yandex.com/" target="_blank" rel="noopener">https://www.yandex.com/</a></p>
+<h4 id="用户信息"><a href="#用户信息" class="headerlink" title="用户信息"></a>用户信息</h4><ul>
+<li>邮件</li>
+<li><code>theharvester -d sina.com -l 300 -b google</code></li>
+<li>文件</li>
+<li><code>metagoofil -d microsoft.com -t pdf -l 200 -o test -f 1.html</code></li>
+</ul>
+<h4 id="MELTAGO"><a href="#MELTAGO" class="headerlink" title="MELTAGO"></a>MELTAGO</h4><h4 id="其他途径"><a href="#其他途径" class="headerlink" title="其他途径"></a>其他途径</h4><ul>
+<li>社交网络</li>
+<li>工商注册</li>
+<li>新闻组 论坛</li>
+<li>招聘网站</li>
+<li>htttp://<a href="http://www.archive.org/web/web.php" target="_blank" rel="noopener">www.archive.org/web/web.php</a></li>
+</ul>
+<h4 id="生成密码字典"><a href="#生成密码字典" class="headerlink" title="生成密码字典"></a>生成密码字典</h4><ul>
+<li>按个人信息生成其专属的密码字典</li>
+<li>CUPP —— Common User Password Profiler</li>
+<li>git clone <a href="https://github.com/Mebus/cupp.git" target="_blank" rel="noopener">https://github.com/Mebus/cupp.git</a></li>
+<li>python cup.py -i</li>
+</ul>
+<h4 id="METADATA"><a href="#METADATA" class="headerlink" title="METADATA"></a>METADATA</h4><ul>
+<li>EXIF </li>
+<li>Foca</li>
+</ul>
+<h4 id="RECON-NG"><a href="#RECON-NG" class="headerlink" title="RECON-NG"></a>RECON-NG</h4><ul>
+<li>web信息搜索框架</li>
+<li>命令格式与msf一致</li>
+<li>基于Python开发</li>
+<li>使用方法：<ul>
+<li>模块</li>
+<li>数据库</li>
+<li>报告</li>
+</ul>
+</li>
+<li>全局选项<ul>
+<li>USER——AGENT</li>
+<li>Proxy</li>
+<li>Workspace</li>
+<li>Snapshot</li>
+</ul>
+</li>
+<li>Show schema</li>
+<li>Help</li>
+<li>Query 数据库</li>
+<li>Select * from hosts where host like ‘%baidu.com%’ order by ip_address</li>
+<li>DNS查询</li>
+<li>解析IP地址</li>
+<li>联系人</li>
+<li>报告</li>
+<li>API</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#第六章-被动信息收集"><span class="toc-number">1.</span> <span class="toc-text">第六章 被动信息收集</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#被动信息收集"><span class="toc-number">1.1.</span> <span class="toc-text">被动信息收集</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#信息收集内容"><span class="toc-number">1.2.</span> <span class="toc-text">信息收集内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#信息用途"><span class="toc-number">1.3.</span> <span class="toc-text">信息用途</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#信息收集——DNS"><span class="toc-number">1.4.</span> <span class="toc-text">信息收集——DNS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DNS——nslookup"><span class="toc-number">1.5.</span> <span class="toc-text">DNS——nslookup</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DNS——DIG"><span class="toc-number">1.6.</span> <span class="toc-text">DNS——DIG</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DNS区域传输"><span class="toc-number">1.7.</span> <span class="toc-text">DNS区域传输</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DNS字典爆破"><span class="toc-number">1.8.</span> <span class="toc-text">DNS字典爆破</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DNS注册信息"><span class="toc-number">1.9.</span> <span class="toc-text">DNS注册信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#搜索引擎"><span class="toc-number">1.10.</span> <span class="toc-text">搜索引擎</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SHODAN"><span class="toc-number">1.11.</span> <span class="toc-text">SHODAN</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GOOGLE搜索"><span class="toc-number">1.12.</span> <span class="toc-text">GOOGLE搜索</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GOOGLE搜索——实例"><span class="toc-number">1.13.</span> <span class="toc-text">GOOGLE搜索——实例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#YANDEX"><span class="toc-number">1.14.</span> <span class="toc-text">YANDEX</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#用户信息"><span class="toc-number">1.15.</span> <span class="toc-text">用户信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MELTAGO"><span class="toc-number">1.16.</span> <span class="toc-text">MELTAGO</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#其他途径"><span class="toc-number">1.17.</span> <span class="toc-text">其他途径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#生成密码字典"><span class="toc-number">1.18.</span> <span class="toc-text">生成密码字典</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#METADATA"><span class="toc-number">1.19.</span> <span class="toc-text">METADATA</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RECON-NG"><span class="toc-number">1.20.</span> <span class="toc-text">RECON-NG</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/02/05/被动信息收集/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/02/05/被动信息收集/&text=被动信息收集"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/02/05/被动信息收集/&title=被动信息收集"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/02/05/被动信息收集/&is_video=false&description=被动信息收集"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=被动信息收集&body=Check out this article: http://yoursite.com/2018/02/05/被动信息收集/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/02/05/被动信息收集/&title=被动信息收集"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/02/05/被动信息收集/&title=被动信息收集"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/02/05/被动信息收集/&title=被动信息收集"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/02/05/被动信息收集/&title=被动信息收集"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/02/05/被动信息收集/&name=被动信息收集&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 jsmhny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

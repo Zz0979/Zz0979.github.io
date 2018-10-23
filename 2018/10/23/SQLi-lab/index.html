@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="SQLi-lab 环境搭建文章参考:’https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-ubuntu-18-04&amp;#39; 以下只用于非生产环境使用 安装Apache12sudo apt updatesudo apt install apache2 安装">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQLi-lab 环境搭建">
+<meta property="og:url" content="http://yoursite.com/2018/10/23/SQLi-lab/index.html">
+<meta property="og:site_name" content="Chace Blog">
+<meta property="og:description" content="SQLi-lab 环境搭建文章参考:’https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-ubuntu-18-04&amp;#39; 以下只用于非生产环境使用 安装Apache12sudo apt updatesudo apt install apache2 安装">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-10-23T12:03:49.127Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQLi-lab 环境搭建">
+<meta name="twitter:description" content="SQLi-lab 环境搭建文章参考:’https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-ubuntu-18-04&amp;#39; 以下只用于非生产环境使用 安装Apache12sudo apt updatesudo apt install apache2 安装">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>SQLi-lab 环境搭建</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2018/07/17/基于LimeSDR的GSM网络搭建/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/10/23/SQLi-lab/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/10/23/SQLi-lab/&text=SQLi-lab 环境搭建"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/10/23/SQLi-lab/&title=SQLi-lab 环境搭建"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/10/23/SQLi-lab/&is_video=false&description=SQLi-lab 环境搭建"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=SQLi-lab 环境搭建&body=Check out this article: http://yoursite.com/2018/10/23/SQLi-lab/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/10/23/SQLi-lab/&title=SQLi-lab 环境搭建"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/10/23/SQLi-lab/&title=SQLi-lab 环境搭建"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/10/23/SQLi-lab/&title=SQLi-lab 环境搭建"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/10/23/SQLi-lab/&title=SQLi-lab 环境搭建"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/10/23/SQLi-lab/&name=SQLi-lab 环境搭建&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SQLi-lab-环境搭建"><span class="toc-number">1.</span> <span class="toc-text">SQLi-lab 环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装Apache"><span class="toc-number">1.0.1.</span> <span class="toc-text">安装Apache</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装MySQL"><span class="toc-number">1.0.2.</span> <span class="toc-text">安装MySQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装PHP"><span class="toc-number">1.0.3.</span> <span class="toc-text">安装PHP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试"><span class="toc-number">1.0.4.</span> <span class="toc-text">测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装phpMyAdmin"><span class="toc-number">1.1.</span> <span class="toc-text">安装phpMyAdmin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-SQLMap"><span class="toc-number">1.2.</span> <span class="toc-text">使用 SQLMap</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#入个门"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">入个门</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        SQLi-lab 环境搭建
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Chace Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-10-23T12:02:46.000Z" itemprop="datePublished">2018-10-23</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="SQLi-lab-环境搭建"><a href="#SQLi-lab-环境搭建" class="headerlink" title="SQLi-lab 环境搭建"></a>SQLi-lab 环境搭建</h1><p>文章参考:’<a href="https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-ubuntu-18-04&#39;" target="_blank" rel="noopener">https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-ubuntu-18-04&#39;</a></p>
+<p>以下只用于非生产环境使用</p>
+<h3 id="安装Apache"><a href="#安装Apache" class="headerlink" title="安装Apache"></a>安装Apache</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install apache2</span><br></pre></td></tr></table></figure>
+<h3 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install mysql-server</span><br><span class="line">sudo mysql_secure_installation</span><br></pre></td></tr></table></figure>
+<h3 id="安装PHP"><a href="#安装PHP" class="headerlink" title="安装PHP"></a>安装PHP</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install php libapache2-mod-php php-mysql</span><br></pre></td></tr></table></figure>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /var/www/html/info.php</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">phpinfo();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>http://your_server_ip/info.php</code></p>
+<p><code>sudo rm /var/www/html/info.php</code></p>
+<h2 id="安装phpMyAdmin"><a href="#安装phpMyAdmin" class="headerlink" title="安装phpMyAdmin"></a>安装phpMyAdmin</h2><p>###安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install phpmyadmin php-mbstring php-gettext</span><br></pre></td></tr></table></figure></p>
+<p>服务器选择apache2<br>使用dbconfig-common建立数据库<br>设置phpmyadmin的mysql密码</p>
+<p>安装过程将phpMyAdmin Apache配置文件添加到/etc/apache2/conf-enabled/目录中，并自动读取该文件。启用mbstringPHP扩展.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo phpenmod mbstring</span><br><span class="line">sudo systemctl restart apache2</span><br></pre></td></tr></table></figure></p>
+<p>创建phpMyAdmin快捷方式：sudo ln -s /usr/share/phpmyadmin /var/www/html</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">要以root用户身份登录phpMyAdmin ，您需要将其身份验证方法切换为auth_socket，mysql_native_password如果您还没有这样做。为此，请从终端打开MySQL提示符：</span><br><span class="line"></span><br><span class="line">sudo mysql</span><br><span class="line">接下来，使用以下命令检查每个MySQL用户帐户使用的身份验证方法：</span><br><span class="line"></span><br><span class="line">SELECT user,authentication_string,plugin,host FROM mysql.user;</span><br><span class="line">Output</span><br><span class="line">+------------------+-------------------------------------------+-----------------------+-----------+</span><br><span class="line">| user             | authentication_string                     | plugin                | host      |</span><br><span class="line">+------------------+-------------------------------------------+-----------------------+-----------+</span><br><span class="line">| root             |                                           | auth_socket           | localhost |</span><br><span class="line">| mysql.session    | *THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE | mysql_native_password | localhost |</span><br><span class="line">| mysql.sys        | *THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE | mysql_native_password | localhost |</span><br><span class="line">| debian-sys-maint | *8486437DE5F65ADC4A4B001CA591363B64746D4C | mysql_native_password | localhost |</span><br><span class="line">| phpmyadmin       | *5FD2B7524254B7F81B32873B1EA6D681503A5CA9 | mysql_native_password | localhost |</span><br><span class="line">+------------------+-------------------------------------------+-----------------------+-----------+</span><br><span class="line">5 rows in set (0.00 sec)</span><br><span class="line">在此示例中，您可以看到root用户确实使用auth_socket插件进行身份验证。要配置root帐户以使用密码进行身份验证，请运行以下ALTER USER命令。请务必更改password为您选择的强密码：</span><br><span class="line"></span><br><span class="line">ALTER USER &apos;root&apos;@&apos;localhost&apos; IDENTIFIED WITH mysql_native_password BY &apos;password&apos;;</span><br><span class="line">然后，运行FLUSH PRIVILEGES告诉服务器重新加载授权表并使您的新更改生效：</span><br><span class="line"></span><br><span class="line">FLUSH PRIVILEGES;</span><br><span class="line">再次检查每个用户使用的身份验证方法，以确认root用户不再使用该auth_socket插件进行身份验证：</span><br><span class="line"></span><br><span class="line">SELECT user,authentication_string,plugin,host FROM mysql.user;</span><br><span class="line">Output</span><br><span class="line">+------------------+-------------------------------------------+-----------------------+-----------+</span><br><span class="line">| user             | authentication_string                     | plugin                | host      |</span><br><span class="line">+------------------+-------------------------------------------+-----------------------+-----------+</span><br><span class="line">| root             | *DE06E242B88EFB1FE4B5083587C260BACB2A6158 | mysql_native_password | localhost |</span><br><span class="line">| mysql.session    | *THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE | mysql_native_password | localhost |</span><br><span class="line">| mysql.sys        | *THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE | mysql_native_password | localhost |</span><br><span class="line">| debian-sys-maint | *8486437DE5F65ADC4A4B001CA591363B64746D4C | mysql_native_password | localhost |</span><br><span class="line">| phpmyadmin       | *5FD2B7524254B7F81B32873B1EA6D681503A5CA9 | mysql_native_password | localhost |</span><br><span class="line">+------------------+-------------------------------------------+-----------------------+-----------+</span><br><span class="line">5 rows in set (0.00 sec)</span><br><span class="line">您可以从此输出中看到root用户将使用密码进行身份验证。您现在可以使用您在此处为其设置的密码以root用户身份登录phpMyAdmin界面。</span><br></pre></td></tr></table></figure>
+<p>因为sqli-lab年代久远的关系,应该只支持到PHP5的版本.现在有两种办法解决,一种是直接将PHP降级,一种是使用修改过的版本.<code>https://github.com/Rinkish/Sqli_Edited_Version</code><br><code>http://www.hackingarticles.in/set-sqli-lab-kali/</code></p>
+<p>后来还发现一种简单的办法,就是直接使用Docker.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">https://www.jianshu.com/p/2ad3edf3c61f</span><br><span class="line">sudo apt-get update#更新软件库</span><br><span class="line">sudo apt install docker-ce#安装docker-ce</span><br><span class="line">sudo docker version#查看是否安装成功</span><br><span class="line">docker search sqli-labs #搜索镜像</span><br><span class="line">docker pull acgpiano/sqli-labs #选择了acgpiano</span><br><span class="line">#大写代表的是预定义可替换</span><br><span class="line">docker run -dt --name NAME -p PORT:80 --rm  acgpiano/sqli-labs</span><br><span class="line">#run 创建一个新的容器并运行一个命令</span><br><span class="line">#-d 表示后台运行,返回容器id</span><br><span class="line">#-t  为容器重新分配一个伪输入终端，通常与 -i 同时使用</span><br><span class="line">#--name NAME 将容器命名为NAME</span><br><span class="line">#-p PORT:80  将acgpiano/sqli-labs的80端口映射到本地的PORT端口</span><br><span class="line">docker ps#查看正在运行的容器</span><br><span class="line">docker ps -a#查看所有容器</span><br><span class="line">docker exec -it ID /bin/bash</span><br><span class="line">#exec 在运行的容器中执行命令</span><br><span class="line">#-t 分配一个伪终端</span><br><span class="line">#-i 即使没有附加也保持STDIN</span><br><span class="line">cd /var/www/html #进入网站放置目录</span><br><span class="line">mysql -u root -p #进入mysql,默认密码为空</span><br><span class="line">docker images #列出本地镜像</span><br><span class="line">docker start CONTAINER #启动一个或多少已经被停止的容器</span><br><span class="line">docker stop CONTAINER #停止一个运行中的容器</span><br><span class="line">docker restart CONTAINER #重启容器</span><br><span class="line">docker rm CONTAINER #删除容器</span><br><span class="line">docker rmi IMAGE #删除镜像</span><br><span class="line">sudo systemctl daemon-reload #reload daemon.json</span><br><span class="line">sudo systemctl restart docker #重启docker</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用-SQLMap"><a href="#使用-SQLMap" class="headerlink" title="使用 SQLMap"></a>使用 SQLMap</h2><h4 id="入个门"><a href="#入个门" class="headerlink" title="入个门"></a>入个门</h4><ul>
+<li><p>判断是否存在注入<br><code>python sqlmap.py -u &#39;http://10.10.10.153/sql1/Less-1/?id=8&quot;</code></p>
+</li>
+<li><p>判断文本请求是否存在注入<br><code>sqlmap.py -r 1.txt</code></p>
+</li>
+<li><p>查询当前用户下的所有数据库<br><code>python sqlmap.py -u &#39;http://10.10.10.153/sql1/Less-1/?id=8&quot; --dbs</code><br><code>--dbs</code>可以缩写为<code>-D</code></p>
+</li>
+<li><p>获取数据库中的表名<br><code>python sqlmap.py -u &quot;http://10.10.10.153/sql1/Less-1/?id=8&quot; -D security --tables</code></p>
+</li>
+<li><p>获取表中的字段名<br><code>python sqlmap.py -u &quot;http://10.10.10.153/sql1/Less-1/?id=8&quot; -D security -T users --columns</code></p>
+</li>
+<li><p>获取字段内容<br><code>python sqlmap.py -u &quot;http://10.10.10.153/sql1/Less-1/?id=8&quot; -D security -T users -C username,password --dump</code></p>
+</li>
+<li><p>获取数据库的所有用户<br><code>python sqlmap.py -u &quot;http://10.10.10.153/sql1/Less-1/?id=8&quot; --users</code></p>
+</li>
+<li><p>获取数据库用户的密码<br><code>python sqlmap.py -u &quot;http://10.10.10.153/sql1/Less-1/?id=8&quot; --passwords</code></p>
+</li>
+<li><p>获取当前网站数据库名称<br><code>python sqlmap.py -u &quot;http://10.10.10.153/sql1/Less-1/?id=8&quot; --current-db</code></p>
+</li>
+<li><p>获取当前数据库的用户名称</p>
+<p><code>python sqlmap.py -u &quot;http://10.10.10.153/sql1/Less-1/?id=8&quot; --current-user</code></p>
+</li>
+<li><p><code>--level 5</code> 探测等级</p>
+</li>
+<li><p><code>--is-dba</code> 当前用户是否为管理权限</p>
+</li>
+<li><p><code>--roles</code> 列出数据库管理员角色</p>
+</li>
+<li><p><code>--referer</code> HTTP Referer头</p>
+</li>
+<li><p><code>--sql-shell</code> 运行自定义SQL语句</p>
+</li>
+<li><p><code>--os-cmd, --os-shell</code> 运行任意操作系统命令</p>
+</li>
+<li><p><code>--fire-read</code> 从数据库服务器中读取文件</p>
+</li>
+<li><p><code>--file-write --file-dest</code> 上传文件到数据库服务器中 </p>
+</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SQLi-lab-环境搭建"><span class="toc-number">1.</span> <span class="toc-text">SQLi-lab 环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装Apache"><span class="toc-number">1.0.1.</span> <span class="toc-text">安装Apache</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装MySQL"><span class="toc-number">1.0.2.</span> <span class="toc-text">安装MySQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装PHP"><span class="toc-number">1.0.3.</span> <span class="toc-text">安装PHP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试"><span class="toc-number">1.0.4.</span> <span class="toc-text">测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装phpMyAdmin"><span class="toc-number">1.1.</span> <span class="toc-text">安装phpMyAdmin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-SQLMap"><span class="toc-number">1.2.</span> <span class="toc-text">使用 SQLMap</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#入个门"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">入个门</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/10/23/SQLi-lab/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/10/23/SQLi-lab/&text=SQLi-lab 环境搭建"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/10/23/SQLi-lab/&title=SQLi-lab 环境搭建"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/10/23/SQLi-lab/&is_video=false&description=SQLi-lab 环境搭建"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=SQLi-lab 环境搭建&body=Check out this article: http://yoursite.com/2018/10/23/SQLi-lab/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/10/23/SQLi-lab/&title=SQLi-lab 环境搭建"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/10/23/SQLi-lab/&title=SQLi-lab 环境搭建"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/10/23/SQLi-lab/&title=SQLi-lab 环境搭建"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/10/23/SQLi-lab/&title=SQLi-lab 环境搭建"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/10/23/SQLi-lab/&name=SQLi-lab 环境搭建&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 jsmhny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

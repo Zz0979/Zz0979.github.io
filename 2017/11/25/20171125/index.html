@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="sympy之前函数求导一直用MATLAB，现在发现几乎所有Matlab的功能都能够用python代替。今天发现了sympy这个库。简单的使用方法如下123from sympy import *x=Symbol(&quot;x&quot;)diff(1/(1+x**2),x) 有时间再去仔细看看这个。 WordCloud 安装今天刚好有人在WordCloud安装时碰到了问题，自己一试，刚开始也没装上。错误提示1Unic">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 求导 和 安装第三方包中出现的小问题">
+<meta property="og:url" content="http://yoursite.com/2017/11/25/20171125/index.html">
+<meta property="og:site_name" content="Chace Blog">
+<meta property="og:description" content="sympy之前函数求导一直用MATLAB，现在发现几乎所有Matlab的功能都能够用python代替。今天发现了sympy这个库。简单的使用方法如下123from sympy import *x=Symbol(&quot;x&quot;)diff(1/(1+x**2),x) 有时间再去仔细看看这个。 WordCloud 安装今天刚好有人在WordCloud安装时碰到了问题，自己一试，刚开始也没装上。错误提示1Unic">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2017-11-25T12:56:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python 求导 和 安装第三方包中出现的小问题">
+<meta name="twitter:description" content="sympy之前函数求导一直用MATLAB，现在发现几乎所有Matlab的功能都能够用python代替。今天发现了sympy这个库。简单的使用方法如下123from sympy import *x=Symbol(&quot;x&quot;)diff(1/(1+x**2),x) 有时间再去仔细看看这个。 WordCloud 安装今天刚好有人在WordCloud安装时碰到了问题，自己一试，刚开始也没装上。错误提示1Unic">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Python 求导 和 安装第三方包中出现的小问题</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/11/25/hexo文章中加入图片/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/11/23/Python 安装第三方包/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/11/25/20171125/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/11/25/20171125/&text=Python 求导 和 安装第三方包中出现的小问题"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/11/25/20171125/&title=Python 求导 和 安装第三方包中出现的小问题"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/11/25/20171125/&is_video=false&description=Python 求导 和 安装第三方包中出现的小问题"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python 求导 和 安装第三方包中出现的小问题&body=Check out this article: http://yoursite.com/2017/11/25/20171125/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/11/25/20171125/&title=Python 求导 和 安装第三方包中出现的小问题"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/11/25/20171125/&title=Python 求导 和 安装第三方包中出现的小问题"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/11/25/20171125/&title=Python 求导 和 安装第三方包中出现的小问题"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/11/25/20171125/&title=Python 求导 和 安装第三方包中出现的小问题"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/11/25/20171125/&name=Python 求导 和 安装第三方包中出现的小问题&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#sympy"><span class="toc-number">1.</span> <span class="toc-text">sympy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WordCloud-安装"><span class="toc-number">2.</span> <span class="toc-text">WordCloud 安装</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Python 求导 和 安装第三方包中出现的小问题
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Chace Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-11-25T12:31:20.000Z" itemprop="datePublished">2017-11-25</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="sympy"><a href="#sympy" class="headerlink" title="sympy"></a>sympy</h2><p>之前函数求导一直用MATLAB，现在发现几乎所有Matlab的功能都能够用python代替。<br>今天发现了sympy这个库。<br>简单的使用方法如下<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sympy <span class="keyword">import</span> *</span><br><span class="line">x=Symbol(<span class="string">"x"</span>)</span><br><span class="line">diff(<span class="number">1</span>/(<span class="number">1</span>+x**<span class="number">2</span>),x)</span><br></pre></td></tr></table></figure></p>
+<p>有时间再去仔细看看这个。</p>
+<h2 id="WordCloud-安装"><a href="#WordCloud-安装" class="headerlink" title="WordCloud 安装"></a>WordCloud 安装</h2><p>今天刚好有人在WordCloud安装时碰到了问题，自己一试，刚开始也没装上。<br>错误提示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UnicodeDecodeError: &apos;utf-8&apos; codec can&apos;t decode byte 0xa1 in position 55: invalid start byte</span><br></pre></td></tr></table></figure></p>
+<p>看上去是字符编码问题，但是目前没搞懂产生问题的原因。<br>另外一个人碰到的问题是提示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error: Microsoft Visual C++ 14.0 is required.</span><br></pre></td></tr></table></figure></p>
+<p>这个因为我安装了VS2017，所以没有这个提示。<br>我看了下WordCloud的官网，发现有这样的提示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">worcloud depends on numpy&gt;=1.5.1, pillow and matplotlib. To install it via pip, you will also need a C compiler.</span><br></pre></td></tr></table></figure></p>
+<p>那么理论上来讲装了VS2017应该就没事了。但是这种解决方法毕竟太麻烦。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">If you&apos;re having trouble with pip installation on windows, you can find a .whl file at:</span><br><span class="line"></span><br><span class="line">http://www.lfd.uci.edu/~gohlke/pythonlibs/#wordcloud</span><br></pre></td></tr></table></figure></p>
+<p>官网上也给了相应的解决办法。<br>直接去下编译好的Whl包进行安装。<br>最后成功解决问题。</p>
+<p>后来在网上查了一下，在windows下使用pip安装一些python的第三方库，有很多都使用了C写一些扩展，需要使用相应的编译环境进行编译安装。<br>所以直接下载编译好的wheel安装包就非常方便，UCI(加州大学尔湾分校)就提供了大量已经编译打包好的针对windows的wheel安装包，刚好发现上面的下载地址就来源于这。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.lfd.uci.edu/~gohlke/pythonlibs/</span><br></pre></td></tr></table></figure></p>
+<p>这个页面相当熟悉，原来来过很多次今天才知道这里存在的意义。关键是有很多科学计算的包可以直接从这里下载。果断收藏。<br>前面编码的问题也由此得到解决，但是还是找不到问题产生的原因。</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#sympy"><span class="toc-number">1.</span> <span class="toc-text">sympy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WordCloud-安装"><span class="toc-number">2.</span> <span class="toc-text">WordCloud 安装</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/11/25/20171125/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/11/25/20171125/&text=Python 求导 和 安装第三方包中出现的小问题"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/11/25/20171125/&title=Python 求导 和 安装第三方包中出现的小问题"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/11/25/20171125/&is_video=false&description=Python 求导 和 安装第三方包中出现的小问题"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python 求导 和 安装第三方包中出现的小问题&body=Check out this article: http://yoursite.com/2017/11/25/20171125/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/11/25/20171125/&title=Python 求导 和 安装第三方包中出现的小问题"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/11/25/20171125/&title=Python 求导 和 安装第三方包中出现的小问题"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/11/25/20171125/&title=Python 求导 和 安装第三方包中出现的小问题"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/11/25/20171125/&title=Python 求导 和 安装第三方包中出现的小问题"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/11/25/20171125/&name=Python 求导 和 安装第三方包中出现的小问题&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 jsmhny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

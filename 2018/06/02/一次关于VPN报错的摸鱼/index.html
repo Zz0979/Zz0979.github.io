@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="起因现在这个博客懒得申请图床，其他方式插入图片也太麻烦，所以纯文字记录啦。事情的起因是发现了一次VPN报错，VPN报错提示很简单。The VPN Service is not acailable. 通过这个报错去寻找VPN服务是否开启，如果这么简单就解决了，就没有后面的事了。问题的解决方案最后也很简单，一条netsh winsock reset就解决了。但是探究问题产生的原因是这次摸鱼的开始。并且">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一次关于VPN报错的摸鱼">
+<meta property="og:url" content="http://yoursite.com/2018/06/02/一次关于VPN报错的摸鱼/index.html">
+<meta property="og:site_name" content="Chace Blog">
+<meta property="og:description" content="起因现在这个博客懒得申请图床，其他方式插入图片也太麻烦，所以纯文字记录啦。事情的起因是发现了一次VPN报错，VPN报错提示很简单。The VPN Service is not acailable. 通过这个报错去寻找VPN服务是否开启，如果这么简单就解决了，就没有后面的事了。问题的解决方案最后也很简单，一条netsh winsock reset就解决了。但是探究问题产生的原因是这次摸鱼的开始。并且">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-06-02T15:08:56.951Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一次关于VPN报错的摸鱼">
+<meta name="twitter:description" content="起因现在这个博客懒得申请图床，其他方式插入图片也太麻烦，所以纯文字记录啦。事情的起因是发现了一次VPN报错，VPN报错提示很简单。The VPN Service is not acailable. 通过这个报错去寻找VPN服务是否开启，如果这么简单就解决了，就没有后面的事了。问题的解决方案最后也很简单，一条netsh winsock reset就解决了。但是探究问题产生的原因是这次摸鱼的开始。并且">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>一次关于VPN报错的摸鱼</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/06/05/解决Ubuntu18-04坚果云问题/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/05/31/NOOBS/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/06/02/一次关于VPN报错的摸鱼/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/06/02/一次关于VPN报错的摸鱼/&text=一次关于VPN报错的摸鱼"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/06/02/一次关于VPN报错的摸鱼/&title=一次关于VPN报错的摸鱼"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/06/02/一次关于VPN报错的摸鱼/&is_video=false&description=一次关于VPN报错的摸鱼"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=一次关于VPN报错的摸鱼&body=Check out this article: http://yoursite.com/2018/06/02/一次关于VPN报错的摸鱼/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/06/02/一次关于VPN报错的摸鱼/&title=一次关于VPN报错的摸鱼"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/06/02/一次关于VPN报错的摸鱼/&title=一次关于VPN报错的摸鱼"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/06/02/一次关于VPN报错的摸鱼/&title=一次关于VPN报错的摸鱼"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/06/02/一次关于VPN报错的摸鱼/&title=一次关于VPN报错的摸鱼"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/06/02/一次关于VPN报错的摸鱼/&name=一次关于VPN报错的摸鱼&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#起因"><span class="toc-number">1.</span> <span class="toc-text">起因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分析一下"><span class="toc-number">2.</span> <span class="toc-text">分析一下</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Autoruns"><span class="toc-number">3.</span> <span class="toc-text">Autoruns</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LSP"><span class="toc-number">4.</span> <span class="toc-text">LSP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TGP"><span class="toc-number">5.</span> <span class="toc-text">TGP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复现"><span class="toc-number">6.</span> <span class="toc-text">复现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ARK"><span class="toc-number">7.</span> <span class="toc-text">ARK</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        一次关于VPN报错的摸鱼
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">Chace Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-06-02T15:04:59.000Z" itemprop="datePublished">2018-06-02</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>现在这个博客懒得申请图床，其他方式插入图片也太麻烦，所以纯文字记录啦。<br>事情的起因是发现了一次VPN报错，VPN报错提示很简单。The VPN Service is not acailable. 通过这个报错去寻找VPN服务是否开启，如果这么简单就解决了，就没有后面的事了。<br>问题的解决方案最后也很简单，一条<code>netsh winsock reset</code>就解决了。但是探究问题产生的原因是这次摸鱼的开始。<br>并且发现这个问题与之前碰到的在开机以后提示<code>你的电脑将在一分钟后自动重启</code>本质上原因是一样的。</p>
+<h3 id="分析一下"><a href="#分析一下" class="headerlink" title="分析一下"></a>分析一下</h3><p>通过<code>netsh winsock reset</code>命令解决表明windows的winsock出现错误。那么猜测是LSP出现的问题。并且通过Autoruns软件发现了TGP创建了LSP的相关注册表项。</p>
+<h3 id="Autoruns"><a href="#Autoruns" class="headerlink" title="Autoruns"></a>Autoruns</h3><p><code>https://docs.microsoft.com/zh-cn/sysinternals/downloads/autoruns</code><br>官方的简单介绍<br>This utility, which has the most comprehensive knowledge of auto-starting locations of any startup monitor, shows you what programs are configured to run during system bootup or login, and when you start various built-in Windows applications like Internet Explorer, Explorer and media players. These programs and drivers include ones in your startup folder, Run, RunOnce, and other Registry keys. Autoruns reports Explorer shell extensions, toolbars, browser helper objects, Winlogon notifications, auto-start services, and much more. Autoruns goes way beyond other autostart utilities.</p>
+<h3 id="LSP"><a href="#LSP" class="headerlink" title="LSP"></a>LSP</h3><p>维基相关介绍<br><code>https://en.wikipedia.org/wiki/Layered_Service_Provider</code><br>Layered Service Provider (LSP) is a deprecated feature of the Microsoft Windows Winsock 2 Service Provider Interface (SPI). A Layered Service Provider is a DLL that uses Winsock APIs to attempt to insert itself into the TCP/IP protocol stack. Once in the stack, a Layered Service Provider can intercept and modify inbound and outbound Internet traffic. It allows processing of all the TCP/IP traffic taking place between the Internet and the applications that are accessing the Internet (such as a web browser, the email client, etc.).<br>其中的缺点很关键。<br>划一下重点<br>Another major common issue with LSPs was that if they were to be removed or unregistered improperly or if the LSP was buggy, it would result in corruption of the Winsock catalog in the registry, and the entire TCP/IP stack would break and the computer could no longer access the network.</p>
+<h3 id="TGP"><a href="#TGP" class="headerlink" title="TGP"></a>TGP</h3><p>通过Autotuns软件中的Winsock Providers选项中，可以看到<code>HKLM\System\CurrentControlSet\Services\WinSock2\Parameters\Protocol_Catalog9\Catalog_Entires</code>和<code>HKLM\System\CurrentControlSet\Services\WinSock2\Parameters\Protocol_Catalog9\Catalog_Entries64</code>注册表中有TGP写入的ierd_tgp_lsp开头的相关信息。指向<code>c:\windows\syswow64\ierd_tgp_lsp.dll</code> 以及<code>ierd_tgp_lsp64.dll</code><br>由LSP的功能推测，这个dll会在与网络加速相关功能的时候启用。<br>那么接下来就开始复现错误，接下来的操作在一台全新的Win10 1804虚拟机下进行。</p>
+<h3 id="复现"><a href="#复现" class="headerlink" title="复现"></a>复现</h3><p>刚安装好wegame的时候，autotuns中看到是没有LSP注册表修改的，在使用一次网络加速功能后，注册表就增加了相关注册表项。那么如何判断<code>ierd_tgp_lsp.dll</code>是否被使用呢？我首先用了Process Explorer工具进行dll的搜索。没有开启游戏前没有进程与之相关，在开启后发现有三四个进程（其中一些是系统进程）与之相关。推测与网络相关进程都被注入，注入细节目前搞不清楚，尝试过逆向dll，水平有限没搞懂。<br>dll问题先暂时放在一边，问题的原因是Winsock被破坏，那么如何观察winsock的情况是一个问题。这个问题的解决也比较简单，参见<code>https://support.microsoft.com/zh-cn/help/811259/how-to-determine-and-to-recover-from-winsock2-corruption-in-windows-se</code><br>介绍的方法是使用Msinfo32程序。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">单击“开始”，单击“运行”，键入“Msinfo32”，然后单击“确定”。</span><br><span class="line">依次展开“组件”和“网络”，然后单击“协议”。</span><br><span class="line">“协议”下将显示 10 个节。如果 Winsock2 项未损坏，则节标题中将包括下列名称：</span><br><span class="line">MSAFD Tcpip [TCP/IP]</span><br><span class="line">MSAFD Tcpip [UDP/IP]</span><br><span class="line">MSAFD Tcpip [TCP/IPv6]</span><br><span class="line">MSAFD Tcpip [UDP/IPv6] </span><br><span class="line">RSVP UDP Service Provider</span><br><span class="line">RSVP TCP Service Provider</span><br><span class="line">RSVP UDPv6 Service Provider </span><br><span class="line">RSVP TCPv6 Service Provider </span><br><span class="line">MSAFD NetBIOS [\Device\NetBT_Tcpip... </span><br><span class="line">MSAFD NetBIOS [\Device\NetBT_Tcpip... </span><br><span class="line">MSAFD NetBIOS [\Device\NetBT_Tcpip... </span><br><span class="line">MSAFD NetBIOS [\Device\NetBT_Tcpip... </span><br><span class="line">MSAFD NetBIOS [\Device\NetBT_Tcpip... </span><br><span class="line">MSAFD NetBIOS [\Device\NetBT_Tcpip... </span><br><span class="line">如果显示的名称与此列表中的名称有任何不同，则说明 Winsock2 项已损坏，或安装了第三方加载项（如代理软件）。</span><br><span class="line">如果安装了第三方加载项，则该加载项的名称将替代列表中的字母“MSAFD”。 </span><br><span class="line">如果列表中的节数多于 10 个，则说明安装了第三方加载项。 </span><br><span class="line">如果少于 10 个，则说明缺少信息。</span><br></pre></td></tr></table></figure></p>
+<p>在没有开启加速器之前，我的系统上第一项显示<code>AF_UNIX</code>,之后显示<code>MSAFD Tcpip [TCP/IP]</code>,<code>MSAFD Tcpip [UDP/IP]</code>等等.<br>在开启加速后，第一项显示<code>ierd_tgp_lsp64 over [MSAFD Tcpip [TCP/IP]]</code>,第二项显示<code>ierd_tgp_lsp64 over [MSAFD Tcpip [UDP/IP]]</code>.</p>
+<p>很明显修改了相关信息，在正常退出TGP时，信息会恢复原状，但是DLL仍然与进程相关，在重启后无关。那么是否非正常退出TGP时会发生问题，答案是肯定的，信息并没有被修改回原来的情况。但是重启后并没有碰到VPN的问题，重启后发现联网的程序都挂上了lspdll,正常情况下重启是没有的。32位的程序挂32位的dll,64位的程序挂64位的，程序的网络通信正常，系统也正常运作。但是Winsock中的信息并没有被修改回来。（我推测是TX的程序员做的容错机制，即使异常也不会发生明显的错误，在下次正常运行程序时可以被修改回来，但是这种容错机制似乎是有点权限过大，还没有仔细研究）</p>
+<p>现在的问题就是如何复现VPN的问题，根据这个思路下去，既然联网的程序都要调用tgp给的lspdll.那么就把DLL文件删除，当然不是那么容易删的。因为它一直是被使用的状态，我就通过进入PE系统将两个DLL文件改名。再进入系统时，运行VPN就出现了最开始出现的错误。这时运行<code>netsh winsock reset</code>解决问题也就很顺理成章了。</p>
+<h3 id="ARK"><a href="#ARK" class="headerlink" title="ARK"></a>ARK</h3><p>我还是想要细致探究一下，所以想借助ARK类工具(AntiRootkit)。但是发现64位系统运行ARK工具并不是很方便，于是又开了一台Win7 32位的虚拟机继续研究。</p>
+<p>基本进行相同的操作，发现在异常操作后，lspdll其实是在winsock供应者启动项中（一直在启动项中）。这下之前的情况就说得通了。然后我用Antispy将相关启动项关闭，发现系统启动都出现了问题，黑屏无法进入系统。那么可以推测问题产生的一种原因是异常关闭TGP之后，电脑中的相关安全或优化程序将启动项优化。</p>
+<p>其实本来想尝试一下内存监控的，有一点复杂。其实到最后对问题产生的原因也是猜测和推测，只有到具体出错的情况时再进行分析是最准确的，今天只做了个简单的复现和分析。</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#起因"><span class="toc-number">1.</span> <span class="toc-text">起因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分析一下"><span class="toc-number">2.</span> <span class="toc-text">分析一下</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Autoruns"><span class="toc-number">3.</span> <span class="toc-text">Autoruns</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LSP"><span class="toc-number">4.</span> <span class="toc-text">LSP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TGP"><span class="toc-number">5.</span> <span class="toc-text">TGP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复现"><span class="toc-number">6.</span> <span class="toc-text">复现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ARK"><span class="toc-number">7.</span> <span class="toc-text">ARK</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/06/02/一次关于VPN报错的摸鱼/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/06/02/一次关于VPN报错的摸鱼/&text=一次关于VPN报错的摸鱼"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/06/02/一次关于VPN报错的摸鱼/&title=一次关于VPN报错的摸鱼"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/06/02/一次关于VPN报错的摸鱼/&is_video=false&description=一次关于VPN报错的摸鱼"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=一次关于VPN报错的摸鱼&body=Check out this article: http://yoursite.com/2018/06/02/一次关于VPN报错的摸鱼/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/06/02/一次关于VPN报错的摸鱼/&title=一次关于VPN报错的摸鱼"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/06/02/一次关于VPN报错的摸鱼/&title=一次关于VPN报错的摸鱼"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/06/02/一次关于VPN报错的摸鱼/&title=一次关于VPN报错的摸鱼"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/06/02/一次关于VPN报错的摸鱼/&title=一次关于VPN报错的摸鱼"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/06/02/一次关于VPN报错的摸鱼/&name=一次关于VPN报错的摸鱼&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 jsmhny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/Search/">Buscar</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
