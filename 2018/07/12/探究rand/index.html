@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang=de>
+<html lang=en>
 <head><meta name="generator" content="Hexo 3.8.0">
     <!-- so meta -->
     <meta charset="utf-8">
@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/07/12/探究rand/index.html">
 <meta property="og:site_name" content="Chace Blog">
 <meta property="og:description" content="今天碰到了一个关于rand()伪随机数的问题，很有意思，记录一下。 伪随机性摘自Wikipedia:伪随机性（英语：Pseudorandomness）是一个过程似乎是随机的，但实际上并不是。例如伪随机数是使用一个确定性的算法计算出来的似乎是随机的数序，因此伪随机数实际上并不随机。在计算伪随机数时假如使用的开始值不变的话，那么伪随机数的数序也不变。伪随机数的随机性可以用它的统计特性来衡量，其主要特征">
-<meta property="og:locale" content="default">
+<meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2018-07-12T07:33:01.160Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="探究rand()函数生成的伪随机数">
@@ -58,11 +58,11 @@
     <span id="nav">
       <ul>
          
-          <li><a href="/">Inici</a></li>
+          <li><a href="/">Home</a></li>
          
-          <li><a href="/archives/">Articles</a></li>
+          <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="/Search/">Buscar</a></li>
+          <li><a href="/Search/">Search</a></li>
         
       </ul>
     </span>
@@ -78,10 +78,10 @@
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
       </ul>
-      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
-      <span id="i-next" class="info" style="display:none;">Post Següent</span>
-      <span id="i-top" class="info" style="display:none;">Adalt</span>
-      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
     </span>
     <br>
     <div id="share" style="display: none">
@@ -159,11 +159,11 @@
     <div id="nav-footer" style="display: none">
       <ul>
          
-          <li><a href="/">Inici</a></li>
+          <li><a href="/">Home</a></li>
          
-          <li><a href="/archives/">Articles</a></li>
+          <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="/Search/">Buscar</a></li>
+          <li><a href="/Search/">Search</a></li>
         
       </ul>
     </div>
@@ -189,10 +189,10 @@
     </div>
 
     <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
         <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
     </div>
 
   </div>
@@ -207,11 +207,11 @@
     <nav>
       <ul>
          
-          <li><a href="/">Inici</a></li>
+          <li><a href="/">Home</a></li>
          
-          <li><a href="/archives/">Articles</a></li>
+          <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="/Search/">Buscar</a></li>
+          <li><a href="/Search/">Search</a></li>
         
       </ul>
     </nav>
