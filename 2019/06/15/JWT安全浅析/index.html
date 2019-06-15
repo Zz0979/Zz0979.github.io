@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang=en>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="参考文章：https://delcoding.github.io/2018/03/jwt-bypass/https://www.freebuf.com/articles/web/181261.htmlhttps://auth0.com/blog/critical-vulnerabilities-in-json-web-token-libraries/https://www.freebuf.com/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JWT安全浅析">
+<meta property="og:url" content="http://yoursite.com/2019/06/15/JWT安全浅析/index.html">
+<meta property="og:site_name" content="jsmhny&#39;s Blog">
+<meta property="og:description" content="参考文章：https://delcoding.github.io/2018/03/jwt-bypass/https://www.freebuf.com/articles/web/181261.htmlhttps://auth0.com/blog/critical-vulnerabilities-in-json-web-token-libraries/https://www.freebuf.com/">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-06-15T15:00:59.585Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JWT安全浅析">
+<meta name="twitter:description" content="参考文章：https://delcoding.github.io/2018/03/jwt-bypass/https://www.freebuf.com/articles/web/181261.htmlhttps://auth0.com/blog/critical-vulnerabilities-in-json-web-token-libraries/https://www.freebuf.com/">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>JWT安全浅析</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/Search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2019/06/06/alloca函数漏洞/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/06/15/JWT安全浅析/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/06/15/JWT安全浅析/&text=JWT安全浅析"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/06/15/JWT安全浅析/&title=JWT安全浅析"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/06/15/JWT安全浅析/&is_video=false&description=JWT安全浅析"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=JWT安全浅析&body=Check out this article: http://yoursite.com/2019/06/15/JWT安全浅析/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/06/15/JWT安全浅析/&title=JWT安全浅析"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/06/15/JWT安全浅析/&title=JWT安全浅析"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/06/15/JWT安全浅析/&title=JWT安全浅析"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/06/15/JWT安全浅析/&title=JWT安全浅析"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/06/15/JWT安全浅析/&name=JWT安全浅析&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JWT简介"><span class="toc-number">1.</span> <span class="toc-text">JWT简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#传统的session认证"><span class="toc-number">1.1.</span> <span class="toc-text">传统的session认证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于session认证所显露的问题"><span class="toc-number">1.2.</span> <span class="toc-text">基于session认证所显露的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Session"><span class="toc-number">1.2.1.</span> <span class="toc-text">Session:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#扩展性"><span class="toc-number">1.2.2.</span> <span class="toc-text">扩展性:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CSRF"><span class="toc-number">1.2.3.</span> <span class="toc-text">CSRF:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于token的鉴权机制"><span class="toc-number">1.3.</span> <span class="toc-text">基于token的鉴权机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JWT"><span class="toc-number">1.4.</span> <span class="toc-text">JWT</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#header"><span class="toc-number">1.4.1.</span> <span class="toc-text">header</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#payload"><span class="toc-number">1.4.2.</span> <span class="toc-text">payload</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#标准中注册的声明"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">标准中注册的声明</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#公共的声明"><span class="toc-number">1.4.2.2.</span> <span class="toc-text">公共的声明</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#私有的声明"><span class="toc-number">1.4.2.3.</span> <span class="toc-text">私有的声明</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#signature"><span class="toc-number">1.4.2.4.</span> <span class="toc-text">signature</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JWT解决什么问题"><span class="toc-number">1.4.3.</span> <span class="toc-text">JWT解决什么问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JWT的一些名词解释"><span class="toc-number">1.4.4.</span> <span class="toc-text">JWT的一些名词解释</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JWS"><span class="toc-number">1.4.5.</span> <span class="toc-text">JWS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#优点"><span class="toc-number">1.4.6.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安全相关"><span class="toc-number">1.4.7.</span> <span class="toc-text">安全相关</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JWT破解绕过"><span class="toc-number">2.</span> <span class="toc-text">JWT破解绕过</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2018-CISCN-easyweb"><span class="toc-number">2.0.1.</span> <span class="toc-text">2018 CISCN easyweb</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#算法修改攻击"><span class="toc-number">2.0.2.</span> <span class="toc-text">算法修改攻击</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        JWT安全浅析
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">jsmhny's Blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2019-06-15T14:59:26.000Z" itemprop="datePublished">2019-06-15</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>参考文章：<br><a href="https://delcoding.github.io/2018/03/jwt-bypass/" target="_blank" rel="noopener">https://delcoding.github.io/2018/03/jwt-bypass/</a><br><a href="https://www.freebuf.com/articles/web/181261.html" target="_blank" rel="noopener">https://www.freebuf.com/articles/web/181261.html</a><br><a href="https://auth0.com/blog/critical-vulnerabilities-in-json-web-token-libraries/" target="_blank" rel="noopener">https://auth0.com/blog/critical-vulnerabilities-in-json-web-token-libraries/</a><br><a href="https://www.freebuf.com/articles/web/180874.html" target="_blank" rel="noopener">https://www.freebuf.com/articles/web/180874.html</a><br><a href="https://www.anquanke.com/post/id/145540#h3-8" target="_blank" rel="noopener">https://www.anquanke.com/post/id/145540#h3-8</a></p>
+<h2 id="JWT简介"><a href="#JWT简介" class="headerlink" title="JWT简介"></a>JWT简介</h2><p>Json web token (JWT), 是为了在网络应用环境间传递声明而执行的一种基于JSON的开放标准（(RFC 7519).该token被设计为紧凑且安全的，特别适用于分布式站点的单点登录（SSO）场景。JWT的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源，也可以增加一些额外的其它业务逻辑所必须的声明信息，该token也可直接被用于认证，也可被加密。</p>
+<h3 id="传统的session认证"><a href="#传统的session认证" class="headerlink" title="传统的session认证"></a>传统的session认证</h3><p>我们知道，http协议本身是一种无状态的协议，而这就意味着如果用户向我们的应用提供了用户名和密码来进行用户认证，那么下一次请求时，用户还要再一次进行用户认证才行，因为根据http协议，我们并不能知道是哪个用户发出的请求，所以为了让我们的应用能识别是哪个用户发出的请求，我们只能在服务器存储一份用户登录的信息，这份登录信息会在响应时传递给浏览器，告诉其保存为cookie,以便下次请求时发送给我们的应用，这样我们的应用就能识别请求来自哪个用户了,这就是传统的基于session认证。但是这种基于session的认证使应用本身很难得到扩展，随着不同客户端用户的增加，独立的服务器已无法承载更多的用户，而这时候基于session认证应用的问题就会暴露出来.</p>
+<h3 id="基于session认证所显露的问题"><a href="#基于session认证所显露的问题" class="headerlink" title="基于session认证所显露的问题"></a>基于session认证所显露的问题</h3><h4 id="Session"><a href="#Session" class="headerlink" title="Session:"></a>Session:</h4><p>每个用户经过我们的应用认证之后，我们的应用都要在服务端做一次记录，以方便用户下次请求的鉴别，通常而言session都是保存在内存中，而随着认证用户的增多，服务端的开销会明显增大。</p>
+<h4 id="扩展性"><a href="#扩展性" class="headerlink" title="扩展性:"></a>扩展性:</h4><p>用户认证之后，服务端做认证记录，如果认证的记录被保存在内存中的话，这意味着用户下次请求还必须要请求在这台服务器上,这样才能拿到授权的资源，这样在分布式的应用上，相应的限制了负载均衡器的能力。这也意味着限制了应用的扩展能力。</p>
+<h4 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF:"></a>CSRF:</h4><p>因为是基于cookie来进行用户识别的, cookie如果被截获，用户就会很容易受到跨站请求伪造的攻击。</p>
+<h3 id="基于token的鉴权机制"><a href="#基于token的鉴权机制" class="headerlink" title="基于token的鉴权机制"></a>基于token的鉴权机制</h3><p>基于token的鉴权机制类似于http协议也是无状态的，它不需要在服务端去保留用户的认证信息或者会话信息。这就意味着基于token认证机制的应用不需要去考虑用户在哪一台服务器登录了，这就为应用的扩展提供了便利。流程上是这样的：用户使用用户名密码来请求服务器服务器进行验证用户的信息服务器通过验证发送给用户一个token客户端存储token，并在每次请求时附送上这个token值服务端验证token值，并返回数据这个token必须要在每次请求时传递给服务端，它应该保存在请求头里， 另外，服务端要支持CORS(跨来源资源共享)策略，一般我们在服务端这么做就可以了<code>Access-Control-Allow-Origin: *</code>。那么我们现在回到JWT的主题上。</p>
+<h3 id="JWT"><a href="#JWT" class="headerlink" title="JWT"></a>JWT</h3><p>JWT是由三段信息构成的，将这三段信息文本用<code>.</code>链接一起就构成了Jwt字符串。就像这样:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ</span><br></pre></td></tr></table></figure></p>
+<p>第一部分我们称它为头部（header),第二部分我们称其为载荷（payload, 类似于飞机上承载的物品)，第三部分是签证（signature).</p>
+<h4 id="header"><a href="#header" class="headerlink" title="header"></a>header</h4><p>jwt的头部承载两部分信息：<br>声明类型，这里是jwt<br>声明加密的算法 通常直接使用 HMAC SHA256<br>完整的头部就像下面这样的JSON：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">'typ'</span>: <span class="string">'JWT'</span>,</span><br><span class="line">  <span class="string">'alg'</span>: <span class="string">'HS256'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后将头部进行base64加密（该加密是可以对称解密的),构成了第一部分.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9</span><br></pre></td></tr></table></figure></p>
+<h4 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h4><p>载荷就是存放有效信息的地方。这个名字像是特指飞机上承载的货品，这些有效信息包含三个部分</p>
+<ul>
+<li>标准中注册的声明</li>
+<li>公共的声明</li>
+<li>私有的声明<h5 id="标准中注册的声明"><a href="#标准中注册的声明" class="headerlink" title="标准中注册的声明"></a>标准中注册的声明</h5></li>
+<li>iss:jwt签发者</li>
+<li>sub: jwt所面向的用户</li>
+<li>aud: 接收jwt的一方</li>
+<li>exp: jwt的过期时间，这个过期时间必须要大于签发时间</li>
+<li>nbf: 定义在什么时间之前，该jwt都是不可用的。</li>
+<li>iat: jwt的签发时间</li>
+<li>jti: jwt的唯一身份标识，主要用来作为一次性token，从而回避重放攻击。</li>
+</ul>
+<h5 id="公共的声明"><a href="#公共的声明" class="headerlink" title="公共的声明"></a>公共的声明</h5><p>公共的声明可以添加任何的信息，一般添加用户的相关信息或其他业务需要的必要信息.但不建议添加敏感信息，因为该部分在客户端可解密.</p>
+<h5 id="私有的声明"><a href="#私有的声明" class="headerlink" title="私有的声明"></a>私有的声明</h5><p>私有声明是提供者和消费者所共同定义的声明，一般不建议存放敏感信息，因为base64是对称解密的，意味着该部分信息可以归类为明文信息。</p>
+<p>定义一个payload<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;sub&quot;: &quot;1234567890&quot;,</span><br><span class="line">  &quot;name&quot;: &quot;John Doe&quot;,</span><br><span class="line">  &quot;admin&quot;: true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后将其进行base64加密，得到Jwt的第二部分。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9</span><br></pre></td></tr></table></figure>
+<h5 id="signature"><a href="#signature" class="headerlink" title="signature"></a>signature</h5><p>jwt的第三部分是一个signature信息，由三部分组成：</p>
+<ul>
+<li>header（base64后的）</li>
+<li>payload （base64后的）</li>
+<li>secret （base64后的）</li>
+</ul>
+<p>这个部分需要base64加密后的header和base64加密后的payload使用.连接组成的字符串，然后通过header中声明的加密方式进行加盐secret组合加密，然后就构成了jwt的第三部分。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// javascript</span></span><br><span class="line"><span class="keyword">var</span> encodedString = base64UrlEncode(header) + <span class="string">'.'</span> + base64UrlEncode(payload);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> signature = HMACSHA256(encodedString, <span class="string">'secret'</span>); </span><br><span class="line"><span class="comment">// TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ</span></span><br></pre></td></tr></table></figure></p>
+<p>将这三部分用.连接成一个完整的字符串,构成了最终的jwt</p>
+<p>注意：secret是保存在服务器端的，jwt的签发生成也是在服务器端的，secret就是用来进行jwt的签发和jwt的验证，所以，它就是你服务端的私钥，在任何场景都不应该流露出去。一旦客户端得知这个secret, 那就意味着客户端是可以自我签发jwt了。</p>
+<h4 id="JWT解决什么问题"><a href="#JWT解决什么问题" class="headerlink" title="JWT解决什么问题"></a>JWT解决什么问题</h4><p>JWT的主要目的是在服务端和客户端之间以安全的方式来转移声明。主要的应用场景如下所示：<br>1.认证 Authentication；<br>2.授权 Authorization // 注意这两个单词的区别；<br>3.联合识别；<br>4.客户端会话（无状态的会话）；<br>5.客户端机密。</p>
+<h4 id="JWT的一些名词解释"><a href="#JWT的一些名词解释" class="headerlink" title="JWT的一些名词解释"></a>JWT的一些名词解释</h4><p>1.JWS：Signed JWT签名过的jwt<br>2.JWE：Encrypted JWT部分payload经过加密的jwt；目前加密payload的操作不是很普及；<br>3.JWK：JWT的密钥，也就是我们常说的scret；<br>4.JWKset：JWT key set在非对称加密中，需要的是密钥对而非单独的密钥，在后文中会阐释；<br>5.JWA：当前JWT所用到的密码学算法；<br>6.nonsecure JWT：当头部的签名算法被设定为none的时候，该JWT是不安全的；因为签名的部分空缺，所有人都可以修改。</p>
+<h4 id="JWS"><a href="#JWS" class="headerlink" title="JWS"></a>JWS</h4><p>到目前为止，jwt的签名算法有三种。对称加密HMAC【哈希消息验证码】：HS256/HS384/HS512非对称加密RSASSA【RSA签名算法】（RS256/RS384/RS512）和ECDSA【椭圆曲线数据签名算法】（ES256/ES384/ES512）最后将签名与之前的两段内容用.连接，就可以得到经过签名的JWT，也就是JWS。</p>
+<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><p>因为json的通用性，所以JWT是可以进行跨语言支持的，像JAVA,JavaScript,NodeJS,PHP等很多语言都可以使用。因为有了payload部分，所以JWT可以在自身存储一些其他业务逻辑所必要的非敏感信息。便于传输，jwt的构成非常简单，字节占用很小，所以它是非常便于传输的。它不需要在服务端保存会话信息, 所以它易于应用的扩展</p>
+<h4 id="安全相关"><a href="#安全相关" class="headerlink" title="安全相关"></a>安全相关</h4><p>不应该在jwt的payload部分存放敏感信息，因为该部分是客户端可解密的部分。保护好secret私钥，该私钥非常重要。如果可以，请使用https协议</p>
+<h2 id="JWT破解绕过"><a href="#JWT破解绕过" class="headerlink" title="JWT破解绕过"></a>JWT破解绕过</h2><p>服务器收到token后会对token的有效性进行验证。  <br>验证方法：首先服务端会产生一个key，然后以这个key作为密钥，使用第一部分选择的加密方式（这里就是HS256），对第一部分和第二部分拼接的结果进行加密，然后把加密结果放到第三部分。</p>
+<p>服务器每次收到信息都会对它的前两部分进行加密，然后比对加密后的结果是否跟客户端传送过来的第三部分相同，如果相同则验证通过，否则失败。</p>
+<p>因为加密算法我们已经知道了，如果我们只要再得到加密的key，我们就能伪造数据，并且通过服务器的检查。</p>
+<p>破解工具：<br>C语言JWT破解工具<br><code>https://github.com/brendan-rius/c-jwt-cracker</code></p>
+<p>这个网站可以提供验证服务：<code>https://jwt.io/</code>。当我们使用破解出来的key时，我们能完美还原出原始数据，这证明我们的key是正确的。</p>
+<h4 id="2018-CISCN-easyweb"><a href="#2018-CISCN-easyweb" class="headerlink" title="2018 CISCN easyweb"></a>2018 CISCN easyweb</h4><p>SQL注入与JWT伪造</p>
+<p>新注册用户testuser2, 解码返回的jwt<br>“kid”:”5”自增一位，判断为表中的用户id</p>
+<p>存在密钥，且无法爆破<br>判断需要通过某种方式得到密钥</p>
+<p>密钥存放在服务端，如果所有人密钥是硬编码在代码中，则题目一定会有读取或下载代码的操作，但经过测试并没有这类型操作，所以判断每人密钥都不相同，那么可能存放在数据库用户表中，且与用户一一对应。</p>
+<p>和数据库有交互的操作仅有注册，登录</p>
+<p>但测试后发现两个操作都无法进行攻击，还剩下jwt中的kid参数</p>
+<p>登录流程一般为验证用户名与密码，而此处存在jwt，则会验证一次jwt的正确性，那么一定会取出secret</p>
+<p>猜测jwt中的kid参数为用户id，在登录验证阶段会根据id取出secret进行jwt的验证，那么在此处构造一次sql注入即可控制secret值，那么就可以进行伪造jwt</p>
+<p><code>&quot;kid&quot;: &quot;1 and 1=2 union select &#39;123&#39;&quot;</code><br>替换cookie,得到flag.</p>
+<h4 id="算法修改攻击"><a href="#算法修改攻击" class="headerlink" title="算法修改攻击"></a>算法修改攻击</h4><p>JWT的header部分中，有签名算法标识alg而alg是用于签名算法的选择，最后保证用户的数据不被篡改。但是在数据处理不正确的情况下，可能存在alg的恶意篡改例如由于网站的不严谨，我们拿到了泄露的公钥pubkey我们知道如果签名算法为RS256，那么会选择用私钥进行签名，用公钥进行解密验证假设我们只拿到了公钥，且公钥模数极大，不可被分解，那么如何进行攻击呢？没有私钥我们是几乎不可能在RS256的情况下篡改数据的，因为第三部分签名需要私钥，所以我们可以尝试将RS256改为HS256此时即非对称密码变为对称加密我们知道非对称密码存在公私钥问题而对称加密只有一个key此时如果以pubkey作为key对数据进行篡改，则会非常简单，而如果后端的验证也是根据header的alg选择算法，那么显然正中下怀。</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/Search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JWT简介"><span class="toc-number">1.</span> <span class="toc-text">JWT简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#传统的session认证"><span class="toc-number">1.1.</span> <span class="toc-text">传统的session认证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于session认证所显露的问题"><span class="toc-number">1.2.</span> <span class="toc-text">基于session认证所显露的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Session"><span class="toc-number">1.2.1.</span> <span class="toc-text">Session:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#扩展性"><span class="toc-number">1.2.2.</span> <span class="toc-text">扩展性:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CSRF"><span class="toc-number">1.2.3.</span> <span class="toc-text">CSRF:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于token的鉴权机制"><span class="toc-number">1.3.</span> <span class="toc-text">基于token的鉴权机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JWT"><span class="toc-number">1.4.</span> <span class="toc-text">JWT</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#header"><span class="toc-number">1.4.1.</span> <span class="toc-text">header</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#payload"><span class="toc-number">1.4.2.</span> <span class="toc-text">payload</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#标准中注册的声明"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">标准中注册的声明</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#公共的声明"><span class="toc-number">1.4.2.2.</span> <span class="toc-text">公共的声明</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#私有的声明"><span class="toc-number">1.4.2.3.</span> <span class="toc-text">私有的声明</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#signature"><span class="toc-number">1.4.2.4.</span> <span class="toc-text">signature</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JWT解决什么问题"><span class="toc-number">1.4.3.</span> <span class="toc-text">JWT解决什么问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JWT的一些名词解释"><span class="toc-number">1.4.4.</span> <span class="toc-text">JWT的一些名词解释</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JWS"><span class="toc-number">1.4.5.</span> <span class="toc-text">JWS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#优点"><span class="toc-number">1.4.6.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安全相关"><span class="toc-number">1.4.7.</span> <span class="toc-text">安全相关</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JWT破解绕过"><span class="toc-number">2.</span> <span class="toc-text">JWT破解绕过</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2018-CISCN-easyweb"><span class="toc-number">2.0.1.</span> <span class="toc-text">2018 CISCN easyweb</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#算法修改攻击"><span class="toc-number">2.0.2.</span> <span class="toc-text">算法修改攻击</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/06/15/JWT安全浅析/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/06/15/JWT安全浅析/&text=JWT安全浅析"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/06/15/JWT安全浅析/&title=JWT安全浅析"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/06/15/JWT安全浅析/&is_video=false&description=JWT安全浅析"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=JWT安全浅析&body=Check out this article: http://yoursite.com/2019/06/15/JWT安全浅析/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/06/15/JWT安全浅析/&title=JWT安全浅析"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/06/15/JWT安全浅析/&title=JWT安全浅析"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/06/15/JWT安全浅析/&title=JWT安全浅析"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/06/15/JWT安全浅析/&title=JWT安全浅析"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/06/15/JWT安全浅析/&name=JWT安全浅析&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 jsmhny
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/Search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
